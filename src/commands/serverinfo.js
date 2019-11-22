@@ -23,7 +23,7 @@ exports.run = ({ message, t, zSend, zEmbed }) => {
 	zEmbed.addField(t("serverinfo:verificationLevel"), VerificationMessages[Guild.verificationLevel], true);
 
 	if (Guild.splash !== null) {
-		zEmbed.setImage(Guild.splash);
+		zEmbed.setImage(Guild.splashURL + "?size=2048");
 	}
 	if (Guild.verified) {
 		zEmbed.setDescription(t("serverinfo:thisGuildIsVerified"));
