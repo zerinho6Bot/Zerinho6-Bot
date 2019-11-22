@@ -261,8 +261,8 @@ exports.run = async function({ message, t, zSend, zEmbed, zSendAsync }) {
 	});
 
 	Collection.on("end", () => {
-		PlayersPlaying.add(message.author.id);
-		PlayersPlaying.add(message.mentions.members.first().id);
+		PlayersPlaying.delete(message.author.id);
+		PlayersPlaying.delete(message.mentions.members.first().id);
 		
 		if (!Game.finished) {
 			zSend("tictactoe:timeExpired", true);
