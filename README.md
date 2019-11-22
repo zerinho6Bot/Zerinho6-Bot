@@ -44,8 +44,6 @@ Zerinho6 Bot is a Lite and fast bot that's focused on self-host but available fo
 
 Inside src, create a ``.env`` file **via a IDE because you need it to be without name and windows won't let you do that**...
 
-...It should look like [this](https://github.com/zerinho6bot/Zerinho6-Bot/blob/master/.env.example)
-
 Remember, ``.env`` should not have spaces.
 
 You still need to change the values..
@@ -64,7 +62,7 @@ You still need to change the values..
 
 ° **TERMINAL_RELOAD_INTERVAL** Being how fast the terminal will update if FAST_LOAD is active.
 
-Open the console window on the src folder and type ``npm i``, after that you can do ``node bot.js``. There'll be a message saying when the bot's ready or a lot of things if FAST_LOAD is enabled
+Open the console window on the src folder and type ``npm i``, after that you can do ``node bot.js``. There'll be a message saying when the bot's ready or a lot of things if FAST_LOAD is enabled.
 
 Want to know more about the code? There's a whole [Wiki](https://github.com/zerinho6bot/Zerinho6-Bot/wiki) made for for!
 ## Helping
