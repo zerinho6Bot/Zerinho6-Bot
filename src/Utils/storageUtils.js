@@ -17,7 +17,7 @@ module.exports = {
 			try {
 				delete require.cache[require.resolve(`${path}`)];
 			} catch (e) {
-				console.log(e);
+				console.log("No cache detected for " + path);
 			}
 		});
 		return true;
@@ -256,7 +256,7 @@ module.exports = {
 					delete GuildStats[ServersIds[i]];
 				}
 			}
-			
+
 			GuildWantingStats.setupConfigs.lastDayChecked = this.currentDay;
 
 			//If there's another way to acess the write function, please tell me.
