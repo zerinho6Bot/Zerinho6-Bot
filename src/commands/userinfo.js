@@ -15,7 +15,7 @@ exports.run = async ({ bot, args, message, t, zSend, zEmbed }) => {
     }
   }
 
-  zEmbed.addField(t('userinfo:tag'), user.username + user.discriminator, true)
+  zEmbed.addField(t('userinfo:tag'), user.tag, true)
   zEmbed.addField(t('help:id'), user.id, true)
   zEmbed.addField(t('userinfo:accountCreatedIn'), Moment(user.createdAt).format('LL'), true)
 
@@ -25,6 +25,6 @@ exports.run = async ({ bot, args, message, t, zSend, zEmbed }) => {
     zEmbed.addField(t('userinfo:roleAmount'), Member.roles.size > 1 ? Member.roles.size : t('userinfo:noRole'), true)
     zEmbed.addField(t('userinfo:joinedAt'), Moment(Member.joinedAt).format('LL'), true)
   }
-  zEmbed.setThumbnail(user.displayAvatarURL)
+  zEmbed.setThumbnail(user.displayAvatarURL({ dynamic: true }))
   zSend(zEmbed)
 }

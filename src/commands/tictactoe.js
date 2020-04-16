@@ -223,7 +223,7 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
   zEmbed.setDescription(Game.description)
 
   const Msg = await zSendAsync(zEmbed)
-  console.log(Msg)
+
   if (Game.checkIfPlayerActivesEasterEgg(1)) {
     Game.zerinho = true
     Game.player1.emoji = '<:zerinicon:317871174266912768>'

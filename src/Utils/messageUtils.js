@@ -47,9 +47,9 @@ module.exports = {
   * @returns {Object}
   */
   zerinhoEmbed: function (member) {
-    const ZeroEmbed = new Discord.RichEmbed()
+    const ZeroEmbed = new Discord.MessageEmbed()
 
-    ZeroEmbed.setAuthor(member.user.tag, member.user.displayAvatarURL)
+    ZeroEmbed.setAuthor(member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
     ZeroEmbed.setColor(member.displayHexColor)
     ZeroEmbed.setTimestamp()
     return ZeroEmbed
@@ -108,21 +108,21 @@ module.exports = {
   * @returns {Object} - Null if it doesn't find the message.
   */
   findMessage: async function (bot, message, guildID, channelID, messageID) {
-    const Guild = guildID === message.guild.id ? message.guild : bot.guilds.get(guildID) || null
+    const Guild = guildID === message.guild.id ? message.guild : bot.guilds.cache.get(guildID) || null
     const Channel = () => {
       if (Guild !== null) {
         if (channelID === message.guild.id) {
           return message.channel
         }
 
-        return Guild.channels.get(channelID)
+        return Guild.channels.cache.get(channelID)
       }
       return null
     }
 
     if (Channel() !== null) {
       try {
-        const Msg = await Channel().fetchMessage(messageID)
+        const Msg = await Channel().messages.fetch(messageID)
         return Msg || null
       } catch (e) {
         return null

@@ -19,6 +19,7 @@ function setIsType (options) {
   * @param {String} type - The type to check if it's or not.
   */
   return function isType (property, type) {
+    // eslint-disable-next-line valid-typeof
     return typeof options[property] === type
   }
 }
@@ -68,7 +69,7 @@ module.exports = {
         return `${t('utils:commandUtils.specificNeeds.specificChannel.defaultReturn')} ${CommandPerms.specificChannel}`
       }
     }
-    //
+
     if (CommandPerms.specificRole) {
       const Roles = message.member.roles
 
@@ -192,15 +193,15 @@ module.exports = {
   /**
   * Returns the list of all commands listed on the every key on local_storage/command_availables.json
   * @function
-  * @returns {Array<string>}
+  * @returns {Array<String>}
   */
   getEveryCommand () {
     return CommandAvailables.every
   },
   /**
   * Returns the needs listed on local_storage/command_needs.json of a command if it needs anything.
-  * @param {string} command - The commmand name.
-  * @returns {object}
+  * @param {String} command - The commmand name.
+  * @returns {Object}
   */
   getCommandNeeds (command) {
     if (!CommandNeeds[command]) {

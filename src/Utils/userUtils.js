@@ -8,7 +8,7 @@ module.exports = {
   */
   searchUser: async function (bot, id) {
     try {
-      const FindUser = await bot.fetchUser(id)
+      const FindUser = await bot.users.fetch(id)
       return FindUser || null
     } catch (e) {
       return null

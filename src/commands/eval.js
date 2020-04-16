@@ -4,9 +4,10 @@ exports.run = ({ bot, message, t, zSend, zEmbed }) => {
     const FullArgument = message.content.split(' ').slice(1).join(' ')
 
     zEmbed.addField(t('eval:code'), `\`\`\`JavaScript\n${FullArgument}\`\`\``)
+    // eslint-disable-next-line no-eval
     zEmbed.addField(t('eval:result'), `\`\`\`JavaScript\n${eval(FullArgument)}\`\`\``)
     zSend(zEmbed)
   } catch (e) {
-    zSend(String(e))
+    zSend(e.toString())
   }
 }

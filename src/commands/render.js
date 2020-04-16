@@ -43,10 +43,10 @@ exports.run = async ({ bot, args, message, t, zSend, zEmbed }) => {
 
     zSend(zEmbed)
   } else {
-    const Embed = new Discord.RichEmbed()
+    const Embed = new Discord.MessageEmbed()
     // We don't use zerinhoEmbed from message Utils because if a user fetch message from a member that
     // isn't on the guild anymore, it won't return the member property which is required as argument for zerinhoEmbed.
-    Embed.setAuthor(Msg.author.username, Msg.author.avatarURL)
+    Embed.setAuthor(Msg.author.username, Msg.author.avatarURL({ dynamic: true }))
     if (Msg.content.length > 0) {
       Embed.setDescription(Msg.content)
     }

@@ -38,7 +38,7 @@ exports.run = async function (bot, message) {
   const checkMissingPermission = CommandUtils.checkCommandPermissions(message, CommandName, Translate)
   if (checkMissingPermission === '') {
     const FastEmbed = MessageUtils.zerinhoEmbed(message.member)
-    console.log(`Executing command: ${CommandName}, by user ${Author.username} on guild ${Guild.name}, RAM: ${Math.round(process.memoryUsage().rss / 1024 / 1024)}`)
+    console.log(`Executing command: ${CommandName}, by user ${Author.username} on guild ${Guild.name}`)
     CommandUtils.getCommandRequirer(CommandName).run({
       bot: bot,
       message,
