@@ -1,12 +1,11 @@
 /**
-  * Sets up the channel so you don't need to pass it every time for the zerinhoSend function that's what it returns.
-  * @function
-  * @param {Object} channel - The channel object.
-  * @param {Object} t - The translate function.
-  * @param {Object} [message] - The message object. If you pass the message param, zerinhoSend will return the message sent, remember that it's a promise.
-  * @returns {Object} Returns the zerinhoSend function, it'll be async if you pass the message param.
-  */
-exports.zerinhoConfigSend = (channel, translate, message) => {
+ * Configures the fastSend used in most commands.
+ * @function
+ * @param {Object} channel - The channel where the message came from (Only accepts guild)
+ * @param {Object} translate - The i18n module already started.
+ * @returns {(content: string, noTranslation: boolean, parameters: Object) => Promise<Object>}
+ */
+exports.configSend = (channel, translate) => {
   /**
    * Starts typing before sending the message, then stops typing and then returns the message.
    * @async

@@ -1,10 +1,10 @@
 const Emojis = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣']
-const { MessageUtils, StorageUtils } = require('../Utils')
 const MatchId = Date.now().toString(36)
-const { TictactoeMatchs, TictactoeProfiles } = require('../local_storage')
 const PlayersPlaying = new Set()
 
-exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
+exports.run = async function ({ message, i18n, Send, fastEmbed }) {
+  const { TictactoeMatchs, TictactoeProfiles } = require('../cache')
+  const { messageUtils, cacheUtils } = require('../Utils')
   class TicTacToe {
     constructor (p1, p2) {
       this.player1 = {
@@ -32,7 +32,7 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
       this.topera = false
       this.secret = 0
       this.finished = false
-      this.description = `${this.player1.emoji} ${t('tictactoe:turn')} (${this.player1.tag})\n\n${this.draw()}`
+      this.description = `${this.player1.emoji} ${i18n.__('tictactoe:turn')} (${this.player1.tag})\n\n${this.draw()}`
     }
 
     /**
@@ -85,10 +85,10 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
     */
     getMatchResult (playerN) {
       if (this.winner === 3) {
-        return t('tictactoe:draw')
+        return i18n.__('tictactoe:draw')
       }
 
-      return this.winner === playerN ? t('tictactoe:winner') : t('tictactoe:loser')
+      return this.winner === playerN ? i18n.__('tictactoe:winner') : i18n.__('tictactoe:loser')
     }
 
     /**
@@ -106,7 +106,7 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
       TurnEqualsX ? this.player1.moves = this.player1.moves.concat(house + 1) : this.player2.moves = this.player2.moves.concat(house + 1)
       this.map[house] = TurnEqualsX ? 1 : 2
       this.turn = TurnEqualsX ? this.o : this.x
-      this.description = `${TurnEqualsX ? this.player1.emoji : this.player2.emoji} ${t('tictactoe:turn')} (${this.turn === this.x ? this.player1.tag : this.player2.tag}).\n\n${this.draw()}`
+      this.description = `${TurnEqualsX ? this.player1.emoji : this.player2.emoji} ${i18n.__('tictactoe:turn')} (${this.turn === this.x ? this.player1.tag : this.player2.tag}).\n\n${this.draw()}`
 
       const Winner = this.check()
 
@@ -115,7 +115,7 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
         this.winner = Winner
 
         const playerWhoWon = Winner === 1 ? this.player1 : this.player2
-        this.description = (Winner === 3 ? `:loudspeaker: ${t('tictactoe:draw')}` : `${playerWhoWon.emoji} - ${playerWhoWon.tag} ${t('tictactoe:winner')}!`) + `\n\n${this.draw()}`
+        this.description = (Winner === 3 ? `:loudspeaker: ${i18n.__('tictactoe:draw')}` : `${playerWhoWon.emoji} - ${playerWhoWon.tag} ${i18n.__('tictactoe:winner')}!`) + `\n\n${this.draw()}`
         return true
       }
       return false
@@ -145,12 +145,12 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
         ActualPlayer.wins = this.winner === i + 1 ? ActualPlayer.wins + 1 : ActualPlayer.wins
         ActualPlayer.loses = this.winner !== i + 1 ? ActualPlayer.loses + 1 : ActualPlayer.loses
         ActualPlayer.draws = this.winner === 3 ? ActualPlayer.draws + 1 : ActualPlayer.draws
-        StorageUtils.write('src/local_storage/tictactoe-profiles.json', TictactoeProfiles)
+        cacheUtils.write('TictactoeProfiles', TictactoeProfiles)
       }
     }
 
     /**
-    * Saves the match in local_storage/tictactoe-matchs.json
+    * Saves the match in tictactoeMatchs.json
     * @function
     * @param {Number} time - How much the match has gone in seconds
     */
@@ -177,7 +177,7 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
       Match.p1.tag = this.player1.tag
       Match.p2.tag = this.player2.tag
       Match.winner = this.winner
-      StorageUtils.write('src/local_storage/tictactoe-matchs.json', TictactoeMatchs)
+      cacheUtils.write('TictactoeMatchs', TictactoeMatchs)
     }
 
     /**
@@ -201,17 +201,17 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
   }
 
   if (message.mentions.members.first().id === message.author.id) {
-    zSend('tictactoe:selfMention', true)
+    Send('tictactoe:selfMention')
     return
   }
 
   if (message.mentions.members.first().bot) {
-    zSend('tictactoe:botMention', true)
+    Send('tictactoe:botMention')
     return
   }
 
   if (PlayersPlaying.has(message.author.id) || PlayersPlaying.has(message.mentions.members.first().id)) {
-    zSend('tictactoe:oneOfThePlayersIsAlreadyPlaying', true)
+    Send('tictactoe:oneOfThePlayersIsAlreadyPlaying')
     return
   }
 
@@ -220,9 +220,9 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
   PlayersPlaying.add(message.author.id)
   PlayersPlaying.add(message.mentions.members.first().id)
 
-  zEmbed.setDescription(Game.description)
+  fastEmbed.setDescription(Game.description)
 
-  const Msg = await zSendAsync(zEmbed)
+  const Msg = await Send(fastEmbed, true)
 
   if (Game.checkIfPlayerActivesEasterEgg(1)) {
     Game.zerinho = true
@@ -256,8 +256,8 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
       Collection.stop()
     }
 
-    zEmbed.setDescription(Game.description)
-    Msg.edit(zEmbed)
+    fastEmbed.setDescription(Game.description)
+    Msg.edit(fastEmbed)
   })
 
   Collection.on('end', () => {
@@ -265,23 +265,23 @@ exports.run = async function ({ message, t, zSend, zEmbed, zSendAsync }) {
     PlayersPlaying.delete(message.mentions.members.first().id)
 
     if (!Game.finished) {
-      zSend('tictactoe:timeExpired', true)
+      Send('tictactoe:timeExpired')
       return
     }
 
-    const ResultEmbed = MessageUtils.zerinhoEmbed(message.member)
+    const ResultEmbed = messageUtils.zerinhoEmbed(message.member)
     const Time = Math.floor((new Date() - Game.time) / 1000)
     const Players = Game.players
 
-    ResultEmbed.setTitle(t('tictactoe:results'))
-    ResultEmbed.setDescription(`${t('tictactoe:theMatchTaken.part1')} ${Time} ${t('tictactoe:theMatchTaken.part2')}.${Game.secret ? '\n\nWith the love of zerinho6 and topera\n<:zerinicon:317871174266912768> :heart: <:Toperaicon:317871116934840321>' : ''}`)
-    ResultEmbed.setFooter(`${t('tictactoe:matchCode')}: ${MatchId}`)
+    ResultEmbed.setTitle(i18n.__('tictactoe:results'))
+    ResultEmbed.setDescription(`${i18n.__('tictactoe:theMatchTaken.part1')} ${Time} ${i18n.__('tictactoe:theMatchTaken.part2')}.${Game.secret ? '\n\nWith the love of zerinho6 and topera\n<:zerinicon:317871174266912768> :heart: <:Toperaicon:317871116934840321>' : ''}`)
+    ResultEmbed.setFooter(`${i18n.__('tictactoe:matchCode')}: ${MatchId}`)
 
     for (let i = 0; i < 2; i++) {
-      ResultEmbed.addField(Players[i].tag, `${t('tictactoe:matchResult')}: ${Game.getMatchResult(i + 1)}\n${t('tictactoe:moves')}: ${Players[i].moves.join(', ')}`)
+      ResultEmbed.addField(Players[i].tag, `${i18n.__('tictactoe:matchResult')}: ${Game.getMatchResult(i + 1)}\n${i18n.__('tictactoe:moves')}: ${Players[i].moves.join(', ')}`)
     }
 
-    zSend(ResultEmbed)
+    Send(ResultEmbed, true)
     Game.updatePlayersOnlineStats()
     Game.uploadMatch(Time)
   })

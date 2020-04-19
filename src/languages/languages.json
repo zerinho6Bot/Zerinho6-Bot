@@ -1,0 +1,6 @@
+{
+    "utils:commandUtils.needArg.default": {
+        "en": "error",
+        "pt-br": "Deu erro playboy"
+    }
+}

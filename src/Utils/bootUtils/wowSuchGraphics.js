@@ -4,10 +4,8 @@
   * @param {Object} - The Discord bot instance.
   */
 exports.wowSuchGraphics = (bot) => {
-  const { BootUtils } = require('./')
-
-  if (BootUtils.envConfigs().FAST_LOAD !== 'false') {
-    console.log('Bot on! Ready to rock.')
+  if (process.env.FAST_LOAD !== 'false') {
+    Log.info('Bot on! Ready to rock.')
     return
   }
 
@@ -20,8 +18,8 @@ exports.wowSuchGraphics = (bot) => {
   * @param {Object} Terminal - The terminal-kit package.
   */
   function drawOnce (Bot, Terminal) {
-    const Users = Bot.users.size || 0
-    const Guilds = Bot.guilds.size || 0
+    const Users = Bot.users.cache.size || 0
+    const Guilds = Bot.guilds.cache.size || 0
     /**
     * Returns a random number from 0 to 615.
     * @function
@@ -31,7 +29,7 @@ exports.wowSuchGraphics = (bot) => {
       return parseInt(Math.random() * 615)
     }
     const SaveNumber = LuckyNumber()
-    const { Tips } = require('../local_storage')
+    const { Tips } = require('../../cache/index.js')
     const RandomTip = Tips[parseInt(Math.random() * Object.keys(Tips).length)]
 
     /**
@@ -40,7 +38,7 @@ exports.wowSuchGraphics = (bot) => {
     * @returns {String}
     */
     function getIcon () {
-      const Assets = './assets/'
+      const Assets = 'src/assets/'
 
       if (Number.isInteger(SaveNumber / 3)) {
         return Assets + 'topera_icon.png'
@@ -59,5 +57,5 @@ exports.wowSuchGraphics = (bot) => {
   drawOnce(bot, Terminal)
   setInterval(() => {
     drawOnce(bot, Terminal)
-  }, BootUtils.envConfigs().TERMINAL_RELOAD_INTERVAL)
+  }, process.env.TERMINAL_RELOAD_INTERVAL)
 }

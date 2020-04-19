@@ -1,5 +1,5 @@
-const { TictactoeProfiles } = require('../local_storage')
-exports.run = ({ message, args, t, zSend, zEmbed }) => {
+exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
+  const { TictactoeProfiles } = require('../cache/index.js')
   let user = null
 
   if (message.mentions.users.first()) {
@@ -7,25 +7,25 @@ exports.run = ({ message, args, t, zSend, zEmbed }) => {
   }
 
   if (user === null) {
-    if (args[0]) {
-      if (isNaN(args[0])) {
-        zSend('tictactoe-profile:argsNotNumber', true)
+    if (ArgsManager.Argument && ArgsManager.Argument[0]) {
+      if (isNaN(ArgsManager.Argument[0])) {
+        Send('tictactoe-profile:argsNotNumber', true)
         return
       }
-      user = args[0]
+      user = ArgsManager.Argument[0]
     } else {
       user = message.author.id
     }
   }
 
   if (!TictactoeProfiles[user]) {
-    zSend('tictactoe-profile:userNotFound', true)
+    Send('tictactoe-profile:userNotFound', true)
     return
   }
 
   user = TictactoeProfiles[user]
-  zEmbed.setTitle(`${t('tictactoe-profile:profileOf')} ${user.tag}`)
-  zEmbed.setDescription(`**${t('tictactoe-profile:wins')}**: ${user.wins}\n**${t('tictactoe-profile:loses')}**: ${user.loses}\n**${t('tictactoe-profile:draws')}**: ${user.draws}\n**${t('tictactoe-profile:matchs')}**: ${user.matchs}`)
+  fastEmbed.setTitle(`${i18n.__('tictactoe-profile:profileOf')} ${user.tag}`)
+  fastEmbed.setDescription(`**${i18n.__('tictactoe-profile:wins')}**: ${user.wins}\n**${i18n.__('tictactoe-profile:loses')}**: ${user.loses}\n**${i18n.__('tictactoe-profile:draws')}**: ${user.draws}\n**${i18n.__('tictactoe-profile:matchs')}**: ${user.matchs}`)
 
-  zSend(zEmbed)
+  Send(fastEmbed, true)
 }

@@ -1,10 +1,12 @@
-module.exports = {
-  GuildLanguage: require('./guild_language.json'),
-  CommandNeeds: require('./command_needs.json'),
-  TictactoeMatchs: require('./tictactoe-matchs.json'),
-  TictactoeProfiles: require('./tictactoe-profiles.json'),
-  CommandAvailables: require('./command_availables.json'),
-  GuildStats: require('./guild_stats.json'),
-  GuildWantingStats: require('./guild_wanting_stats.json'),
-  Tips: require('./tips.json')
-}
+exports.GuildLanguage = require('./guildLanguage.json')
+exports.CommandNeeds = require('./commandNeeds.json')
+exports.TictactoeMatchs = require('./tictactoeMatchs.json')
+exports.TictactoeProfiles = require('./tictactoeProfiles.json')
+exports.CommandAvailables = require('./commandAvailables.json')
+exports.GuildStats = require('./guildStats.json')
+exports.GuildWantingStats = require('./guildWantingStats.json')
+exports.Tips = require('./tips.json')
+exports.Charts = require('./charts.json')
+exports.Profiles = require('./profiles.json')
+exports.GuildData = require('./guildData.json')
+exports.CommandHelp = require('./commandHelp.json')

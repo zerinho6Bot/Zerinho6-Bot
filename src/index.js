@@ -1,30 +1,25 @@
 'use strict'
 require('dotenv').config()
 const Discord = require('discord.js')
-const { GuildStats } = require('./local_storage')
-const { StorageUtils, BootUtils } = require('./Utils')
-const Bot = new Discord.Client({ messageCacheMaxSize: 30, messageCacheLifeTime: 300, messageSweepInterval: 350 })
-const ServerStats = new StorageUtils.ServerStats(GuildStats, Bot)
-const EnvVariables = BootUtils.envConfigs()
+const { Message, Ready } = require('./events/index.js')
+const Bot = new Discord.Client()
+const Path = require('path')
+global.Log = require('simple-node-logger').createSimpleLogger({ logFilePath: Path.join(__dirname, './cache/log.txt') })
 
 Bot.on('message', (message) => {
-  const Channel = message.channel
-
-  if (message.author.bot || !message.content.startsWith(EnvVariables.PREFIX) || Channel.type === 'dm' || !Channel.permissionsFor(Bot.user.id).has('SEND_MESSAGES') || !message.content.split(' ').slice(EnvVariables.PREFIX.length)) {
+  if (!Message.condition(Bot, message)) {
     return
   }
-  require('./message.js').run(Bot, message)
+  Log.info(`Message id(${message.id}) from ${message.author.tag} in server ${message.guild.name}(${message.guild.id}) with the content: ${message.content}`)
+  Message.run(Bot, message)
 })
 
 Bot.on('error', (error) => {
-  console.log(error)
+  Log.warn(error)
 })
 
-Bot.login(EnvVariables.TOKEN).then(() => {
-  BootUtils.wowSuchGraphics(Bot)
-  ServerStats.updateServersStats(true)
-
-  setTimeout(() => {
-    ServerStats.updateServersStats(true)
-  }, 86400000)// 24h
+Bot.on('ready', () => {
+  Ready.run(Bot)
 })
+
+Bot.login(process.env.TOKEN)

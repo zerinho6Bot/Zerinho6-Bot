@@ -1,4 +1,4 @@
-exports.run = ({ message, zSend }) => {
-  zSend('stoptyping:CANYOUSTOPTYPINGHOLYSHIT', true)
+exports.run = ({ message, Send }) => {
+  Send('stoptyping:CANYOUSTOPTYPINGHOLYSHIT')
   message.channel.stopTyping(true)
 }

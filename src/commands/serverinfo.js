@@ -1,32 +1,32 @@
 const Moment = require('moment')
 
-exports.run = ({ message, t, zSend, zEmbed }) => {
+exports.run = ({ message, i18n, Send, fastEmbed }) => {
   const VerificationMessages = {
-    NONE: t('serverinfo:unrestricted'),
-    LOW: t('serverinfo:needEmail'),
-    MEDIUM: t('serverinfo:waitFiveMinutesOnDiscord'),
-    HIGH: t('serverinfo:waitTenMinutesOnTheServer'),
-    VERY_HIGH: t('serverinfo:heyYouGuysDontHavePhones')
+    NONE: i18n.__('serverinfo:unrestricted'),
+    LOW: i18n.__('serverinfo:needEmail'),
+    MEDIUM: i18n.__('serverinfo:waitFiveMinutesOnDiscord'),
+    HIGH: i18n.__('serverinfo:waitTenMinutesOnTheServer'),
+    VERY_HIGH: i18n.__('serverinfo:heyYouGuysDontHavePhones')
   }
   const Guild = message.guild
 
-  zEmbed.setThumbnail(Guild.iconURL ? Guild.iconURL : `https://guild-default-icon.herokuapp.com/${Guild.nameAcronym}`)
-  zEmbed.addField(t('serverinfo:guildName'), Guild.name, true)
-  zEmbed.addField(t('serverinfo:memberCount'), Guild.memberCount, true)
+  fastEmbed.setThumbnail(Guild.iconURL() ? Guild.iconURL({ dynamic: true, size: 2048 }) : `https://guild-default-icon.herokuapp.com/${Guild.nameAcronym}`)
+  fastEmbed.addField(i18n.__('serverinfo:guildName'), Guild.name, true)
+  fastEmbed.addField(i18n.__('serverinfo:memberCount'), Guild.memberCount, true)
 
   const Owner = Guild.owner.user
-  zEmbed.addField(t('serverinfo:guildRegion'), Guild.region, true)
-  zEmbed.addField(t('serverinfo:guildID'), Guild.id, true)
-  zEmbed.addField(t('serverinfo:guildCreatedAt'), Moment(Guild.createdAt).format('LL'), true)
-  zEmbed.addField(t('serverinfo:roleAmount'), Guild.roles.cache.size, true)
-  zEmbed.addField(t('serverinfo:guildOwner'), `${Owner.tag}`, true)
-  zEmbed.addField(t('serverinfo:verificationLevel'), VerificationMessages[Guild.verificationLevel], true)
+  fastEmbed.addField(i18n.__('serverinfo:guildRegion'), Guild.region, true)
+  fastEmbed.addField(i18n.__('serverinfo:guildID'), Guild.id, true)
+  fastEmbed.addField(i18n.__('serverinfo:guildCreatedAt'), Moment(Guild.createdAt).format('LL'), true)
+  fastEmbed.addField(i18n.__('serverinfo:roleAmount'), Guild.roles.cache.size, true)
+  fastEmbed.addField(i18n.__('serverinfo:guildOwner'), `${Owner.tag}`, true)
+  fastEmbed.addField(i18n.__('serverinfo:verificationLevel'), VerificationMessages[Guild.verificationLevel], true)
 
   if (Guild.splash !== null) {
-    zEmbed.setImage(Guild.splashURL({ dynamic: true, size: 2048 }))
+    fastEmbed.setImage(Guild.splashURL({ dynamic: true, size: 2048 }))
   }
   if (Guild.verified) {
-    zEmbed.setDescription(t('serverinfo:thisGuildIsVerified'))
+    fastEmbed.setDescription(i18n.__('serverinfo:thisGuildIsVerified'))
   }
-  zSend(zEmbed)
+  Send(fastEmbed, true)
 }

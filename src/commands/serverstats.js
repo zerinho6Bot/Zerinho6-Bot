@@ -1,5 +1,5 @@
-const { StorageUtils } = require('../Utils')
-const { GuildStats, GuildWantingStats } = require('../local_storage')
+const { StorageUtils } = require('../Utils/index.js')
+const { GuildStats, GuildWantingStats } = require('../cache/index.js')
 const Time = new Date()
 const TimeYear = Time.getFullYear()
 const TimeMonth = Time.getMonth()
@@ -7,68 +7,68 @@ const TimeMonth = Time.getMonth()
 /**
  * Returns the month name.
  * @function
- * @param {Object} t - The translate function.
+ * @param {Object} i18n - The translate function.
  * @param {Number} month - The month related number.
  * @returns {(String|Boolean)}
  */
-function Months (t, month) {
-  const MonthsTranslated = Object.keys(t('serverstats:months'))
-  return MonthsTranslated[month] ? t(`serverstats:months.${MonthsTranslated[month]}`) : false
+function Months (i18n, month) {
+  const MonthsTranslated = Object.keys(i18n.__('serverstats:months'))
+  return MonthsTranslated[month] ? i18n.__(`serverstats:months.${MonthsTranslated[month]}`) : false
 }
 
 /**
  * Returns the month number.
  * @function
- * @param {Object} t - The translate function.
+ * @param {Object} i18n- The translate function.
  * @param {String} month - The month name.
  * @returns {Number}
  */
-function MonthsToNumber (t, month) {
-  month = typeof month === 'number' ? Months(t, month) : month
+function MonthsToNumber (i18n, month) {
+  month = typeof month === 'number' ? Months(i18n.__, month) : month
   function MonthsTranslated () {
     let newArr = []
-    for (let i = 0; i < Object.values(t('serverstats:months')).length; i++) {
-      newArr = newArr.concat(Object.values(t('serverstats:months'))[i].toLowerCase())
+    for (let i = 0; i < Object.values(i18n.__('serverstats:months')).length; i++) {
+      newArr = newArr.concat(Object.values(i18n.__('serverstats:months'))[i].toLowerCase())
     }
     return newArr
   }
   return MonthsTranslated().indexOf(month)
 }
 
-exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
+exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
   const ServerStats = new StorageUtils.ServerStats(GuildStats, bot)
 
   if (!ServerStats.guildWantsStats(message.guild.id)) {
     if (!message.channel.permissionsFor(message.author.id).has('MANAGE_GUILD')) {
-      zSend('serverstats:thisGuildDontHaveServerStatsEnabled_NoPerm', true)
+      Send('serverstats:thisGuildDontHaveServerStatsEnabled_NoPerm')
       return
     }
 
-    zSend('serverstats:thisGuildDontHaveServerStatsEnabled', true)
+    Send('serverstats:thisGuildDontHaveServerStatsEnabled')
     await message.channel.awaitMessages((msg) => msg.author.id === message.author.id, { time: 30000, max: 1 })
       .then((c) => {
         const Msg = c.first()
         const MsgLower = Msg.content.toLowerCase()
-        if (MsgLower === t('serverstats:no')) {
-          zSend('serverstats:staffDecidedNo', true)
-        } else if (MsgLower === t('serverstats:yes')) {
-          zSend('serverstats:staffDecidedYes_Part1', true)
+        if (MsgLower === i18n.__('serverstats:no')) {
+          Send('serverstats:staffDecidedNo')
+        } else if (MsgLower === i18n.__('serverstats:yes')) {
+          Send('serverstats:staffDecidedYes_Part1')
           GuildWantingStats.servers[Msg.guild.id] = {
             lastMonthUpdated: 13 // Little trick, if I put 0 and the month is January...
           }
-          StorageUtils.write('src/local_storage/guild_wanting_stats.json')
-          zSend('serverstats:staffDecidedYes_Part2', true)
+          StorageUtils.write('GuildWantingStats')
+          Send('serverstats:staffDecidedYes_Part2')
           ServerStats.updateServersStats()
 
           /*
-          Since updateServersStats doesn't return nothing and it won't take that
+          Since updateServersStats doesn'i18n.__ return nothing and it won'i18n.__ take that
           long to update the JSON, I'll do this.
           */
           setTimeout(() => {
-            zSend('serverstats:staffDecidedYes_Part3', true)
+            Send('serverstats:staffDecidedYes_Part3')
           }, 2000)
         } else {
-          zSend('serverstats:staffDintGiveAOption', true)
+          Send('serverstats:staffDintGiveAOption')
         }
       })
   }
@@ -90,7 +90,7 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
 
       const values = Object.keys(data[Object.keys(data)[i]])
       for (let v = 0; v < values.length; v++) {
-        mainString += `---${Months(t, values[v])}\n`
+        mainString += `---${Months(i18n, values[v])}\n`
       }
     }
 
@@ -108,7 +108,7 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
       return TimeYear
     }
 
-    return parseInt(year) // We don't really care about NaN, because it's a number.
+    return parseInt(year) // We don'i18n.__ really care about NaN, because it's a number.
   }
 
   /**
@@ -121,7 +121,7 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
     if (month === '~') {
       return TimeMonth
     }
-    const MonthToNumber = MonthsToNumber(t, month)
+    const MonthToNumber = MonthsToNumber(i18n.__, month)
     return MonthToNumber === -1 ? parseInt(month) : MonthToNumber // Again, we don't care about NaN, because it's a number.
   }
 
@@ -137,12 +137,12 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
     const Year = translateYear(year)
 
     if (!ServerStats.getDataFromYear(message.guild.id, Year)) {
-      zSend('serverstats:yearIsNotAvailable', true)
+      Send('serverstats:yearIsNotAvailable', true)
       return false
     }
 
     if (!ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, Year), translateMonth(month))) {
-      zSend('serverstats:monthIsNotAvailable', true)
+      Send('serverstats:monthIsNotAvailable', true)
       return false
     }
 
@@ -162,7 +162,7 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
   * @returns {String}
   */
   function returnSpecifiedDifference (ServerStats, oldYear, oldMonth, oldData, newYear, newMonth, newData) {
-    return `${ServerStats.getDifference(oldData, newData)} (${oldData} ${t('serverstats:from')} ${oldYear}[${Months(t, oldMonth)}] - ${newData} ${t('serverstats:from')} ${newYear}[${Months(t, newMonth)}])${ServerStats.getStatus(oldData - newData)}`
+    return `${ServerStats.getDifference(oldData, newData)} (${oldData} ${i18n.__('serverstats:from')} ${oldYear}[${Months(i18n.__, oldMonth)}] - ${newData} ${i18n.__('serverstats:from')} ${newYear}[${Months(i18n.__, newMonth)}])${ServerStats.getStatus(oldData - newData)}`
   }
 
   /**
@@ -189,10 +189,10 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
      * @param {Object} secondData
      */
   function returnSpecifiedComparedData (comparationEmbed, ServerStats, firstYear, firstMonth, firstData, secondYear, secondMonth, secondData) {
-    comparationEmbed.setTitle(`${t('serverstats:comparing')} ${firstYear}(${Months(t, firstMonth)}) ${t('serverstats:with')} ${secondYear}(${Months(t, secondMonth)})`)
+    comparationEmbed.setTitle(`${i18n.__('serverstats:comparing')} ${firstYear}(${Months(i18n.__, firstMonth)}) ${i18n.__('serverstats:with')} ${secondYear}(${Months(i18n.__, secondMonth)})`)
 
     /**
-    * Executes the returnSpecifiedDifference with most of arguments already defined so you don't need to repeat everything.
+    * Executes the returnSpecifiedDifference with most of arguments already defined so you don'i18n.__ need to repeat everything.
     * @function
     * @param {Object} oldData
     * @param {Object} newData
@@ -202,45 +202,45 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
       return returnSpecifiedDifference(ServerStats, firstYear, firstMonth, oldData, secondYear, secondMonth, newData)
     }
 
-    comparationEmbed.addField(t('serverstats:memberDifference'), lessParamForSpecifiedDifference(firstData.membersCount, secondData.membersCount), true)
-    comparationEmbed.addField(t('serverstats:roleDifference'), lessParamForSpecifiedDifference(firstData.rolesCount, secondData.rolesCount), true)
-    comparationEmbed.addField(t('serverstats:channelDifference'), lessParamForSpecifiedDifference(firstData.channelsCount, secondData.channelsCount), true)
+    comparationEmbed.addField(i18n.__('serverstats:memberDifference'), lessParamForSpecifiedDifference(firstData.membersCount, secondData.membersCount), true)
+    comparationEmbed.addField(i18n.__('serverstats:roleDifference'), lessParamForSpecifiedDifference(firstData.rolesCount, secondData.rolesCount), true)
+    comparationEmbed.addField(i18n.__('serverstats:channelDifference'), lessParamForSpecifiedDifference(firstData.channelsCount, secondData.channelsCount), true)
 
     return comparationEmbed
   }
 
   const FullDataFromServer = ServerStats.getDataFromServer(message.guild.id)
 
-  if (args.length !== 3) {
-    zEmbed.setTitle(t('serverstats:yourOptions'))
-    zEmbed.setDescription(castadeVisualizer(FullDataFromServer))
-    zSend(zEmbed)
+  if (ArgsManager.Argument.length !== 3) {
+    fastEmbed.setTitle(i18n.__('serverstats:yourOptions'))
+    fastEmbed.setDescription(castadeVisualizer(FullDataFromServer))
+    Send(fastEmbed)
     return
   }
 
-  const ArgsLower = args[0].toLowerCase()
-  const CorrectArgs = typeof args[2] === 'string' ? args[2].toLowerCase() : args[2]
-  if (ArgsLower === t('serverstats:see')) {
-    if (validadeYearAndMonth(ServerStats, args[1], CorrectArgs) === false) {
+  const ArgsLower = ArgsManager.Argument[0].toLowerCase()
+  const CorrectArgs = typeof ArgsManager.Argument[2] === 'string' ? ArgsManager.Argument[2].toLowerCase() : ArgsManager.Argument[2]
+  if (ArgsLower === i18n.__('serverstats:see')) {
+    if (validadeYearAndMonth(ServerStats, ArgsManager.Argument[1], CorrectArgs) === false) {
       return
     }
 
-    const Year = translateYear(args[1])
+    const Year = translateYear(ArgsManager.Argument[1])
     const Month = translateMonth(CorrectArgs)
     const DataFromMonth = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, Year), Month)
 
-    zEmbed.setTitle(`${t('serverstats:summaryOf')} ${Year} ${Months(t, Month)}`)
-    zEmbed.addField(t('serverstats:members'), DataFromMonth.membersCount, true)
-    zEmbed.addField(t('serverstats:roles'), DataFromMonth.rolesCount, true)
-    zEmbed.addField(t('serverstats:channels'), DataFromMonth.channelsCount, true)
+    fastEmbed.setTitle(`${i18n.__('serverstats:summaryOf')} ${Year} ${Months(i18n.__, Month)}`)
+    fastEmbed.addField(i18n.__('serverstats:members'), DataFromMonth.membersCount, true)
+    fastEmbed.addField(i18n.__('serverstats:roles'), DataFromMonth.rolesCount, true)
+    fastEmbed.addField(i18n.__('serverstats:channels'), DataFromMonth.channelsCount, true)
 
-    const Msg = await zSendAsync(zEmbed)
+    const Msg = await Send(fastEmbed)
     if ((Year !== TimeYear || Month !== TimeMonth) && ServerStats.isComparationFromMonthAvailable(message.guild.id, TimeYear, TimeMonth)) {
       await Msg.react('🔁')
       const Collection = Msg.createReactionCollector((r, u) => r.emoji.name === '🔁' && !u.bot && u.id === message.author.id, { time: 30000 })
 
       Collection.on('collect', (r) => {
-        let comparationEmbed = zEmbed
+        let comparationEmbed = fastEmbed
         const CurrentMonthData = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, TimeYear), TimeMonth)
 
         comparationEmbed.fields = []
@@ -249,15 +249,15 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
         Msg.edit(comparationEmbed)
       })
     }
-  } else if (ArgsLower === t('serverstats:comparingLower')) {
-    if (validadeYearAndMonth(ServerStats, args[1], CorrectArgs) === false) {
+  } else if (ArgsLower === i18n.__('serverstats:comparingLower')) {
+    if (validadeYearAndMonth(ServerStats, ArgsManager.Argument[1], CorrectArgs) === false) {
       return
     }
 
-    let firstYear = translateYear(args[1])
+    let firstYear = translateYear(ArgsManager.Argument[1])
     let firstMonth = translateMonth(CorrectArgs)
 
-    zSend('serverstats:sendAnotherYearAndMonth', true)
+    Send('serverstats:sendAnotherYearAndMonth')
     await message.channel.awaitMessages((msg) => msg.author.id === message.author.id, { time: 30000, max: 1 })
       .then((c) => {
         const Msg = c.first()
@@ -273,11 +273,11 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
         secondMonth = translateMonth(secondMonth)
 
         if (firstYear === secondYear && firstMonth === secondMonth) {
-          zSend('serverstats:sameDateDetected', true)
+          Send('serverstats:sameDateDetected')
           return
         }
         // Time to do cursed things.
-        // If the year isn't the same, find the oldest, else the difference is on the month.(Thanks god I don't store days)
+        // If the year isn'i18n.__ the same, find the oldest, else the difference is on the month.(Thanks god I don'i18n.__ store days)
         const DataToCompare = firstYear !== secondYear ? [firstYear, secondYear] : [firstMonth, secondMonth]
         const WhatWeAreComparing = DataToCompare[0].toString().length === 4 ? secondYear : secondMonth
         // We want the oldest data to be the firstYear, that's why we are comparing to the secondYear
@@ -291,9 +291,9 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed, zSendAsync }) => {
         const FirstDataFromMonth = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, firstYear), firstMonth)
         const SecondDataFromMonth = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, secondYear), secondMonth)
 
-        zSend(returnSpecifiedComparedData(zEmbed, ServerStats, firstYear, firstMonth, FirstDataFromMonth, secondYear, secondMonth, SecondDataFromMonth))
+        Send(returnSpecifiedComparedData(fastEmbed, ServerStats, firstYear, firstMonth, FirstDataFromMonth, secondYear, secondMonth, SecondDataFromMonth))
       })
   } else {
-    zSend('serverstats:anIdiotsGuide', true)
+    Send('serverstats:anIdiotsGuide')
   }
 }

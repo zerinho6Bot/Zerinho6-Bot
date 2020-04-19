@@ -1,86 +1,86 @@
-const { MessageUtils } = require('../Utils')
+const getMessage = require('../Utils/messageUtils/index.js').getMessage
 const Regex = /https:\/\/discordapp.com\/channels\/([0-9]{16,18})\/([0-9]{16,18})\/([0-9]{16,18})/
 const ChannelRegex = /<#([0-9]{16,18})>/
 const Discord = require('discord.js')
 
-exports.run = async ({ bot, message, args, t, zSend, zEmbed }) => {
-  const MatchedRegex = args[0].match(Regex)
+exports.run = async ({ bot, message, ArgsManager, i18n, Send, fastEmbed }) => {
+  const MatchedRegex = ArgsManager.Argument[0].match(Regex)
 
   if (MatchedRegex === null) {
-    zSend('render:wrongFormat', true)
+    Send('render:wrongFormat')
     return
   }
 
   if ([MatchedRegex[1], MatchedRegex[2], MatchedRegex[3]].every((elem) => isNaN(elem))) {
-    zSend('render:incorrectID', true)
+    Send('render:incorrectID')
     return
   }
 
   if (MatchedRegex[1] !== message.guild.id) {
-    zSend('move:theMessageIsFromAnotherServer', true)
+    Send('move:theMessageIsFromAnotherServer')
     return
   }
 
-  const ChannelId = args[1].match(ChannelRegex) === null ? args[1] : args[1].match(ChannelRegex)[1]
+  const ChannelId = ArgsManager.Argument[1].match(ChannelRegex) === null ? ArgsManager.Argument[1] : ArgsManager.Argument[1].match(ChannelRegex)[1]
   if (isNaN(ChannelId)) {
-    zSend('tictactoe-profile:argsNotNumber', true)
+    Send('tictactoe-profile:argsNotNumber')
     return
   }
 
   const Guild = message.guild
-  if (!Guild.channels.has(ChannelId)) {
-    zSend('move:aChannelWithThatIdDoesntExistOnThisGuild', true)
+  if (!Guild.channels.cache.has(ChannelId)) {
+    Send('move:aChannelWithThatIdDoesntExistOnThisGuild')
     return
   }
 
-  const Channel = Guild.channels.get(ChannelId)
+  const Channel = Guild.channels.cache.get(ChannelId)
 
   if (!Channel.permissionsFor(bot.user.id).has('SEND_MESSAGES')) {
-    zSend('move:missingSendMessagePermissionOnTheChannel', true)
+    Send('move:missingSendMessagePermissionOnTheChannel')
     return
   }
 
-  const Msg = await MessageUtils.findMessage(bot, message, MatchedRegex[1], MatchedRegex[2], MatchedRegex[3])
+  const Msg = await getMessage(bot, MatchedRegex[1], MatchedRegex[2], MatchedRegex[3])
   const Author = message.author
   if (Msg === null) {
-    zSend('render:messageNotFound', true)
+    Send('render:messageNotFound')
     return
   }
 
   // I know I've already made a check for that, but never trust the user.
   if (Msg.guild.id !== Guild.id) {
-    zSend('move:theMessageIsFromAnotherServer', true)
+    Send('move:theMessageIsFromAnotherServer')
     return
   }
 
   if (!Msg.channel.permissionsFor(Author.id).has('MANAGE_MESSAGES')) {
-    zSend('move:youDontHavePermissionToDeleteMessage', true)
+    Send('move:youDontHavePermissionToDeleteMessage')
     return
   }
 
   if (!Msg.channel.permissionsFor(Author.id).has('VIEW_CHANNEL')) {
-    zSend('move:youDontHavePermissionToSeeMessages', true)
+    Send('move:youDontHavePermissionToSeeMessages')
     return
   }
 
   if (!Msg.channel.permissionsFor(bot.user.id).has('MANAGE_MESSAGES')) {
-    zSend('move:missingManageMessagePermissionOnTheChannel', true)
+    Send('move:missingManageMessagePermissionOnTheChannel')
     return
   }
 
   if (Msg.channel.nsfw && !message.channel.nsfw) {
-    zSend('render:tryingToMoveAMessageFromNsfwToNotNsfw', true)
+    Send('render:tryingToMoveAMessageFromNsfwToNotNsfw')
     return
   }
 
   try {
     Msg.delete()
   } catch (e) {
-    zSend('move:couldntDeleteTheMessage', true)
+    Send('move:couldntDeleteTheMessage')
     return
   }
 
-  Channel.send(`${t('move:messageSentBy')} ${Msg.author.username} ${t('move:movedFrom')} ${Msg.channel.name} ${t('move:by')} ${message.author.username}.`)
+  Channel.send(`${i18n.__('move:messageSentBy')} ${Msg.author.username} ${i18n.__('move:movedFrom')} ${Msg.channel.name} ${i18n.__('move:by')} ${message.author.username}.`)
   if (!Msg.embeds.length > 0) {
     Channel.send(Msg.content)
 
@@ -92,21 +92,21 @@ exports.run = async ({ bot, message, args, t, zSend, zEmbed }) => {
   }
 
   if (!Channel.permissionsFor(bot.user.id).has('EMBED_LINKS')) {
-    zSend('move:missingEmbedLinksPermissionOnTheChannel', true)
+    Send('move:missingEmbedLinksPermissionOnTheChannel')
     return
   }
 
   const DataFrom = Msg.embeds[0]
 
-  zEmbed.fields = DataFrom.fields
-  zEmbed.title = DataFrom.title
-  zEmbed.description = DataFrom.description
-  zEmbed.url = DataFrom.url
-  zEmbed.timestamp = DataFrom.timestamp
-  zEmbed.color = DataFrom.color
-  zEmbed.video = DataFrom.video
-  zEmbed.image = DataFrom.image
-  zEmbed.thumbnail = DataFrom.thumbnail
-  zEmbed.author = DataFrom.author
-  Channel.send(zEmbed)
+  fastEmbed.fields = DataFrom.fields
+  fastEmbed.title = DataFrom.title
+  fastEmbed.description = DataFrom.description
+  fastEmbed.url = DataFrom.url
+  fastEmbed.timestamp = DataFrom.timestamp
+  fastEmbed.color = DataFrom.color
+  fastEmbed.video = DataFrom.video
+  fastEmbed.image = DataFrom.image
+  fastEmbed.thumbnail = DataFrom.thumbnail
+  fastEmbed.author = DataFrom.author
+  Channel.send(fastEmbed)
 }

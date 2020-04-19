@@ -1,4 +1,5 @@
 const { CommandNeeds } = require('../../cache/index.js')
+const ArgsManager = require('../messageUtils/index.js').argsManager
 
 /**
 * Sets up the key from where isType function will get properties.
@@ -33,79 +34,93 @@ exports.checkCommandPermissions = (message, command, t) => {
   }
 
   const CommandPerms = CommandNeeds[command].options
-  const Args = message.content.split(' ').slice(1)
+  const Args = ArgsManager(message, process.env.PREFIX)
   const IsType = setIsType(CommandPerms)
 
   if (CommandPerms.onlyOwner && message.author.id !== process.env.OWNER) {
-    return t('utils:commandUtils.onlyOwner')
+    return t.__('utils:commandUtils.onlyOwner')
   }
 
   if (CommandPerms.specificAuthor) {
     if (IsType('specificAuthor', 'object') && !CommandPerms.specificAuthor.includes(message.author.id)) {
-      return `${t('utils:commandUtils.specificNeeds.specificAuthor.pluralReturn')} ${CommandPerms.specificAuthor.join(', ')}`
-    } else if (message.author.id !== CommandPerms.specificAuthor) {
-      return `${t('utils:commandUtils.specificNeeds.specificAuthor.defaultReturn')} ${CommandPerms.specificAuthor}`
+      return `${t.__('utils:commandUtils.specificNeeds.specificAuthor.pluralReturn')} ${CommandPerms.specificAuthor.join(', ')}`
+    }
+
+    if (message.author.id !== CommandPerms.specificAuthor) {
+      return `${t.__('utils:commandUtils.specificNeeds.specificAuthor.defaultReturn')} ${CommandPerms.specificAuthor}`
     }
   }
 
   if (CommandPerms.specificGuild) {
     if (IsType('specificGuild', 'object') && !CommandPerms.specificGuild.includes(message.guild.id)) {
-      return `${t('utils:commandUtils.specificNeeds.specificGuild.pluralReturn')} ${CommandPerms.specificGuild.join(', ')}`
-    } else if (message.guild.id !== CommandPerms.specificGuild) {
-      return `${t('utils:commandUtils.specificNeeds.specificGuild.defaultReturn')} ${CommandPerms.specificGuild}`
+      return `${t.__('utils:commandUtils.specificNeeds.specificGuild.pluralReturn')} ${CommandPerms.specificGuild.join(', ')}`
+    }
+
+    if (message.guild.id !== CommandPerms.specificGuild) {
+      return `${t.__('utils:commandUtils.specificNeeds.specificGuild.defaultReturn')} ${CommandPerms.specificGuild}`
     }
   }
 
   if (CommandPerms.specificChannel) {
     if (IsType('specificChannel', 'object') && !CommandPerms.specificChannel.includes(message.channel.id)) {
-      return `${t('utils:commandUtils.specificNeeds.specificChannel.pluralReturn')} ${CommandPerms.specificChannel.join(', ')}`
-    } else if (message.channel.id !== CommandPerms.specificChannel) {
-      return `${t('utils:commandUtils.specificNeeds.specificChannel.defaultReturn')} ${CommandPerms.specificChannel}`
+      return `${t.__('utils:commandUtils.specificNeeds.specificChannel.pluralReturn')} ${CommandPerms.specificChannel.join(', ')}`
+    }
+
+    if (message.channel.id !== CommandPerms.specificChannel) {
+      return `${t.__('utils:commandUtils.specificNeeds.specificChannel.defaultReturn')} ${CommandPerms.specificChannel}`
     }
   }
 
   if (CommandPerms.specificRole) {
-    const Roles = message.member.roles
+    const Roles = message.member.roles.cache
 
     if (isNaN(CommandPerms.specificRole) && !Roles.find((r) => r.name.toLowerCase() === CommandPerms.specificRole)) {
-      return `${t('utils:commandUtils.specificNeeds.specificRole.nameReturn')} ${CommandPerms.specificRole}`
-    } else if (!Roles.has(CommandPerms.specificRole)) {
-      return `${t('utils:commandUtils.specificNeeds.specificRole.defaultReturn')} ${CommandPerms.specificRole}`
+      return `${t.__('utils:commandUtils.specificNeeds.specificRole.nameReturn')} ${CommandPerms.specificRole}`
+    }
+
+    if (!Roles.has(CommandPerms.specificRole)) {
+      return `${t.__('utils:commandUtils.specificNeeds.specificRole.defaultReturn')} ${CommandPerms.specificRole}`
     }
   }
 
   if (CommandPerms.needArg) {
-    if (IsType('needArg', 'number') && CommandPerms.needArg > Args.length) {
-      return `${t('utils:commandUtils.needArg.thisCommandNeeds')} **${CommandPerms.needArg}** ${t('utils:commandUtils.needArg.arguments')} ${t('utils:commandUtils.needArg.andYourMessageOnlyHave')} **${Args.length}** ${t('utils:commandUtils.needArg.arguments')}`
-    } else if (!Args.length >= 1) {
-      return t('utils:commandUtils.needArg.default')
+    if (IsType('needArg', 'number') && !Args.ArgumentWithID && CommandPerms.needArg > Args.ArgumentWithID.length) {
+      return `${t.__('utils:commandUtils.needArg.thisCommandNeeds')} **${CommandPerms.needArg}** ${t.__('utils:commandUtils.needArg.arguments')} ${t.__('utils:commandUtils.needArg.andYourMessageOnlyHave')} **${Args.ArgumentWithID.length}** ${t.__('utils:commandUtils.needArg.arguments')}`
+    }
+
+    if (!Args.Argument || !Args.Argument.length >= 1) {
+      return t.__('utils:commandUtils.needArg.default')
     }
   }
 
   if (CommandPerms.needAttch) {
     if (IsType('needAttch', 'number') && !message.attachments.size >= CommandPerms.needAttch) {
-      return `${t('utils:commandUtils.needAttch.default')} ${CommandPerms.needAttch} ${t('utils:commandUtils.needAttch.attachments')}`
-    } else if (!message.attachments.size >= 1) {
-      return `${t('utils:commandUtils.needAttch.default')} 1 ${t('utils:commandUtils.needAttch.attachment')}`
+      return `${t.__('utils:commandUtils.needAttch.default')} ${CommandPerms.needAttch} ${t.__('utils:commandUtils.needAttch.attachments')}`
+    }
+
+    if (!message.attachments.size >= 1) {
+      return `${t.__('utils:commandUtils.needAttch.default')} 1 ${t.__('utils:commandUtils.needAttch.attachment')}`
     }
   }
 
   if (CommandPerms.needMention) {
     if (IsType('needMention', 'number') && !message.mentions.users >= CommandPerms.needMention) {
-      return `${t('utils:commandUtils.needMention.needToMention')} ${CommandPerms.needMention} ${t('utils:commandUtils.needMention.users')} ${t('utils:commandUtils.needMention.inOrderTo')}`
-    } else if (!message.mentions.users.first()) {
-      return `${t('utils:commandUtils.needMention.needToMention')} ${t('utils:commandUtils.needMention.users')} ${t('utils:commandUtils.needMention.inOrderTo')}`
+      return `${t.__('utils:commandUtils.needMention.needToMention')} ${CommandPerms.needMention} ${t.__('utils:commandUtils.needMention.users')} ${t.__('utils:commandUtils.needMention.inOrderTo')}`
+    }
+
+    if (!message.mentions.users.first()) {
+      return `${t.__('utils:commandUtils.needMention.needToMention')} ${t.__('utils:commandUtils.needMention.users')} ${t.__('utils:commandUtils.needMention.inOrderTo')}`
     }
   }
 
   if (CommandPerms.userNeed) {
     if (!message.channel.permissionsFor(message.author.id).has(CommandPerms.userNeed)) {
-      return `${t('utils:commandUtils.userNeed.part1')} ${CommandPerms.userNeed} ${t('utils:commandUtils.userNeed.part2')}`
+      return `${t.__('utils:commandUtils.userNeed.part1')} ${CommandPerms.userNeed} ${t.__('utils:commandUtils.userNeed.part2')}`
     }
   }
 
   if (CommandPerms.guildOwner && message.author.id !== message.guild.owner.user.id) {
-    return t('utils:commandUtils.guildOwner')
+    return t.__('utils:commandUtils.guildOwner')
   }
 
   return ''

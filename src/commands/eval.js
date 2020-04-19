@@ -1,13 +1,13 @@
 // Bot is exported but not used because we want it to exist when executing the FullArgument
-exports.run = ({ bot, message, t, zSend, zEmbed }) => {
+exports.run = ({ bot, ArgsManager, message, i18n, Send, fastEmbed }) => {
   try {
-    const FullArgument = message.content.split(' ').slice(1).join(' ')
+    const FullArgument = ArgsManager.Argument.join(' ')
 
-    zEmbed.addField(t('eval:code'), `\`\`\`JavaScript\n${FullArgument}\`\`\``)
+    fastEmbed.addField(i18n.__('eval:code'), `\`\`\`JavaScript\n${FullArgument}\`\`\``)
     // eslint-disable-next-line no-eval
-    zEmbed.addField(t('eval:result'), `\`\`\`JavaScript\n${eval(FullArgument)}\`\`\``)
-    zSend(zEmbed)
+    fastEmbed.addField(i18n.__('eval:result'), `\`\`\`JavaScript\n${eval(FullArgument)}\`\`\``)
+    Send(fastEmbed)
   } catch (e) {
-    zSend(e.toString())
+    Send(e.toString())
   }
 }

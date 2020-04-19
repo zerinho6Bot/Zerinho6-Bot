@@ -1,42 +1,42 @@
-const { GuildLanguage } = require('../local_storage')
-const { LanguageUtils, StorageUtils } = require('../Utils')
-const LanguageList = LanguageUtils.getLanguages()
-const LanguageListLiteral = Object.keys(LanguageList).join(', ')
+const { GuildLanguage } = require('../cache/index.js')
+const LanguageList = require('../Utils/languageUtils/index.js').acceptableLanguages
+const LanguageListLiteral = LanguageList.join(', ')
 
-exports.run = ({ message, args, t, zSend, zEmbed }) => {
-  if (!args[0]) {
-    zEmbed.addField(t('set-language:languageList'), LanguageListLiteral)
-    zSend(zEmbed)
+exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
+  const cacheUtils = require('../Utils/index.js').cacheUtils
+  if (!ArgsManager.Argument) {
+    fastEmbed.addField(i18n.__('set-language:languageList'), LanguageListLiteral)
+    Send(fastEmbed, true)
     return
   }
 
-  if (!Object.keys(LanguageList).includes(args[0])) {
-    zEmbed.setDescription(LanguageListLiteral)
-    zSend('set-language:languageNotExist', true)
-    zSend(zEmbed)
+  if (!LanguageList.includes(ArgsManager.Argument[0])) {
+    fastEmbed.setDescription(LanguageListLiteral)
+    Send('set-language:languageNotExist')
+    Send(fastEmbed, true)
     return
   }
 
   const Guild = message.guild
 
   if (GuildLanguage[Guild.id]) {
-    if (args[0] === GuildLanguage[Guild.id].language) {
-      zSend('set-language:languageIsDefault', true)
+    if (ArgsManager.Argument[0] === GuildLanguage[Guild.id].language) {
+      Send('set-language:languageIsDefault')
       return
     }
 
-    GuildLanguage[Guild.id].language = args[0]
+    GuildLanguage[Guild.id].language = ArgsManager.Argument[0]
   } else {
     GuildLanguage[Guild.id] = {
       language: ''
     }
-    GuildLanguage[Guild.id].language = args[0]
+    GuildLanguage[Guild.id].language = ArgsManager.Argument[0]
   }
 
-  const Result = StorageUtils.write('src/local_storage/guild_language.json', GuildLanguage)
+  const Result = cacheUtils.write('GuildLanguage', GuildLanguage)
   if (Result) {
-    zSend('set-language:languageDone', true)
+    Send('set-language:languageDone')
   } else {
-    zSend('set-language:languageError', true)
+    Send('set-language:languageError')
   }
 }

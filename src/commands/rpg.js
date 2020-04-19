@@ -8,7 +8,7 @@ const Emojis = {
 }
 const EmojisArr = ['🗡', '🛡', '🕯', '🍬', '🤢'] // Order: Dagger, shield, candle, candy and nauseated_face.
 const PlayersPlaying = new Set()
-exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
+exports.run = async ({ bot, message, i18n, Send }) => {
   class ZeroBattle {
     constructor (p1, p2) {
       this.p1 = {
@@ -112,13 +112,13 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
     */
     isActionAvailable (action) {
       if (this.Playerturn.actions[action] !== 0) {
-        zSendAsync(`${this.Playerturn.name}, ${t('rpg:thatActionStillOnCooldown')}.`).then((msg) => {
+        Send(`${this.Playerturn.name}, ${i18n.__('rpg:thatActionStillOnCooldown')}.`).then((msg) => {
           try {
             setTimeout(() => {
               msg.delete()
             }, 3000)
           } catch (e) {
-            console.log(e)
+            Log.warn(e)
           }
         })
         return false
@@ -185,7 +185,7 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
     /**
     * Executes a action.
     * @param {String} action - The name of the action that the user is making, ex: candle
-    * @returns {Boolean} - Returns false if: The user doesn't have the action available or if the enemy isn't dead after the action.
+    * @returns {Boolean} - Returns false if: The user doesn'i18n.__ have the action available or if the enemy isn'i18n.__ dead after the action.
     */
     act (action) {
       if (!this.isActionAvailable(action)) {
@@ -267,7 +267,7 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
         let stringToDisplay = ''
 
         for (let i = 0; i < Keys.length; i++) {
-          stringToDisplay += ` -${t('rpg:' + Keys[i])}: ${Values[i]}${Values[i] === 0 ? '' : ':x:'}\n`
+          stringToDisplay += ` -${i18n.__('rpg:' + Keys[i])}: ${Values[i]}${Values[i] === 0 ? '' : ':x:'}\n`
         }
 
         return stringToDisplay
@@ -321,14 +321,14 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
       * @returns {String}
       */
       function displayStats (player) {
-        return `${player.name}\n${t('rpg:hp')}: ${displayHealth(player)} ${displayEffects(player)}\n${t('rpg:actions')}:\n${displayActions(player)}`
+        return `${player.name}\n${i18n.__('rpg:hp')}: ${displayHealth(player)} ${displayEffects(player)}\n${i18n.__('rpg:actions')}:\n${displayActions(player)}`
       }
 
-      const Announcer = `     ----- ${t('rpg:turnOf')} ${this.Playerturn.name} -----`
+      const Announcer = `     ----- ${i18n.__('rpg:turnOf')} ${this.Playerturn.name} -----`
       // A emoji is equal to like, 3 characters, that's why we do this  \/
       const Banner = `${Announcer}\n${' '.repeat((Announcer.length / 2) - 3)}${this.p1.icon} ${Emojis.crossedSword} ${this.p2.icon}`
 
-      return `${Banner}\n\n${displayStats(this.p1)}\n\n${displayStats(this.p2)}\n\n${this.history.length > 0 ? `${t('rpg:history')}: ${this.history.join(', ')}` : ''}`
+      return `${Banner}\n\n${displayStats(this.p1)}\n\n${displayStats(this.p2)}\n\n${this.history.length > 0 ? `${i18n.__('rpg:history')}: ${this.history.join(', ')}` : ''}`
     }
 
     // Game Over
@@ -349,7 +349,7 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
         let stringWithKeysAndValues = ''
 
         for (let i = 0; i < Keys.length; i++) {
-          stringWithKeysAndValues += ` -${t('rpg:' + Keys[i])}: ${Values[i]} ${t('rpg:time(s)')}\n`
+          stringWithKeysAndValues += ` -${i18n.__('rpg:' + Keys[i])}: ${Values[i]} ${i18n.__('rpg:time(s)')}\n`
         }
 
         return stringWithKeysAndValues
@@ -361,7 +361,7 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
       * @returns {String}
       */
       function getDamageAndHealedHistoryFromPlayer (player) {
-        return ` -${t('rpg:damageDealt(DaggerAndShield)')}: ${player.damageDealt}\n -${t('rpg:damageDealtFromNausea')}: ${player.damageDealtFromNausea}\n -${t('rpg:damageDealtFromCandle')}: ${15 * player.actionsLog.candle}\n -${t('rpg:damageBlocked')}: ${player.damageBlocked}\n -${t('rpg:healthRestored')}: ${20 * player.actionsLog.candy}`
+        return ` -${i18n.__('rpg:damageDealt(DaggerAndShield)')}: ${player.damageDealt}\n -${i18n.__('rpg:damageDealtFromNausea')}: ${player.damageDealtFromNausea}\n -${i18n.__('rpg:damageDealtFromCandle')}: ${15 * player.actionsLog.candle}\n -${i18n.__('rpg:damageBlocked')}: ${player.damageBlocked}\n -${i18n.__('rpg:healthRestored')}: ${20 * player.actionsLog.candy}`
       }
 
       /**
@@ -370,10 +370,10 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
       * @returns {String}
       */
       function getResultsFromPlayer (player) {
-        return `${player.name}\nHp: ${player.hp}\n${t('rpg:timesThatYouUsedEachAction')}:\n${getActionTimesUsedFromPlayer(player)}\n${t('rpg:damageDealtAndRestoredHistory')}:\n${getDamageAndHealedHistoryFromPlayer(player)}`
+        return `${player.name}\nHp: ${player.hp}\n${i18n.__('rpg:timesThatYouUsedEachAction')}:\n${getActionTimesUsedFromPlayer(player)}\n${i18n.__('rpg:damageDealtAndRestoredHistory')}:\n${getDamageAndHealedHistoryFromPlayer(player)}`
       }
 
-      return `${t('rpg:history')}: ${this.history.join(', ')}\n\n     ${t('tictactoe:winner')}: ${this.winner === this.p1.userObject.id ? this.p1.name : this.winner === this.p2.userObject.id ? this.p2.name : t('rpg:noOne')}\n\n${getResultsFromPlayer(this.p1)}\n\n${getResultsFromPlayer(this.p2)}`
+      return `${i18n.__('rpg:history')}: ${this.history.join(', ')}\n\n     ${i18n.__('tictactoe:winner')}: ${this.winner === this.p1.userObject.id ? this.p1.name : this.winner === this.p2.userObject.id ? this.p2.name : i18n.__('rpg:noOne')}\n\n${getResultsFromPlayer(this.p1)}\n\n${getResultsFromPlayer(this.p2)}`
     }
   }
 
@@ -381,16 +381,16 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
   const Author = message.author
 
   if (Member.id === Author.id) {
-    zSend('tictactoe:selfMention', true)
+    Send('tictactoe:selfMention')
     return
   }
 
   if (Member.bot) {
-    zSend('tictactoe:botMention', true)
+    Send('tictactoe:botMention')
   }
 
   if (PlayersPlaying.has(Author.id) || PlayersPlaying.has(Member.id)) {
-    zSend('tictactoe:oneOfThePlayersIsAlreadyPlaying', true)
+    Send('tictactoe:oneOfThePlayersIsAlreadyPlaying')
     return
   }
 
@@ -399,7 +399,7 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
   PlayersPlaying.add(Author.id)
   PlayersPlaying.add(Member.id)
 
-  const Msg = await zSendAsync(Game.draw())
+  const Msg = await Send(Game.draw(), true)
 
   for (let i = 0; i < EmojisArr.length; i++) {
     await Msg.react(EmojisArr[i])
@@ -429,7 +429,7 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
   }
 
   Collection.on('collect', (r) => {
-    if (r.users.last().id !== Game.turn) {
+    if (r.users.cache.last().id !== Game.turn) {
       return
     }
 
@@ -439,7 +439,7 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
       Msg.edit(Game.draw())
     }
 
-    r.users.forEach((u) => {
+    r.users.cache.forEach((u) => {
       if (u.id !== bot.user.id) {
         r.remove(u)
       }
@@ -450,7 +450,7 @@ exports.run = async ({ bot, message, t, zSend, zSendAsync }) => {
     PlayersPlaying.delete(Author.id)
     PlayersPlaying.delete(Member.id)
     if (Game.winner === null) {
-      zSend('tictactoe:timeExpired', true)
+      Send('tictactoe:timeExpired')
     }
 
     Msg.edit(Game.drawResults())
