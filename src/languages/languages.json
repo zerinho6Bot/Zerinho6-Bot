@@ -1,6 +1,394 @@
 {
-    "utils:commandUtils.needArg.default": {
-        "en": "error",
-        "pt-br": "Deu erro playboy"
+    "Global_No": {
+        "en": "No",
+        "pt-br": "Não"
+    },
+    "Global_Yes": {
+        "en": "Yes",
+        "pt-br": "Sim"
+    },
+    "Global_Or": {
+        "en": "or",
+        "pt-br": "ou"
+    },
+    "Message_errorMissingCommandName": {
+        "en": "You forgot the command name.",
+        "pt-br": "Você esqueceu o nome do comando."
+    },
+    "Message_errorCommandDoesntExist": {
+        "en": "That command doesn't exist.",
+        "pt-br": "Esse comando não existe."
+    },
+    "Message_errorCooldownWarning": {
+        "en": "Hello there. You need to wait {{amount}} seconds to use another command.",
+        "pt-br": "Calma lá. Você precisa esperar {{amount}} segundos para usar outro comando."
+    },
+    "Message_errorMissingEmbedLinks": {
+        "en": "Hello there, I would like to ask for EMBED_LINKS permission on this channel so my commands can work, if you don't understand this message, mention an Staff.",
+        "pt-br": "Eu preciso da permissão EMBED_LINKS para que meus comandos funcionem, se você não entende essa mensagem, marque um Staff."
+    },
+    "Utils_commandUtils_onlyOwner": {
+        "en": "Only the bot owner can use this command.",
+        "pt-br": "Apenas o dono do bot pode usar esse comando."
+    },
+    "Utils_commandUtils_specificNeeds_specificAuthor_pluralReturn": {
+        "en": "Only users with one of those IDs can use that command:",
+        "pt-br": "Apenas usuários com um desses IDs podem usar esse comando:"
+    },
+    "Utils_commandUtils_specificNeeds_specificAuthor_defaultReturn": {
+        "en": "Only a user with the follow ID can use that command:",
+        "pt-br": "Apenas um usuário com o seguinte ID pode usar esse comando:"
+    },
+    "Utils_commandUtils_specificNeeds_specificGuild_pluralReturn": {
+        "en": "You can only use that command in a guild with one of those IDs:",
+        "pt-br": "Você só pode usar esse comando em um servidor com um desses IDs:"
+    },
+    "Utils_commandUtils_specificNeeds_specificGuild_defaultReturn": {
+        "en": "You can only use this command in a guild with this ID:",
+        "pt-br": "Você só pode usar esse comando em um servidor com o seguinte ID:"
+    },
+    "Utils_commandUtils_specificNeeds_specificChannel_pluralReturn": {
+        "en": "You can only use this command in a channel with one of those IDs:",
+        "pt-br": "Você só pode usar esse comando em um servidor com um desses IDs:"
+    },
+    "Utils_commandUtils_specificNeeds_specificChannel_defaultReturn": {
+        "en": "You can only use this command in a channel with this ID:",
+        "pt-br": "Você só pode usar esse comando em um servidor com o seguinte ID:"
+    },
+    "Utils_commandUtils_specificNeeds_specificRole_defaultReturn": {
+        "en": "You can only use this command with a role with the follow ID:",
+        "pt-br": "Você só pode usar esse comando se você tiver um cargo com o seguinte ID:"
+    },
+    "Utils_commandUtils_specificNeeds_specificRole_nameReturn": {
+        "en": "You can only use this command with a role with the follow name:",
+        "pt-br": "Você só pode usar esse comando se você tiver um cargo com o seguinte nome:"
+    },
+    "Utils_commandUtils_needArg_default": {
+        "en": "This command required an argument to work.",
+        "pt-br": "Esse comando precisa de um argumento para funcionar."
+    },
+    "Utils_commandUtils_needArg_CommandNeeds": {
+        "en": "This command needs {{arguments}} arguments and your message only has **{{givenMessageArguments}}**.",
+        "pt-br": "Esse comando precisa de {{arguments}} argumentos e sua mensagem só tem **{{givenMessageArguments}}**."
+    },
+    "Utils_commandUtils_needAttch_defaultReturn": {
+        "en": "You need to use the command with an attachment.",
+        "pt-br": "Você precisa enviar um arquivo com o comando."
+    },
+    "Utils_commandUtils_needAttch_pluralReturn": {
+        "en": "You need to use the command with {{amount}} attachments.",
+        "pt-br": "Você precisa enviar {{amount}} arquivos com o comando."
+    },
+    "Utils_commandUtils_needMention_defaultReturn": {
+        "en": "You need to mention someone in order to use this command.",
+        "pt-br": "Você precisa mencionar alguém para utilizar essa comando."
+    },
+    "Utils_commandUtils_needMention_pluralReturn": {
+        "en": "You need to mention {{amount}} users in order to use this command.",
+        "pt-br": "Você precisa mencionar {{amount}} pessoas para utilizar essa comando."
+    },
+    "Utils_commandUtils_userNeed": {
+        "en": "You need {{permission}} permission to use this command.",
+        "pt-br": "Você precisa da permissão {{permission} para usar esse comando."
+    },
+    "Utils_commandUtils_guildOwner": {
+        "en": "Only the guild owner can use this command.",
+        "pt-br": "Apenas o dono do servidor pode usar esse comando."
+    },
+    "Help_Bot": {
+        "en": "Bot Category",
+        "pt-br": "Categoria Bot"
+    },
+    "Help_Games": {
+        "en": "Games Category",
+        "pt-br": "Categoria Jogos"
+    },
+    "Help_Staff": {
+        "en": "Staff Category",
+        "pt-br": "Categoria Staff"
+    },
+    "Help_Utility": {
+        "en": "Utility Category",
+        "pt-br": "Categoria Utilidade"
+    },
+    "Help_Etc": {
+        "en": "Etc Category",
+        "pt-br": "Categoria Aleatória"
+    },
+    "Help_typeWithCommandName": {
+        "en": "**Type \"{{prefix}}help commandName\" to see a manual about that command.\nExample: {{prefix}}help avatar**",
+        "pt-br": "**Digite \"{{prefix}}help nomeDoComando\" para ver um manual desse comando.\nExemplo: {{prefix}}help avatar**"
+    },
+    "Help_errorNoHelpEmbed": {
+        "en": "That command doesn't seem to have a help defined for it yet.",
+        "pt-br": "Esse comando não tem um comando de ajuda definido para ele ainda."
+    },
+    "Help_NoArgument": {
+        "en": "No argument",
+        "pt-br": "Nenhum argumento"
+    },
+    "Help_OneArgument": {
+        "en": "One argument",
+        "pt-br": "Um argumento"
+    },
+    "Help_TwoArguments": {
+        "en": "Two arguments",
+        "pt-br": "Dois argumentos"
+    },
+    "Help_ThreeArguments": {
+        "en": "Three arguments",
+        "pt-br": "Três argumentos"
+    },
+    "Help_FourArguments": {
+        "en": "Four arguments",
+        "pt-br": "Quatro argumentos"
+    },
+    "Help_FiveArguments": {
+        "en": "Five arguments",
+        "pt-br": "Cinco argumentos"
+    },
+    "Help_SixArguments": {
+        "en": "Six arguments",
+        "pt-br": "Seis argumentos"
+    },
+    "Help_FirstArgument": {
+        "en": "First argument",
+        "pt-br": "Primeiro argumento"
+    },
+    "Help_SecondArgument": {
+        "en": "Second argument",
+        "pt-br": "Segundo argumento"
+    },
+    "Help_ThirdArgument": {
+        "en": "Third argument",
+        "pt-br": "Terceiro argumento"
+    },
+    "Help_FourthArgument": {
+        "en": "Fourth argument",
+        "pt-br": "Quarto argumento"
+    },
+    "Help_FifthArgument": {
+        "en": "Fifth argument",
+        "pt-br": "Quinto argumento"
+    },
+    "Help_SixthArgument": {
+        "en": "Sixth argument",
+        "pt-br": "Sexto argumento"
+    },
+    "Help_ArgumentsFormat": {
+        "en": "Arguments Format",
+        "pt-br": "Formato dos Argumentos"
+    },
+    "Help_Info": {
+        "en": "Info",
+        "pt-br": "Informações"
+    },
+    "Help_ArgumentsRequired": {
+        "en": "Arguments: {{howMany}}\nAre arguments required: {{required}}",
+        "pt-br": "Argumentos: {{howMany}}\nArguments são necessários: {{required}}"
+    },
+    "Help_description": {
+        "en": "Shows the bot command and it's manual.",
+        "pt-br": "Mostra a lista de comandos e o manual deles."
+    },
+    "Avatar_server": {
+        "en": "guild",
+        "pt-br": "servidor"
+    },
+    "Avatar_description": {
+        "en": "Look your avatar, someone's avatar or the server icon.",
+        "pt-br": "Veja o seu avatar, o avatar de outra pessoa ou o ícone do servidor."
+    },
+    "Bot-invite_IdOrMentionNotDetected": {
+        "en": "ID or Mention not detected.",
+        "pt-br": "ID ou Menção não detectada."
+    },
+    "Bot-invite_CouldntFindThatUser": {
+        "en": "Couldn't find that account.",
+        "pt-br": "Não foi possivel achar essa conta."
+    },
+    "Bot-invite_userIsntBot": {
+        "en": "That account isn't a bot account, use the ``userinfo`` command for not bot accounts.",
+        "pt-br": "Essa conta não é uma conta bot, use o comando ``userinfo`` para contas não bot."
+    },
+    "Bot-invite_invite": {
+        "en": "Invite",
+        "pt-br": "Convite"
+    },
+    "Bot-invite_description": {
+        "en": "Returns an invite of the given bot ID or the mentioned bot.",
+        "pt-br": "Retorna um convite do ID do bot dado como argumento ou o bot mencionado."
+    },
+    "Bot-invite_botID": {
+        "en": "Bot ID",
+        "pt-br": "ID do bot"
+    },
+    "Bot-invite_botMention": {
+        "en": "Bot Mention",
+        "pt-br": "Menção do Bot"
+    },
+    "Bot-invite_errorWrongArgument": {
+        "en": "Your argument isn't an ID or Bot Mention",
+        "pt-br": "Seu argumento não é um ID ou menção de bot"
+    },
+    "Embed_fieldContainsTooMuch": {
+        "en": "The embed field contains too much, the name can only have {{name}} amount of characters and the description can have up to {{description}} characters.",
+        "pt-br": "O embed tem muito conteudo, o nome do embed só pode conter {{name}} caracteres e a descrição pode contar {{description}} caracteres."
+    },
+    "Embed_description": {
+        "en": "Make a custom embed message.",
+        "pt-br": "Faça uma mensagem embed."
+    },
+    "Embed_argumentFormat_example1": {
+        "en": "Hello",
+        "pt-br": "Olá"
+    },
+    "Embed_argumentFormat_example2": {
+        "en": "World",
+        "pt-br": "Mundo"
+    },
+    "Eval_description": {
+        "en": "Executes the given code.",
+        "pt-br": "Executa o código dado como argumento."
+    },
+    "Eval_code": {
+        "en": "Code",
+        "pt-br": "Código"
+    },
+    "Eval_result": {
+        "en": "Result",
+        "pt-br": "Resultado"
+    },
+    "Info_description": {
+        "en": "Shows the bot system info.",
+        "pt-br": "Mostra informações de sistema do bot."
+    },
+    "Info_guilds": {
+        "en": "Guilds",
+        "pt-br": "Servidores"
+    },
+    "Info_users": {
+        "en": "Users",
+        "pt-br": "Usuários"
+    },
+    "Info_gitRepository": {
+        "en": "Git Repository",
+        "pt-br": "Repositorio Git"
+    },
+    "Info_reportBugsAt": {
+        "en": "Report bugs at",
+        "pt-br": "Reporte bugs em"
+    },
+    "Info_defaultLanguage": {
+        "en": "Default Language",
+        "pt-br": "Linguagem Padrão"
+    },
+    "Info_RAM": {
+        "en": "RAM",
+        "pt-br": "RAM"
+    },
+    "Info_uptime": {
+        "en": "Uptime",
+        "pt-br": "Tempo acordado"
+    },
+    "Info_ownerID": {
+        "en": "Owner ID",
+        "pt-br": "ID do dono"
+    },
+    "Info_History": {
+        "en": "History",
+        "pt-br": "História"
+    },
+    "Info_ZerinhoHistory": {
+        "en": "Back in 2016, I was nedding bots for my server, and I really wanted one with advanded auto-reply, thing that only Tatsumaki bot had at the time(back when mee6 was trash, lol) and I really wanted more, then I found a bot called 'Mixy' that had this function, I added to my server and started to use it a lot, the owner of the bot noticed that(the basic console.log(message.guild.name...) ) and made the bot make a invite link to enter on the server, I noticed that it was Smix tue bot owner because I already meet him on another server but I was surprised that it made all the way to my server to talk with me about the bot and the updates, because, just like Zerinho6 Bot, it isn't public fucused but personal usage, then he showed me the code of the bot(It was horrible, but it was a trainee developer and atleast the code works) I was like 'What the f is that, what i'm looking at?' and since then I started to learn programming and work on Zerinho6 Bot.",
+        "pt-br": "La em 2016, eu estava precisando de bots para o meu servidor, e eu realmente precisava de um com um modulo de auto-resposta avançada, coisa que apenas a Tatsumaki tinha no momento(Época que o mee6 era uma merda, lol) e eu realmente queria mais, então eu achei um bot chamado 'Mixy' que tinha essa função, eu o adicionei no meu servidor e comecei a usar bastante, o dono do bot notou isso e fez o bot criar um link de convite no servidor, eu notei que Smix era o dono do bot pois eu já conhecia ele de outro servidor, mas eu estava surpreso que ele foi ate o meu servidor falar sobre o bot e atualizações pois, assim como o Zerinho6 Bot, o foco dele não é o uso publico, mas sim pessoal, então ele me mostoru o codigo do bot(Era horrivel, mas ele era novo e o codigo pelo menos funcionava), eu estava tipo 'Mas que p, é essa, o que eu estou olhando?' e desde então eu comecei a aprender programação e trabalhar no Zerinho6 Bot."
+    },
+    "Render_wrongFormat": {
+        "en": "The argument is in the wrong format, it should follow this format: ``https://discordapp.com/channels/422897054386225173/586285188158586881/701893082379190364``",
+        "pt-br": "O argumento está no formato incorreto, ele deve seguir o seguinte formato: ``https://discordapp.com/channels/422897054386225173/586285188158586881/701893082379190364``"
+    },
+    "Render_incorrectID": {
+        "en": "The IDs of the links are invalid.",
+        "pt-br": "Os IDs no link são inválidos."
+    },
+    "Render_messageIsFromAnotherServer": {
+        "en": "The message you gave is from another server.",
+        "pt-br": "A mensagem que você deu é de outro servidor."
+    },
+    "Render_invalidChannelReference": {
+        "en": "The channel to given is not an channel mention or a channel ID.",
+        "pt-br": "O canal dado como argumento não é uma menção de canal nem um ID de canal."
+    },
+    "Render_invalidChannel": {
+        "en": "I couldn't find that channel.",
+        "pt-br": "Não consegui achar esse canal."
+    },
+    "Render_messageNotFound": {
+        "en": "Couldn't find the message.",
+        "pt-br": "Não foi possivel achar a mensagem."
+    },
+    "Render_noPermissionToDelete": {
+        "en": "You don't have permisiion to delete the message(that you want to move).",
+        "pt-br": "Você não tem permissão para deletar a mensagem(que você quer enviar)."
+    },
+    "Render_noPermissionToSee": {
+        "en": "You don't have permission to see messages on that channel..",
+        "pt-br": "Você não tem permissão para enviar mensagens nesse canal.."
+    },
+    "Render_noPermissionToManage": {
+        "en": "I don't have permission to manage messages on this channel.",
+        "pt-br": "Eu não tenho permissão permissão para gerenciar mensagens nesse canal."
+    },
+    "Render_nsfwChannel": {
+        "en": "You're trying to move a message from a nsfw channel to a not nsfw channel. No.",
+        "pt-br": "Você está tentando enviar uma mensagem de um canal nsfw para um canal nsfw. Não."
+    },
+    "Render_couldntDeleteMessage": {
+        "en": "Couldn't delete the message that you want to move.",
+        "pt-br": "Não foi possivel deletar a mensagem que você quer mover."
+    },
+    "Render_messageSentBy": {
+        "en": "Message from",
+        "pt-br": "Mensagem de"
+    },
+    "Render_movedFrom": {
+        "en": "moved from",
+        "pt-br": "movida de"
+    },
+    "Render_by": {
+        "en": "by",
+        "pt-br": "por"
+    },
+    "Render_missingEmbedPermission": {
+        "en": "I'm missing embed links permission on that channel.",
+        "pt-br": "Eu preciso da permissão de enviar links embed nesse canal."
+    },
+    "Move_description": {
+        "en": "Move a messagem from a channel to another.",
+        "pt-br": "Mova uma mensagem de um canal pra outro."
+    },
+    "Ping_ping": {
+        "en": "Ping",
+        "pt-br": "Ping"
+    },
+    "Ping_pong": {
+        "en": "Pong",
+        "pt-br": "Pong"
+    },
+    "Ping_ms": {
+        "en": "ms",
+        "pt-br": "ms"
+    },
+    "Ping_description": {
+        "en": "See bot's ping.",
+        "pt-br": "Veja o ping do bot."
+    },
+    "Ram_heapUsed": {
+        "en": "heapUsed",
+        "pt-br": "heapUsed"
+    },
+    "Ram_description": {
+        "en": "See how much RAM the bot is using.",
+        "pt-br": "Veja quanta RAM o bot está usando."
     }
 }

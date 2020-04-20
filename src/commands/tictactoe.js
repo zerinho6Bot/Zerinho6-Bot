@@ -192,7 +192,9 @@ exports.run = async function ({ message, i18n, Send, fastEmbed }) {
 
       if (Member.nickname !== null && Member.nickname.toLowerCase().includes(NameToCheck)) {
         return true
-      } else if (Member.user.username.toLowerCase().includes(NameToCheck)) {
+      }
+
+      if (Member.user.username.toLowerCase().includes(NameToCheck)) {
         return true
       }
 

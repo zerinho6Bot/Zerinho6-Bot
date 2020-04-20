@@ -7,29 +7,29 @@ exports.run = async ({ bot, message, ArgsManager, i18n, Send, fastEmbed }) => {
   const MatchedRegex = ArgsManager.Argument[0].match(Regex)
 
   if (MatchedRegex === null) {
-    Send('render:wrongFormat')
+    Send('Render_wrongFormat')
     return
   }
 
   if ([MatchedRegex[1], MatchedRegex[2], MatchedRegex[3]].every((elem) => isNaN(elem))) {
-    Send('render:incorrectID')
+    Send('Render_incorrectID')
     return
   }
 
   if (MatchedRegex[1] !== message.guild.id) {
-    Send('move:theMessageIsFromAnotherServer')
+    Send('Render_messageIsFromAnotherServer')
     return
   }
 
   const ChannelId = ArgsManager.Argument[1].match(ChannelRegex) === null ? ArgsManager.Argument[1] : ArgsManager.Argument[1].match(ChannelRegex)[1]
   if (isNaN(ChannelId)) {
-    Send('tictactoe-profile:argsNotNumber')
+    Send('Render_invalidChannelReference')
     return
   }
 
   const Guild = message.guild
   if (!Guild.channels.cache.has(ChannelId)) {
-    Send('move:aChannelWithThatIdDoesntExistOnThisGuild')
+    Send('Render_invalidChannel"')
     return
   }
 
@@ -43,44 +43,44 @@ exports.run = async ({ bot, message, ArgsManager, i18n, Send, fastEmbed }) => {
   const Msg = await getMessage(bot, MatchedRegex[1], MatchedRegex[2], MatchedRegex[3])
   const Author = message.author
   if (Msg === null) {
-    Send('render:messageNotFound')
+    Send('Render_messageNotFound')
     return
   }
 
   // I know I've already made a check for that, but never trust the user.
   if (Msg.guild.id !== Guild.id) {
-    Send('move:theMessageIsFromAnotherServer')
+    Send('Render_messageIsFromAnotherServer')
     return
   }
 
   if (!Msg.channel.permissionsFor(Author.id).has('MANAGE_MESSAGES')) {
-    Send('move:youDontHavePermissionToDeleteMessage')
+    Send('Render_noPermissionToDelete')
     return
   }
 
   if (!Msg.channel.permissionsFor(Author.id).has('VIEW_CHANNEL')) {
-    Send('move:youDontHavePermissionToSeeMessages')
+    Send('Render_noPermissionToSee')
     return
   }
 
   if (!Msg.channel.permissionsFor(bot.user.id).has('MANAGE_MESSAGES')) {
-    Send('move:missingManageMessagePermissionOnTheChannel')
+    Send('Render_noPermissionToManage')
     return
   }
 
   if (Msg.channel.nsfw && !message.channel.nsfw) {
-    Send('render:tryingToMoveAMessageFromNsfwToNotNsfw')
+    Send('Render_nsfwChannel')
     return
   }
 
   try {
     Msg.delete()
   } catch (e) {
-    Send('move:couldntDeleteTheMessage')
+    Send('Render_couldntDeleteMessage')
     return
   }
 
-  Channel.send(`${i18n.__('move:messageSentBy')} ${Msg.author.username} ${i18n.__('move:movedFrom')} ${Msg.channel.name} ${i18n.__('move:by')} ${message.author.username}.`)
+  Channel.send(`${i18n.__('Render_messageSentBy')} ${Msg.author.username} ${i18n.__('Render_movedFrom')} ${Msg.channel.name} ${i18n.__('Render_by')} ${message.author.username}.`)
   if (!Msg.embeds.length > 0) {
     Channel.send(Msg.content)
 
@@ -92,7 +92,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, Send, fastEmbed }) => {
   }
 
   if (!Channel.permissionsFor(bot.user.id).has('EMBED_LINKS')) {
-    Send('move:missingEmbedLinksPermissionOnTheChannel')
+    Send('Render_missingEmbedPermission')
     return
   }
 
@@ -109,4 +109,15 @@ exports.run = async ({ bot, message, ArgsManager, i18n, Send, fastEmbed }) => {
   fastEmbed.thumbnail = DataFrom.thumbnail
   fastEmbed.author = DataFrom.author
   Channel.send(fastEmbed)
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 2,
+    argumentsNeeded: true,
+    argumentsFormat: ['https://discordapp.com/channels/422897054386225173/586285188158586881/701910837425733652', '#channel'],
+    imageExample: 'https://cdn.discordapp.com/attachments/499671331021914132/701892639922061444/unknown.png'
+  }
+
+  return helpEmbed(message, i18n, Options)
 }

@@ -51,7 +51,9 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
         const MsgLower = Msg.content.toLowerCase()
         if (MsgLower === i18n.__('serverstats:no')) {
           Send('serverstats:staffDecidedNo')
-        } else if (MsgLower === i18n.__('serverstats:yes')) {
+        }
+
+        if (MsgLower === i18n.__('serverstats:yes')) {
           Send('serverstats:staffDecidedYes_Part1')
           GuildWantingStats.servers[Msg.guild.id] = {
             lastMonthUpdated: 13 // Little trick, if I put 0 and the month is January...
@@ -249,7 +251,9 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
         Msg.edit(comparationEmbed)
       })
     }
-  } else if (ArgsLower === i18n.__('serverstats:comparingLower')) {
+  }
+
+  if (ArgsLower === i18n.__('serverstats:comparingLower')) {
     if (validadeYearAndMonth(ServerStats, ArgsManager.Argument[1], CorrectArgs) === false) {
       return
     }

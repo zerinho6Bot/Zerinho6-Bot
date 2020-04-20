@@ -38,36 +38,36 @@ exports.checkCommandPermissions = (message, command, t) => {
   const IsType = setIsType(CommandPerms)
 
   if (CommandPerms.onlyOwner && message.author.id !== process.env.OWNER) {
-    return t.__('utils:commandUtils.onlyOwner')
+    return t.__('Utils_commandUtils_onlyOwner')
   }
 
   if (CommandPerms.specificAuthor) {
     if (IsType('specificAuthor', 'object') && !CommandPerms.specificAuthor.includes(message.author.id)) {
-      return `${t.__('utils:commandUtils.specificNeeds.specificAuthor.pluralReturn')} ${CommandPerms.specificAuthor.join(', ')}`
+      return `${t.__('Utils_commandUtils_specificNeeds_specificAuthor_pluralReturn')} ${CommandPerms.specificAuthor.join(', ')}`
     }
 
     if (message.author.id !== CommandPerms.specificAuthor) {
-      return `${t.__('utils:commandUtils.specificNeeds.specificAuthor.defaultReturn')} ${CommandPerms.specificAuthor}`
+      return `${t.__('Utils_commandUtils_specificNeeds_specificAuthor_defaultReturn')} ${CommandPerms.specificAuthor}`
     }
   }
 
   if (CommandPerms.specificGuild) {
     if (IsType('specificGuild', 'object') && !CommandPerms.specificGuild.includes(message.guild.id)) {
-      return `${t.__('utils:commandUtils.specificNeeds.specificGuild.pluralReturn')} ${CommandPerms.specificGuild.join(', ')}`
+      return `${t.__('Utils_commandUtils_specificNeeds_specificGuild_pluralReturn')} ${CommandPerms.specificGuild.join(', ')}`
     }
 
     if (message.guild.id !== CommandPerms.specificGuild) {
-      return `${t.__('utils:commandUtils.specificNeeds.specificGuild.defaultReturn')} ${CommandPerms.specificGuild}`
+      return `${t.__('Utils_commandUtils_specificNeeds_specificGuild_defaultReturn')} ${CommandPerms.specificGuild}`
     }
   }
 
   if (CommandPerms.specificChannel) {
     if (IsType('specificChannel', 'object') && !CommandPerms.specificChannel.includes(message.channel.id)) {
-      return `${t.__('utils:commandUtils.specificNeeds.specificChannel.pluralReturn')} ${CommandPerms.specificChannel.join(', ')}`
+      return `${t.__('Utils_commandUtils_specificNeeds_specificChannel_pluralReturn')} ${CommandPerms.specificChannel.join(', ')}`
     }
 
     if (message.channel.id !== CommandPerms.specificChannel) {
-      return `${t.__('utils:commandUtils.specificNeeds.specificChannel.defaultReturn')} ${CommandPerms.specificChannel}`
+      return `${t.__('Utils_commandUtils_specificNeeds_specificChannel_defaultReturn')} ${CommandPerms.specificChannel}`
     }
   }
 
@@ -75,52 +75,52 @@ exports.checkCommandPermissions = (message, command, t) => {
     const Roles = message.member.roles.cache
 
     if (isNaN(CommandPerms.specificRole) && !Roles.find((r) => r.name.toLowerCase() === CommandPerms.specificRole)) {
-      return `${t.__('utils:commandUtils.specificNeeds.specificRole.nameReturn')} ${CommandPerms.specificRole}`
+      return `${t.__('Utils_commandUtils_specificNeeds_specificRole_nameReturn')} ${CommandPerms.specificRole}`
     }
 
     if (!Roles.has(CommandPerms.specificRole)) {
-      return `${t.__('utils:commandUtils.specificNeeds.specificRole.defaultReturn')} ${CommandPerms.specificRole}`
+      return `${t.__('Utils_commandUtils_specificNeeds_specificRole_defaultReturn')} ${CommandPerms.specificRole}`
     }
   }
 
   if (CommandPerms.needArg) {
     if (IsType('needArg', 'number') && !Args.ArgumentWithID && CommandPerms.needArg > Args.ArgumentWithID.length) {
-      return `${t.__('utils:commandUtils.needArg.thisCommandNeeds')} **${CommandPerms.needArg}** ${t.__('utils:commandUtils.needArg.arguments')} ${t.__('utils:commandUtils.needArg.andYourMessageOnlyHave')} **${Args.ArgumentWithID.length}** ${t.__('utils:commandUtils.needArg.arguments')}`
+      return t.__('Utils_commandUtils_needArg_commandNeeds', { arguments: CommandPerms.needArg, givenMessageArguments: Args.ArgumentWithID.length })
     }
 
     if (!Args.Argument || !Args.Argument.length >= 1) {
-      return t.__('utils:commandUtils.needArg.default')
+      return t.__('Utils_commandUtils_needArg_default')
     }
   }
 
   if (CommandPerms.needAttch) {
     if (IsType('needAttch', 'number') && !message.attachments.size >= CommandPerms.needAttch) {
-      return `${t.__('utils:commandUtils.needAttch.default')} ${CommandPerms.needAttch} ${t.__('utils:commandUtils.needAttch.attachments')}`
+      return t.__('Utils_commandUtils_needAttch_pluralReturn', { amount: CommandPerms.needAttch })
     }
 
     if (!message.attachments.size >= 1) {
-      return `${t.__('utils:commandUtils.needAttch.default')} 1 ${t.__('utils:commandUtils.needAttch.attachment')}`
+      return t.__('Utils_commandUtils_needAttch_defaultReturn')
     }
   }
 
   if (CommandPerms.needMention) {
     if (IsType('needMention', 'number') && !message.mentions.users >= CommandPerms.needMention) {
-      return `${t.__('utils:commandUtils.needMention.needToMention')} ${CommandPerms.needMention} ${t.__('utils:commandUtils.needMention.users')} ${t.__('utils:commandUtils.needMention.inOrderTo')}`
+      return t.__('Utils_commandUtils_needMention_pluralReturn', { amount: CommandPerms.needMention })
     }
 
     if (!message.mentions.users.first()) {
-      return `${t.__('utils:commandUtils.needMention.needToMention')} ${t.__('utils:commandUtils.needMention.users')} ${t.__('utils:commandUtils.needMention.inOrderTo')}`
+      return t.__('Utils_commandUtils_needMention_defaultReturn')
     }
   }
 
   if (CommandPerms.userNeed) {
     if (!message.channel.permissionsFor(message.author.id).has(CommandPerms.userNeed)) {
-      return `${t.__('utils:commandUtils.userNeed.part1')} ${CommandPerms.userNeed} ${t.__('utils:commandUtils.userNeed.part2')}`
+      return t.__('Utils_commandUtils_userNeed', { permission: CommandPerms.userNeed })
     }
   }
 
   if (CommandPerms.guildOwner && message.author.id !== message.guild.owner.user.id) {
-    return t.__('utils:commandUtils.guildOwner')
+    return t.__('Utils_commandUtils_guildOwner')
   }
 
   return ''

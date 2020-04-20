@@ -1,7 +1,17 @@
 exports.run = ({ i18n, Send }) => {
   const DateBeforeSend = new Date()
 
-  Send('ping:ping', true).then((message) => {
-    message.edit(`${i18n.__('ping:pong')} \`${new Date() - DateBeforeSend}\`${i18n.__('ping:ms')}`)
+  Send('Ping_ping', true).then((message) => {
+    message.edit(`${i18n.__('Ping_pong')} \`${new Date() - DateBeforeSend}\`${i18n.__('Ping_ms')}`)
   })
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 0,
+    argumentsNeeded: false,
+    argumentsFormat: []
+  }
+
+  return helpEmbed(message, i18n, Options)
 }

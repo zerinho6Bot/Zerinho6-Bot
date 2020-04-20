@@ -33,7 +33,9 @@ exports.getAvailableCommandsForUser = (message) => {
 
       if (isNaN(RoleVerify) && !Roles.find((r) => r.name.toLowerCase() === RoleVerify)) {
         continue
-      } else if (!Roles.has(RoleVerify)) {
+      }
+
+      if (!Roles.has(RoleVerify)) {
         continue
       }
     }

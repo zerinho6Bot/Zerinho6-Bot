@@ -1,6 +1,6 @@
 const guildData = require('../cache/index.js').GuildData
 const { messageUtils, languageUtils, commandUtils } = require('../Utils/index.js')
-const Commands = require('../commands/index.js')
+const Commands = require('../commands/index.js').commandNames
 
 exports.condition = (bot, message) => {
   if (message.author.bot || !message.content.toLowerCase().startsWith(process.env.PREFIX) || message.channel.type !== 'text' || !message.channel.permissionsFor(bot.user.id).has('SEND_MESSAGES')) {
@@ -22,7 +22,7 @@ exports.condition = (bot, message) => {
     return false
   }
 
-  if (!Object.keys(Commands).includes(ArgsManager.CommandName[0])) {
+  if (!Commands.includes(ArgsManager.CommandName[0])) {
     Log.info(`${message.author.id} tried to execute a command that doesn't exist, command: ${ArgsManager.CommandName[0]}`)
     Send('Message_errorCommandDoesntExist')
     return
@@ -56,7 +56,7 @@ exports.run = async (bot, message) => {
     fastEmbed,
     ArgsManager
   }
-  const Command = Commands[ArgsManager.CommandName[0]]
+  const Command = commandUtils.getCommandRequirer(ArgsManager.CommandName[0].toLowerCase())
   try {
     if (checkMissingPermission !== '') {
       Log.info(`Missing permission for command ${ArgsManager.CommandName[0]}`)

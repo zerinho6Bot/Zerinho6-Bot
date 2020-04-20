@@ -306,11 +306,13 @@ exports.run = async ({ bot, message, i18n, Send }) => {
 
         if (player.wasPlayerHealedLastTurn) {
           healthString = `**${player.hp}**`
-        } else if (player.wasPlayerDamagedLastTurn) {
-          healthString = `_${player.hp}_`
-        } else {
-          healthString = player.hp
         }
+
+        if (player.wasPlayerDamagedLastTurn) {
+          healthString = `_${player.hp}_`
+        }
+
+        healthString = player.hp
 
         return healthString
       }

@@ -1,5 +1,6 @@
 exports.run = ({ ArgsManager, fastEmbed, i18n, Send, message }) => {
   const Commands = require('./index.js')
+  const getCommandRequirer = require('../Utils/commandUtils/index.js').getCommandRequirer
   if (!ArgsManager.Argument) {
     const Advanced = Commands.advanced
     const AdvancedKeys = Object.keys(Advanced)
@@ -19,20 +20,20 @@ exports.run = ({ ArgsManager, fastEmbed, i18n, Send, message }) => {
     return
   }
 
-  if (!Commands[FixedArgument].helpEmbed) {
+  if (!getCommandRequirer(FixedArgument).helpEmbed) {
     Send('Help_errorNoHelpEmbed')
     return
   }
   const { helpEmbedFactory } = require('../Utils/messageUtils/index.js')
-  Send(Commands[FixedArgument].helpEmbed({ ArgsManager, fastEmbed, i18n, Send, message, helpEmbed: helpEmbedFactory }), true)
+  Send(getCommandRequirer(FixedArgument).helpEmbed({ ArgsManager, fastEmbed, i18n, Send, message, helpEmbed: helpEmbedFactory }), true)
 }
 
 exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
   const Options = {
     argumentsLength: 1,
     argumentsNeeded: false,
-    argumentsFormat: [i18n.__('Help_commandName')],
-    imageExample: 'https://cdn.discordapp.com/attachments/688182781263609868/693823076735123456/unknown.png'
+    argumentsFormat: ['avatar'],
+    imageExample: 'https://cdn.discordapp.com/attachments/499671331021914132/701889372093546516/unknown.png'
   }
 
   return helpEmbed(message, i18n, Options)

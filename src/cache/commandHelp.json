@@ -4,5 +4,26 @@
     },
     "help": {
         "redir": "Help_description"
+    },
+    "bot-invite": {
+        "redir": "Bot-invite_description"
+    },
+    "embed": {
+        "redir": "Embed_description"
+    },
+    "eval": {
+        "redir": "Eval_description"
+    },
+    "info": {
+        "redir": "Info_description"
+    },
+    "move": {
+        "redir": "Move_description"
+    },
+    "ping": {
+        "redir": "Ping_description"
+    },
+    "ram": {
+        "redit": "Ram_description"
     }
 }

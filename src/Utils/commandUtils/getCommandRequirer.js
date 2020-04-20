@@ -5,7 +5,7 @@
   * @returns {Object}
   */
 exports.getCommandRequirer = (command) => {
-  const requires = require('../../requires.js')
+  const requires = require('../../commands/index.js').requirer
 
   return requires[command]
 }
