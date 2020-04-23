@@ -112,7 +112,7 @@ exports.run = async ({ bot, message, i18n, Send }) => {
     */
     isActionAvailable (action) {
       if (this.Playerturn.actions[action] !== 0) {
-        Send(`${this.Playerturn.name}, ${i18n.__('rpg:thatActionStillOnCooldown')}.`).then((msg) => {
+        Send(`${this.Playerturn.name}, ${i18n.__('Rpg_actionStillOnCooldown')}`).then((msg) => {
           try {
             setTimeout(() => {
               msg.delete()
@@ -267,7 +267,7 @@ exports.run = async ({ bot, message, i18n, Send }) => {
         let stringToDisplay = ''
 
         for (let i = 0; i < Keys.length; i++) {
-          stringToDisplay += ` -${i18n.__('rpg:' + Keys[i])}: ${Values[i]}${Values[i] === 0 ? '' : ':x:'}\n`
+          stringToDisplay += ` -${i18n.__('Rpg_' + Keys[i])}: ${Values[i]}${Values[i] === 0 ? '' : ':x:'}\n`
         }
 
         return stringToDisplay
@@ -323,14 +323,14 @@ exports.run = async ({ bot, message, i18n, Send }) => {
       * @returns {String}
       */
       function displayStats (player) {
-        return `${player.name}\n${i18n.__('rpg:hp')}: ${displayHealth(player)} ${displayEffects(player)}\n${i18n.__('rpg:actions')}:\n${displayActions(player)}`
+        return `${player.name}\n${i18n.__('Rpg_hp')}: ${displayHealth(player)} ${displayEffects(player)}\n${i18n.__('Rpg_actions')}:\n${displayActions(player)}`
       }
 
-      const Announcer = `     ----- ${i18n.__('rpg:turnOf')} ${this.Playerturn.name} -----`
+      const Announcer = `     ----- ${i18n.__('Rpg_turnOf')} ${this.Playerturn.name} -----`
       // A emoji is equal to like, 3 characters, that's why we do this  \/
       const Banner = `${Announcer}\n${' '.repeat((Announcer.length / 2) - 3)}${this.p1.icon} ${Emojis.crossedSword} ${this.p2.icon}`
 
-      return `${Banner}\n\n${displayStats(this.p1)}\n\n${displayStats(this.p2)}\n\n${this.history.length > 0 ? `${i18n.__('rpg:history')}: ${this.history.join(', ')}` : ''}`
+      return `${Banner}\n\n${displayStats(this.p1)}\n\n${displayStats(this.p2)}\n\n${this.history.length > 0 ? `${i18n.__('Rpg_history')}: ${this.history.join(', ')}` : ''}`
     }
 
     // Game Over
@@ -351,7 +351,7 @@ exports.run = async ({ bot, message, i18n, Send }) => {
         let stringWithKeysAndValues = ''
 
         for (let i = 0; i < Keys.length; i++) {
-          stringWithKeysAndValues += ` -${i18n.__('rpg:' + Keys[i])}: ${Values[i]} ${i18n.__('rpg:time(s)')}\n`
+          stringWithKeysAndValues += ` -${i18n.__('Rpg_' + Keys[i])}: ${Values[i]} ${i18n.__('Rpg_times')}\n`
         }
 
         return stringWithKeysAndValues
@@ -363,7 +363,7 @@ exports.run = async ({ bot, message, i18n, Send }) => {
       * @returns {String}
       */
       function getDamageAndHealedHistoryFromPlayer (player) {
-        return ` -${i18n.__('rpg:damageDealt(DaggerAndShield)')}: ${player.damageDealt}\n -${i18n.__('rpg:damageDealtFromNausea')}: ${player.damageDealtFromNausea}\n -${i18n.__('rpg:damageDealtFromCandle')}: ${15 * player.actionsLog.candle}\n -${i18n.__('rpg:damageBlocked')}: ${player.damageBlocked}\n -${i18n.__('rpg:healthRestored')}: ${20 * player.actionsLog.candy}`
+        return ` -${i18n.__('Rpg_damageDealt(DaggerAndShield)')}: ${player.damageDealt}\n -${i18n.__('Rpg_damageDealt', { what: i18n.__('RPG_nauseated_face') })}: ${player.damageDealtFromNausea}\n -${i18n.__('Rpg_damageDealt', { what: i18n.__('Rpg_candle') })}: ${15 * player.actionsLog.candle}\n -${i18n.__('Rpg_damageBlocked')}: ${player.damageBlocked}\n -${i18n.__('Rpg_healthRestored')}: ${20 * player.actionsLog.candy}`
       }
 
       /**
@@ -372,10 +372,10 @@ exports.run = async ({ bot, message, i18n, Send }) => {
       * @returns {String}
       */
       function getResultsFromPlayer (player) {
-        return `${player.name}\nHp: ${player.hp}\n${i18n.__('rpg:timesThatYouUsedEachAction')}:\n${getActionTimesUsedFromPlayer(player)}\n${i18n.__('rpg:damageDealtAndRestoredHistory')}:\n${getDamageAndHealedHistoryFromPlayer(player)}`
+        return `${player.name}\n${i18n.__('Rpg_hp')}: ${player.hp}\n${i18n.__('Rpg_timesUsedEachActions')}:\n${getActionTimesUsedFromPlayer(player)}\n${i18n.__('Rpg_damageDealtAndRestoredHistory')}:\n${getDamageAndHealedHistoryFromPlayer(player)}`
       }
 
-      return `${i18n.__('rpg:history')}: ${this.history.join(', ')}\n\n     ${i18n.__('tictactoe:winner')}: ${this.winner === this.p1.userObject.id ? this.p1.name : this.winner === this.p2.userObject.id ? this.p2.name : i18n.__('rpg:noOne')}\n\n${getResultsFromPlayer(this.p1)}\n\n${getResultsFromPlayer(this.p2)}`
+      return `${i18n.__('Rpg_history')}: ${this.history.join(', ')}\n\n     ${i18n.__('Rpg_winner')}: ${this.winner === this.p1.userObject.id ? this.p1.name : this.winner === this.p2.userObject.id ? this.p2.name : i18n.__('Rpg_noOne')}\n\n${getResultsFromPlayer(this.p1)}\n\n${getResultsFromPlayer(this.p2)}`
     }
   }
 
@@ -383,16 +383,17 @@ exports.run = async ({ bot, message, i18n, Send }) => {
   const Author = message.author
 
   if (Member.id === Author.id) {
-    Send('tictactoe:selfMention')
+    Send('Rpg_selfMention')
     return
   }
 
   if (Member.bot) {
-    Send('tictactoe:botMention')
+    Send('Rpg_botMention')
+    return
   }
 
   if (PlayersPlaying.has(Author.id) || PlayersPlaying.has(Member.id)) {
-    Send('tictactoe:oneOfThePlayersIsAlreadyPlaying')
+    Send('Rpg_oneIsAlreadyPlaying')
     return
   }
 
@@ -407,7 +408,7 @@ exports.run = async ({ bot, message, i18n, Send }) => {
     await Msg.react(EmojisArr[i])
   }
 
-  const Collection = Msg.createReactionCollector((r, u) => EmojisArr.includes(r.emoji.name) && !u.bot, { time: 300000 })
+  const Collection = Msg.createReactionCollector((r, u) => EmojisArr.includes(r.emoji.name) && !u.bot, { time: 500000 })
 
   function getActionName (emoji) {
     switch (emoji) {
@@ -452,9 +453,20 @@ exports.run = async ({ bot, message, i18n, Send }) => {
     PlayersPlaying.delete(Author.id)
     PlayersPlaying.delete(Member.id)
     if (Game.winner === null) {
-      Send('tictactoe:timeExpired')
+      Send('Rpg_timeExpired')
     }
 
     Msg.edit(Game.drawResults())
   })
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 1,
+    argumentsNeeded: true,
+    argumentsFormat: ['@Moru Zerinho6#9939'],
+    imageExample: 'https://cdn.discordapp.com/attachments/490329576300609538/580119182537129998/unknown.png'
+  }
+
+  return helpEmbed(message, i18n, Options)
 }

@@ -390,5 +390,287 @@
     "Ram_description": {
         "en": "See how much RAM the bot is using.",
         "pt-br": "Veja quanta RAM o bot está usando."
+    },
+    "Render_tryingToRenderMessageFromNsfw": {
+        "en": "You're trying to render a message from a nsfw channel to a not nsfw channel.",
+        "pt-br": "Você está tentando renderizar uma mensagem de um canal nsfw para um canal não nsfw."
+    },
+    "Render_description": {
+        "en": "Renders a message using it's link.",
+        "pt-br": "Renderiza uma mensagem usando o link dela."
+    },
+    "Render_channel": {
+        "en": "Channel",
+        "pt-br": "Canal"
+    },
+    "Rpg_actionStillOnCooldown": {
+        "en": "That action is still on cooldown.",
+        "pt-br": "Essa ação ainda está recarregando."
+    },
+    "Rpg_dagger": {
+        "en": "Dagger",
+        "pt-br": "Adaga"
+    },
+    "Rpg_shield": {
+        "en": "Shield",
+        "pt-br": "Escudo"
+    },
+    "Rpg_candy": {
+        "en": "Candy",
+        "pt-br": "Doce"
+    },
+    "Rpg_candle": {
+        "en": "Candle",
+        "pt-br": "Vela"
+    },
+    "Rpg_nauseated_face": {
+        "en": "Nausea",
+        "pt-br": "Nausea"
+    },
+    "Rpg_hp": {
+        "en": "HP",
+        "pt-br": "HP"
+    },
+    "Rpg_actions": {
+        "en": "Actions",
+        "pt-br": "Ações"
+    },
+    "Rpg_turnOf": {
+        "en": "Turn of",
+        "pt-br": "Turno de"
+    },
+    "Rpg_history": {
+        "en": "History",
+        "pt-br": "Historia"
+    },
+    "Rpg_times": {
+        "en": "Time(s)",
+        "pt-br": "Tempo"
+    },
+    "Rpg_damageDealt(DaggerAndShield)": {
+        "en": "Damage Dealt(Dagger and Shield)",
+        "pt-br": "Dano causado(Adaga e Escudo)"
+    },
+    "Rpg_damageDealt": {
+        "en": "Damage Dealt From {{what}}",
+        "pt-br": "Dano causado por {{what}}"
+    },
+    "Rpg_damageBlocked": {
+        "en": "Damage Blocked",
+        "pt-br": "Dano Bloqueado"
+    },
+    "Rpg_healthRestored": {
+        "en": "Health Restored",
+        "pt-br": "Vida Restaurada"
+    },
+    "Rpg_timesUsedEachActions": {
+        "en": "Times that you used each action",
+        "pt-br": "Quantidade de vezes que você usou cada ação"
+    },
+    "Rpg_damageDealtAndRestoredHistory": {
+        "en": "Damage Dealt and Healed History",
+        "pt-br": "Historia do dano causado e restaurado"
+    },
+    "Rpg_winner": {
+        "en": "Winner",
+        "pt-br": "Vencedor(a)"
+    },
+    "Rpg_noOne": {
+        "en": "No one",
+        "pt-br": "Ninguém"
+    },
+    "Rpg_selfMention": {
+        "en": "You can't play with yourself on that game.",
+        "pt-br": "Você não pode jogar sozinho."
+    },
+    "Rpg_botMention": {
+        "en": "You can't play with a bot on this game.",
+        "pt-br": "Você não pode jogar com um bot."
+    },
+    "Rpg_oneIsAlreadyPlaying": {
+        "en": "One of the players are already playing.",
+        "pt-br": "Um dos jogadores já está participando de uma partida."
+    },
+    "Rpg_timeExpired": {
+        "en": "Time expired.",
+        "pt-br": "Tempo expirado."
+    },
+    "Rpg_description": {
+        "en": "Play a rpg math with someone!\n\nInstructions:\n\nEach player have **200 health**, that's you max health and there's no way to pass that, your objective is to kill the enemy making his health 0 or lower than 0.\n\nYou have 5 **actions**:\n\n🗡 -Dagger: Deal **30 damage** to the enemy.\n🛡 -Shield: Makes dagger deal half of the damage and repeal 5 damage, **works for only one turn and doesn't protect from candle**.\n🕯 -Candle: Deal **15 damage** to the enemy, it ignores shield protection and you don't take damage back from it.\n🍬 -Candy: **Heal for 20** and removes nausea if you have it.\n🤢 -Nausea: Makes the enemy suffer from nausea, it'll take **6 damage** each turn.\n\nAfter using any action it'll go on a cooldown of 3 turns, you can't use it if the action is not with the value of 0, a :x: will appear to make it more easy to see what you can and can't use.",
+        "pt-br": "Jogue uma partida rpg com alguém!\n\nInstruções:\n\nCada jogador tem 200 de vida, essa é a sua vida máxima e não tem jeito de ultrapassar isso, seu objetivo é matar o inimigo, reduzindo a vida dele para 0 ou menos.\n\nVocê tem 5 **ações**:\n\n🗡 -Adaga: Dê **30 de dano** ao inimigo.\n🛡 -Escudo: Faz a adaga dar apenas metade do dano e repele 5 de dano, **funciona por apenas um turno e não protege contra vela.**\n🕯 -Vela: dê **15 de dano** ao inimigo, o dano ignora escudo e o dano não é repelado.\n🍬 -Doce: **Cure 20 de vida** e remova o efeito de nausea se você tiver.\n🤢 -Nausea: Faça o inimigo sofrer de nausea, ele vai levar **6 de dano** a cada turno ate que ele se cure com o Doce.\n\nApós usar cada ação, ela vai ir para um tempo de recarga de 3 turnos, você não pode usar a ação ate que esse tempo de recarga chegue em 0, um :x: vai aparecer na habilidade que você não pode usar para te ajudar."
+    },
+    "Serverinfo_unrestricted": {
+        "en": "Unrestricted",
+        "pt-br": "Irrestrito"
+    },
+    "Serverinfo_needEmail": {
+        "en": "You need an e-mail to be able to talk on this guild.",
+        "pt-br": "Você precisa de um e-mail para poder utilizar esse servidor."
+    },
+    "Serverinfo_waitFiveMinutesOnDiscord": {
+        "en": "You need to wait 5 minutes after having created an Discord Account.",
+        "pt-br": "Você precisa esperar 5 minutes depois de ter criado a conta no Discord."
+    },
+    "Serverinfo_waitTenMinutesOnTheServer": {
+        "en": "You need to wait 10 minutes after joining the guild.",
+        "pt-br": "Você precisa esperar 10 minutes depois de entrar no servidor."
+    },
+    "Serverinfo_heyYouGuysDontHavePhones": {
+        "en": "You need a phone number to use this guild.",
+        "pt-br": "Você precisa de um número para usar esse servidor"
+    },
+    "Serverinfo_guildName": {
+        "en": "Guild Name",
+        "pt-br": "Nome do Servidor"
+    },
+    "Serverinfo_memberCount": {
+        "en": "Member Count",
+        "pt-br": "Quantidade de Membros"
+    },
+    "Serverinfo_guildRegion": {
+        "en": "Guild Region",
+        "pt-br": "Região do Servidor"
+    },
+    "Serverinfo_guildID": {
+        "en": "Guild ID",
+        "pt-br": "ID do Servidor"
+    },
+    "Serverinfo_guildCreatedAt": {
+        "en": "Guild Created at",
+        "pt-br": "Servidor criado em"
+    },
+    "Serverinfo_roleAmount": {
+        "en": "Role Amount",
+        "pt-br": "Quantidade de cargos"
+    },
+    "Serverinfo_guildOwner": {
+        "en": "Guild Owner",
+        "pt-br": "Dono do Servidor"
+    },
+    "Serverinfo_verificationLevel": {
+        "en": "Verification Level",
+        "pt-br": "Nivel de Verificação"
+    },
+    "Serverinfo_thisGuildIsVerified": {
+        "en": "This guild is verified.",
+        "pt-br": "Esse servidor é verificado."
+    },
+    "Serverinfo_description": {
+        "en": "See informations about the server where the command is being executed.",
+        "pt-br": "Veja as informações do servidor."
+    },
+    "Serverstats_january": {
+        "en": "January",
+        "pt-br": "Janeiro"
+    },
+    "Serverstats_february": {
+        "en": "February",
+        "pt-br": "Fevereiro"
+    },
+    "Serverstats_march": {
+        "en": "March",
+        "pt-br": "Março"
+    },
+    "Serverstats_april": {
+        "en": "April",
+        "pt-br": "Abril"
+    },
+    "Serverstats_may": {
+        "en": "May",
+        "pt-br": "Maio"
+    },
+    "Serverstats_june": {
+        "en": "June",
+        "pt-br": "junho"
+    },
+    "Serverstats_july": {
+        "en": "Joly",
+        "pt-br": "Julho"
+    },
+    "Serverstats_august": {
+        "en": "August",
+        "pt-br": "Agosto"
+    },
+    "Serverstats_september": {
+        "en": "September",
+        "pt-br": "Setembro"
+    },
+    "Serverstats_october": {
+        "en": "October",
+        "pt-br": "Outubro"
+    },
+    "Serverstats_november": {
+        "en": "November",
+        "pt-br": "Novembro"
+    },
+    "Serverstats_december": {
+        "en": "December",
+        "pt-br": "Dezembro"
+    },
+    "Serverstats_months": {
+        "en": {
+            "january": "January",
+			"february": "February",
+			"march": "March",
+			"april": "April",
+			"may": "May",
+			"june": "June",
+			"july": "Joly",
+			"august": "August",
+			"september": "September",
+			"october": "October",
+			"november": "November",
+			"december": "December"
+        },
+        "pt-br": {
+            "january": "Janeiro",
+			"february": "Fevereiro",
+			"march": "Março",
+			"april": "Abril",
+			"may": "Maio",
+			"june": "Junho",
+			"july": "Jolho",
+			"august": "Agosto",
+			"september": "Setembro",
+			"october": "Outubro",
+			"november": "Novembro",
+			"december": "Dezembro"
+        }
+    },
+    "Serverstats_guildStatsDisabledNoPermission": {
+        "en": "This guild din't enable the serverStats command yet, ask for a Staff with MANAGE_GUILD permission.",
+        "pt-br": "Esse servidor ainda não habilitou o serverStats, fale com alguém que tenha a permissão de MANAGE_GUILD(Gerenciar Servidor)"
+    },
+    "Serverstats_guildStatsDisabled": {
+        "en": "This guild doesn't have ServerStats enabled, do you want to enable it now? (Type: yes **or** no)",
+        "pt-br": "Esse servidor ainda não habilitou o serverStats, você deseja habilitar? (Digite: sim **ou** não)"
+    },
+    "Serverstats_decidedNo": {
+        "en": "**No**, ok.",
+        "pt-br": "**Não**, ok."
+    },
+    "Serverstats_decidedYes": {
+        "en": "**Yes**, fine...defining this guild as one that wants stats...",
+        "pt-br": "**Sim**, ok...definindo o servidor como um que quer as informações..."
+    },
+    "Serverstats_decidedYes_Part2": {
+        "en": "Writing stats from this month(This can take some seconds..)",
+        "pt-br": "Escrevendo as informações desse mês..."
+    },
+    "Serverstats_decidedYes_Part3": {
+        "en": "Done, please execute the command again if you want to see the stats that I stored from this month.",
+        "pt-br": "Feito, por favor execute o comando novamente se você quer ver as informações que eu armazenei desse mês."
+    },
+    "Serverstats_noOptionGiven": {
+        "en": "No reply given.",
+        "pt-br": "Nenhuma resposta foi dada."
+    },
+    "Serverstats_yearIsNotAvailable": {
+        "en": "That year is not available",
+        "pt-br": "Este ano não está disponivel"
+    },
+    "Serverstats_monthIsNotAvailable": {
+        "en": "That month is not available",
+        "pt-br": "Este mês não está disponivel"
     }
 }

@@ -12,8 +12,8 @@ const TimeMonth = Time.getMonth()
  * @returns {(String|Boolean)}
  */
 function Months (i18n, month) {
-  const MonthsTranslated = Object.keys(i18n.__('serverstats:months'))
-  return MonthsTranslated[month] ? i18n.__(`serverstats:months.${MonthsTranslated[month]}`) : false
+  const MonthsTranslated = Object.keys(i18n.__('Serverstats_months'))
+  return MonthsTranslated[month] ? i18n.__('Serverstats_months')[MonthsTranslated[month]] : false
 }
 
 /**
@@ -24,11 +24,11 @@ function Months (i18n, month) {
  * @returns {Number}
  */
 function MonthsToNumber (i18n, month) {
-  month = typeof month === 'number' ? Months(i18n.__, month) : month
+  month = typeof month === 'number' ? Months(i18n, month) : month
   function MonthsTranslated () {
     let newArr = []
-    for (let i = 0; i < Object.values(i18n.__('serverstats:months')).length; i++) {
-      newArr = newArr.concat(Object.values(i18n.__('serverstats:months'))[i].toLowerCase())
+    for (let i = 0; i < Object.values(i18n.__('serverstats_months')).length; i++) {
+      newArr = newArr.concat(Object.values(i18n.__('serverstats_months'))[i].toLowerCase())
     }
     return newArr
   }
@@ -40,48 +40,49 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
 
   if (!ServerStats.guildWantsStats(message.guild.id)) {
     if (!message.channel.permissionsFor(message.author.id).has('MANAGE_GUILD')) {
-      Send('serverstats:thisGuildDontHaveServerStatsEnabled_NoPerm')
+      Send('Serverstats_guildStatsDisabledNoPermission')
       return
     }
 
-    Send('serverstats:thisGuildDontHaveServerStatsEnabled')
+    Send('Serverstats_guildStatsDisabled')
     await message.channel.awaitMessages((msg) => msg.author.id === message.author.id, { time: 30000, max: 1 })
       .then((c) => {
         const Msg = c.first()
         const MsgLower = Msg.content.toLowerCase()
-        if (MsgLower === i18n.__('serverstats:no')) {
-          Send('serverstats:staffDecidedNo')
+        if (MsgLower === i18n.__('Global_No').toLowerCase()) {
+          Send('Serverstats_decidedNo')
+          return
         }
 
-        if (MsgLower === i18n.__('serverstats:yes')) {
-          Send('serverstats:staffDecidedYes_Part1')
+        if (MsgLower === i18n.__('Global_Yes').toLowerCase()) {
+          Send('Serverstats_decidedYes')
           GuildWantingStats.servers[Msg.guild.id] = {
             lastMonthUpdated: 13 // Little trick, if I put 0 and the month is January...
           }
           StorageUtils.write('GuildWantingStats')
-          Send('serverstats:staffDecidedYes_Part2')
+          Send('Serverstats_decidedYes_Part2')
           ServerStats.updateServersStats()
 
           /*
-          Since updateServersStats doesn'i18n.__ return nothing and it won'i18n.__ take that
+          Since updateServersStats doesn't return nothing and it won't take that
           long to update the JSON, I'll do this.
           */
           setTimeout(() => {
-            Send('serverstats:staffDecidedYes_Part3')
+            Send('Serverstats_decidedYes_Part3')
           }, 2000)
         } else {
-          Send('serverstats:staffDintGiveAOption')
+          Send('Serverstats_noOptionGiven')
         }
       })
   }
   // Guild have stats...
 
   /**
-     * Returns a good looking visualizer of availables years and months.
-     * @function
-     * @param {Object} data
-     * @returns {String}
-     */
+    * Returns a good looking visualizer of availables years and months.
+    * @function
+    * @param {Object} data
+    * @returns {String}
+    */
   function castadeVisualizer (data) {
     const Keys = Object.keys(data)
 
@@ -100,17 +101,17 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
   }
 
   /**
-     * Check if it's equal to ~, if it's..it'll return the current year, if not, it'll try to parse to Int.
-     * @function
-     * @param {(String|Number)} year
-     * @returns {Number}
-     */
+    * Check if it's equal to ~, if it's..it'll return the current year, if not, it'll try to parse to Int.
+    * @function
+    * @param {(String|Number)} year
+    * @returns {Number}
+    */
   function translateYear (year) {
     if (year === '~') {
       return TimeYear
     }
 
-    return parseInt(year) // We don'i18n.__ really care about NaN, because it's a number.
+    return parseInt(year) // We don't really care about NaN, because it's a number.
   }
 
   /**
@@ -123,7 +124,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
     if (month === '~') {
       return TimeMonth
     }
-    const MonthToNumber = MonthsToNumber(i18n.__, month)
+    const MonthToNumber = MonthsToNumber(i18n, month)
     return MonthToNumber === -1 ? parseInt(month) : MonthToNumber // Again, we don't care about NaN, because it's a number.
   }
 
@@ -139,12 +140,12 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
     const Year = translateYear(year)
 
     if (!ServerStats.getDataFromYear(message.guild.id, Year)) {
-      Send('serverstats:yearIsNotAvailable', true)
+      Send('Serverstats_yearIsNotAvailable')
       return false
     }
 
     if (!ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, Year), translateMonth(month))) {
-      Send('serverstats:monthIsNotAvailable', true)
+      Send('Serverstats_monthIsNotAvailable')
       return false
     }
 
@@ -164,7 +165,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
   * @returns {String}
   */
   function returnSpecifiedDifference (ServerStats, oldYear, oldMonth, oldData, newYear, newMonth, newData) {
-    return `${ServerStats.getDifference(oldData, newData)} (${oldData} ${i18n.__('serverstats:from')} ${oldYear}[${Months(i18n.__, oldMonth)}] - ${newData} ${i18n.__('serverstats:from')} ${newYear}[${Months(i18n.__, newMonth)}])${ServerStats.getStatus(oldData - newData)}`
+    return `${ServerStats.getDifference(oldData, newData)} (${oldData} ${i18n.__('serverstats:from')} ${oldYear}[${Months(i18n, oldMonth)}] - ${newData} ${i18n.__('serverstats:from')} ${newYear}[${Months(i18n, newMonth)}])${ServerStats.getStatus(oldData - newData)}`
   }
 
   /**
@@ -191,10 +192,10 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
      * @param {Object} secondData
      */
   function returnSpecifiedComparedData (comparationEmbed, ServerStats, firstYear, firstMonth, firstData, secondYear, secondMonth, secondData) {
-    comparationEmbed.setTitle(`${i18n.__('serverstats:comparing')} ${firstYear}(${Months(i18n.__, firstMonth)}) ${i18n.__('serverstats:with')} ${secondYear}(${Months(i18n.__, secondMonth)})`)
+    comparationEmbed.setTitle(`${i18n.__('serverstats:comparing')} ${firstYear}(${Months(i18n, firstMonth)}) ${i18n.__('serverstats:with')} ${secondYear}(${Months(i18n, secondMonth)})`)
 
     /**
-    * Executes the returnSpecifiedDifference with most of arguments already defined so you don'i18n.__ need to repeat everything.
+    * Executes the returnSpecifiedDifference with most of arguments already defined so you don't need to repeat everything.
     * @function
     * @param {Object} oldData
     * @param {Object} newData
@@ -231,7 +232,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
     const Month = translateMonth(CorrectArgs)
     const DataFromMonth = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, Year), Month)
 
-    fastEmbed.setTitle(`${i18n.__('serverstats:summaryOf')} ${Year} ${Months(i18n.__, Month)}`)
+    fastEmbed.setTitle(`${i18n.__('serverstats:summaryOf')} ${Year} ${Months(i18n, Month)}`)
     fastEmbed.addField(i18n.__('serverstats:members'), DataFromMonth.membersCount, true)
     fastEmbed.addField(i18n.__('serverstats:roles'), DataFromMonth.rolesCount, true)
     fastEmbed.addField(i18n.__('serverstats:channels'), DataFromMonth.channelsCount, true)

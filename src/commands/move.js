@@ -115,7 +115,7 @@ exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
   const Options = {
     argumentsLength: 2,
     argumentsNeeded: true,
-    argumentsFormat: ['https://discordapp.com/channels/422897054386225173/586285188158586881/701910837425733652', '#channel'],
+    argumentsFormat: ['https://discordapp.com/channels/422897054386225173/586285188158586881/701910837425733652', `#${i18n.__('Render_channel')}`],
     imageExample: 'https://cdn.discordapp.com/attachments/499671331021914132/701892639922061444/unknown.png'
   }
 

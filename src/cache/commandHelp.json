@@ -24,6 +24,36 @@
         "redir": "Ping_description"
     },
     "ram": {
-        "redit": "Ram_description"
+        "redir": "Ram_description"
+    },
+    "render": {
+        "redir": "Render_description"
+    },
+    "rpg": {
+        "redir": "Rpg_description"
+    },
+    "serverinfo": {
+        "redir": "Serverinfo_description"
+    },
+    "serverstats": {
+        "redir": "Serverstats_description"
+    },
+    "set-language": {
+        "redir": "Setlanguage_description"
+    },
+    "stoptyping": {
+        "redir": "Stoptyping_description"
+    },
+    "tictactoe-match": {
+        "redir": "TictactoeMatch_description"
+    },
+    "tictactoe-profile": {
+        "redir": "TictactoeProfile_description"
+    },
+    "tictactoe": {
+        "redir": "Tictactoe_description"
+    },
+    "userinfo": {
+        "redir": "Userinfo_description"
     }
 }
