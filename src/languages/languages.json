@@ -956,5 +956,9 @@
     "Credits_embedDescription": {
         "en": "A long way from where we started, a long way yet to go. Here are people that helped me and still help though that way.",
         "pt-br": "Um caminho longo desde onde começamos, um caminho longo ainda a ser caminhado. Aqui estão as pessoas que me ajudaram ou continuam ajudando a passar por esse caminho."
+    },
+    "Bhaskara_description": {
+        "en": "Executes the bhaskara options and returns the results, the first argument is the A value, second the B valu and the third is the C value.",
+        "pt-br": "Executa a formula de bhaskara, o primeiro argumento é o valor A, o segundo argumento é o valor B e o ultimo é o valor C"
     }
 }

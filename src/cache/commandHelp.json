@@ -58,5 +58,8 @@
     },
     "credits": {
         "redir": "Credits_description"
+    },
+    "bhaskara": {
+        "redir": "Bhaskara_description"
     }
 }
