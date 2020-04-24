@@ -6,7 +6,7 @@
 <p align="center">  
   <a href="https://discordapp.com/oauth2/authorize?client_id=332968532096843776&scope=bot&permissions=379968" target="_blank"><img
     src="https://img.shields.io/badge/invite-to%20your%20Discord%20server-7289da.svg?style=flat-square&logo=discord" alt="Invite Zerinho6 Bot"></a>
-  <a title="Dependencies" target="_blank" href="https://david-dm.org/zerinho6bot/Zerinho6-Bot/"><img src="https://david-dm.org/zerinho6bot/Zerinho6-Bot.svg?style=flat-square"></a>
+  <a title="Dependencies" target="_blank" href="https://david-dm.org/moruzerinho6/Zerinho6-Bot/"><img src="https://david-dm.org/moruzerinho6/Zerinho6-Bot.svg?style=flat-square"></a>
   <img src="https://img.shields.io/badge/library-discord.js-blue.svg?style=flat-square" alt="Library">
   <a title="JavaScript Standard" target="_blank" href=https://github.com/standard/standard><img src="https://cdn.rawgit.com/standard/standard/master/badge.svg"></a>
 </p>
