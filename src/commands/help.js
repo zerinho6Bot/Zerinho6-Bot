@@ -8,6 +8,7 @@ exports.run = ({ ArgsManager, fastEmbed, i18n, Send, message }) => {
       const Value = Advanced[AdvancedKeys[i]]
       fastEmbed.addField(`**${i18n.__(`Help_${AdvancedKeys[i]}`)}** (${Value.length})`, `\`\`${Value.join('``, ``')}\`\``)
     }
+    fastEmbed.setTitle('BETA MODE')
     fastEmbed.setDescription(i18n.__('Help_typeWithCommandName', { prefix: process.env.PREFIX }))
     Send(fastEmbed, true)
     return

@@ -263,6 +263,10 @@
         "en": "Shows the bot system info.",
         "pt-br": "Mostra informações de sistema do bot."
     },
+    "Info_officialServer": {
+        "en": "Official Server",
+        "pt-br": "Servidor Oficial"
+    },
     "Info_guilds": {
         "en": "Guilds",
         "pt-br": "Servidores"
@@ -672,5 +676,285 @@
     "Serverstats_monthIsNotAvailable": {
         "en": "That month is not available",
         "pt-br": "Este mês não está disponivel"
+    },
+    "Serverstats_from": {
+        "en": "from",
+        "pt-br": "de"
+    },
+    "Serverstats_comparing": {
+        "en": "Comparing",
+        "pt-br": "Comparando"
+    },
+    "Serverstats_with": {
+        "en": "with",
+        "pt-br": "com"
+    },
+    "Serverstats_memberDifference": {
+        "en": "Member Difference",
+        "pt-br": "Diferença de Membros"
+    },
+    "Serverstats_roleDifference": {
+        "en": "Role Difference",
+        "pt-br": "Diferença de Cargos"
+    },
+    "Serverstats_channelDifference": {
+        "en": "Channels Difference",
+        "pt-br": "Diferença de Canais"
+    },
+    "Serverstats_yourOptions": {
+        "en": "Your Options",
+        "pt-br": "Suas opções"
+    },
+    "Serverstats_see": {
+        "en": "see",
+        "pt-br": "ver"
+    },
+    "Serverstats_summaryOf": {
+        "en": "Summary of",
+        "pt-br": "Resumo de"
+    },
+    "Serverstats_members": {
+        "en": "Members",
+        "pt-br": "Membros"
+    },
+    "Serverstats_roles": {
+        "en": "Roles",
+        "pt-br": "Cargos"
+    },
+    "Serverstats_channels": {
+        "en": "Channels",
+        "pt-br": "Canais"
+    },
+    "Serverstats_compare": {
+        "en": "compare",
+        "pt-br": "comparar"
+    },
+    "Serverstats_sendYearAndMonth": {
+        "en": "Ok, send another year and month to compare.(Example: `2019 January`)",
+        "pt-br": "Ok, envie outro ano e mês para comparar.(Exemplo: `2019 Janeiro`)"
+    },
+    "Serverstats_sameDateDetected": {
+        "en": "It looks like the datas that you request for are exactly the same.",
+        "pt-br": "Parece que as datas que você enviou são exatamente iguais."
+    },
+    "Serverstats_anIdiotsGuide": {
+        "en": "Use the help command if you don't know how to use this command, example: `prefix.help command`.",
+        "pt-br": "Use o comando de ajuda caso você não saiba usar o comando, exemplo: `prefix.help comando`"
+    },
+    "Serverstats_description": {
+        "en": "There's 2 operations: `see` and `compare`.\n\n`see` - you only need to give one year and month, if available, you'll see member, roles and channels count of that month in that year.\n\n`compare` - you'll give the year and date just like with `see`, but the bot will ask for another year and month to compare.\n\n``year`` can be a number(ex: 2018) or ~ (Will get the current year);\n``month`` can be a number(0 to 11), month name(January) or ~ (Will get the current month).**\n\nThe bot will not store any data if the command is not enabled, someone with MANAGE_GUILD NEEDS TO ENABLED FIRST**, the bot will update the stats everyday or on every restart, if while updating the stats the bot doesn't find the guild, it'll delete the whole data from every year, there's no save.",
+        "pt-br": "Existem 2 operações: `ver` e `comparar`.\n\n`ver` - você só precisa dar um ano e mês, se disponivel, você vai ver informações como quantidade de membros, cargos e canais.\n\n`comparar` - você precisa dar o ano e o mês igual como na operação `ver`, mas depois disso o bot vai pedir para você dar outro ano e mês para comparar suas informações.\n\n``ano`` pode ser um número(ex: 2018) ou ~ (O bot vai automaticamente trocar pelo ano atual);\n``mês`` pode ser um número(0 a 11), nome do mês(Janeiro) ou ~ (O bot vai automaticamente trocar pelo mês atual).**\n\nO bot não vai armazenar nenhuma data enquanto o comando não for habilitado, alguém com a permissão de MANAGE_GUILD(Gerenciar Servidor) PRECISA HABILITAR PRIMEIRO**, o bot vai procurar pelo servidor a cada 24h ou a cada vez que ele reiniciar, se, enquanto o bot estiver atualizando os dados, ele não achar o servidor, TODA a data será deletada, não tem backup."
+    },
+    "Serverstats_operationExample": {
+        "en": "``see`` or ``compare``",
+        "pt-br": "``ver`` ou ``comparar``"
+    },
+    "Serverstats_yearExample": {
+        "en": "``2020``(any year) or ``~``(places the current year)",
+        "pt-br": "``2020``(qualquer ano) ou ``~``(o bot troca pelo ano atual)"
+    },
+    "Serverstats_monthExample": {
+        "en": "``january``(any month) or ``0``(number of the month starting at 0 up to 11)",
+        "pt-br": "``janeiro``(qualquer mês) ou ``0``(Número do mês começando em 0 e terminando em 11)"
+    },
+    "Setlanguage_languageList": {
+        "en": "Language List",
+        "pt-br": "Lista de Linguagens"
+    },
+    "Setlanguage_languageNotExist": {
+        "en": "That language doesn't exist, here's a list of languages that does exist.",
+        "pt-br": "Essa lingua não existe, aqui está uma lista de das linguagens que existem."
+    },
+    "Setlanguage_languageIsDefault": {
+        "en": "That language is already the defined language.",
+        "pt-br": "Essa linguagem já é a linguagem definida."
+    },
+    "Setlanguage_languageDone": {
+        "en": "Done, :thumbsup:",
+        "pt-br": "Feito, :thumbsup:"
+    },
+    "Setlanguage_languageError": {
+        "en": "An error happened, :thumbsdown:",
+        "pt-br": "Um erro ocorreu, :thumbsdown:"
+    },
+    "Setlanguage_description": {
+        "en": "Change the server language. Give no argument to see the available languages.",
+        "pt-br": "Muda a linguagem do servidor. Não dê nenhum argumento para ver a lista de linguagens que você pode escolher."
+    },
+    "TictactoeMatch_matchNotFound": {
+        "en": "I couldn't find that match.",
+        "pt-br": "Não consegui achar essa partida."
+    },
+    "TictactoeMatch_vs": {
+        "en": "VS",
+        "pt-br": "VS"
+    },
+    "TictactoeMatch_MatchTook": {
+        "en": "The match has taken {{time}} seconds.",
+        "pt-br": "A partida durou {{time}} segundos"
+    },
+    "TictactoeMatch_theWinner": {
+        "en": "The winner was",
+        "pt-br": "O vencedor foi"
+    },
+    "TictactoeMatch_movimentsOf": {
+        "en": "Moviments of",
+        "pt-br": "Movimentos de"
+    },
+    "TictactoeMatch_description": {
+        "en": "See match details by match-code.\n\n'How to get match-code': Play a Tictactoe match, finish it(it doesn't matter who won), get the match-code on the embed footer.",
+        "pt-br": "Mostra os detalhes de uma partida pelo código da partida.\n\n'Como pegar o código de partida': Jogue uma partida de jogo da velha, finalize ela(não importa quem ganhar), copie o codigo da partida obtivel no fundo do embed."
+    },
+    "TictactoeProfile_argsNotNumberOrMention": {
+        "en": "You dind't mention anyone as args or gave an ID.",
+        "pt-br": "Você não mencionou ninguém ou deu um ID como argumento."
+    },
+    "TictactoeProfile_userNotFound": {
+        "en": "I couldn't find that user on my database.",
+        "pt-br": "Eu não consegui achar esse usuário na minha database."
+    },
+    "TictactoeProfile_profileOf": {
+        "en": "Profile of",
+        "pt-br": "Perfil de"
+    },
+    "TictactoeProfile_won": {
+        "en": "Won",
+        "pt-br": "Venceu"
+    },
+    "TictactoeProfile_loses": {
+        "en": "Loses",
+        "pt-br": "Perdas"
+    },
+    "TictactoeProfile_draws": {
+        "en": "Draws",
+        "pt-br": "Empates"
+    },
+    "TictactoeProfile_matchs": {
+        "en": "Matchs",
+        "pt-br": "Partidas"
+    },
+    "TictactoeProfile_description": {
+        "en": "Shows the Tictactoe profile of a user.",
+        "pt-br": "Mostra o historico no jogo de velha de um usuário."
+    },
+    "Tictactoe_draw": {
+        "en": "draw",
+        "pt-br": "empate"
+    },
+    "Tictactoe_winner": {
+        "en": "Winner",
+        "pt-br": "Ganhador"
+    },
+    "Tictactoe_loser": {
+        "en": "Loser",
+        "pt-br": "Perdedor"
+    },
+    "Tictactoe_turn": {
+        "en": "Turn!",
+        "pt-br": "Turno!"
+    },
+    "Tictactoe_results": {
+        "en": "Results",
+        "pt-br": "Resultados"
+    },
+    "Tictactoe_secret": {
+        "en": "This secret does not hold the value that into once had, but, the fact that you took time to search for it gives the value that it needs.\n<:zerinicon:317871174266912768> :heart: <:Toperaicon:317871116934840321>",
+        "pt-br": "Esse segredo não segura mais o valor que antes tinha, mas, o fato que você usou seu tempo para procurar por ele, concede mais valor do que antes tinha.\n<:zerinicon:317871174266912768> :heart: <:Toperaicon:317871116934840321>"
+    },
+    "Tictactoe_matchCode": {
+        "en": "Match Code",
+        "pt-br": "Código da partida"
+    },
+    "Tictactoe_matchResult": {
+        "en": "Match Result",
+        "pt-br": "Resultado da Partida"
+    },
+    "Tictactoe_moves": {
+        "en": "Moves",
+        "pt-br": "Movimentos"
+    },
+    "Tictactoe_description": {
+        "en": "Play tictactoe with someone! It saves your wins, loses, draws, matchs, and even the match via the match code that can be used as argument on tictactoe-match command.\n\n_There's a easter egg on the game, try to play it with p1 having 'zerinho6' username or p2 having 'topera' or both!_",
+        "pt-br": "Jogue uma partida de jogo de velha!Esse comando salva as partidas, suas virotias, derrotas, empates; Utilize o codigo da partida como argumento no comando tictactoe-match.\n\n_Tem um pequeno easter egg, jogue com o primeiro jogador estando com um nome que contenha 'zerinho6' ou o segundo estando com 'topera' ou ambos!_"
+    },
+    "Userinfo_invalidID": {
+        "en": "You need to send a valid user ID as argument.",
+        "pt-br": "Você precisa enviar um ID de usuário como argumento."
+    },
+    "Userinfo_couldNotFindUser": {
+        "en": "I couldn't find that user.",
+        "pt-br": "Eu não consegui achar esse usuário."
+    },
+    "Userinfo_tag": {
+        "en": "Tag",
+        "pt-br": "Tag"
+    },
+    "Userinfo_id": {
+        "en": "ID",
+        "pt-br": "ID"
+    },
+    "Userinfo_accountCreatedIn": {
+        "en": "Account created in",
+        "pt-br": "Conta criada em"
+    },
+    "Userinfo_hexColor": {
+        "en": "Hex Code",
+        "pt-br": "Código da Cor"
+    },
+    "Userinfo_roleAmount": {
+        "en": "Role Amount",
+        "pt-br": "Quantidade de cargos"
+    },
+    "Userinfo_joinedAt": {
+        "en": "Joined at",
+        "pt-br": "Entrou em"
+    },
+    "Userinfo_noRole": {
+        "en": "No role",
+        "pt-br": "Nenhum cargo"
+    },
+    "Userinfo_description": {
+        "en": "See your information or information about someone else with their ID as argument.",
+        "pt-br": "Veja sua informação ou a informação de outra pessoa dando o ID dela como argumento."
+    },
+    "Stoptyping_description": {
+        "en": "Makes so the bot stops typing if he doesn't stop typing on the channel.",
+        "pt-br": "Faz com que o bot pare de digitar caso ele não esteja parando de digitar no canal."
+    },
+    "Credits_description": {
+        "en": "See Zerinho6 Bot credits.",
+        "pt-br": "Veja os créditos do Zerinho6 Bot."
+    },
+    "Credits_credits": {
+        "en": "Credits",
+        "pt-br": "Créditos"
+    },
+    "Credits_users": {
+        "en": "Users",
+        "pt-br": "Usuários"
+    },
+    "Credits_guilds": {
+        "en": "Guilds",
+        "pt-br": "Servidores"
+    },
+    "Credits_artWork": {
+        "en": "Art Work",
+        "pt-br": "Trabalho de Arte"
+    },
+    "Credits_codeHelp": {
+        "en": "Code Help",
+        "pt-br": "Ajuda em Código"
+    },
+    "Credits_ideas": {
+        "en": "Ideas",
+        "pt-br": "Ideias"
+    },
+    "Credits_translation": {
+        "en": "Translation",
+        "pt-br": "Tradução"
+    },
+    "Credits_embedDescription": {
+        "en": "A long way from where we started, a long way yet to go. Here are people that helped me and still help though that way.",
+        "pt-br": "Um caminho longo desde onde começamos, um caminho longo ainda a ser caminhado. Aqui estão as pessoas que me ajudaram ou continuam ajudando a passar por esse caminho."
     }
 }

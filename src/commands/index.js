@@ -17,7 +17,8 @@ exports.requirer = {
   rpg: require('./rpg.js'),
   info: require('./info.js'),
   serverstats: require('./serverstats.js'),
-  ping: require('./ping.js')
+  ping: require('./ping.js'),
+  credits: require('./credits.js')
 }
 
 exports.commandNames = [
@@ -26,13 +27,12 @@ exports.commandNames = [
   'tictactoe-match', 'embed', 'bot-invite',
   'eval', 'stoptyping', 'userinfo',
   'serverinfo', 'render', 'move', 'rpg', 'info',
-  'serverstats', 'ping'
+  'serverstats', 'ping', 'credits'
 ]
 
 exports.advanced = {
-  Bot: ['ram', 'help', 'bot-invite', 'info', 'ping'],
+  Bot: ['ram', 'help', 'bot-invite', 'info', 'ping', 'credits', 'stoptyping'],
   Games: ['rpg', 'tictactoe', 'tictactoe-profile', 'tictactoe-match'],
   Staff: ['move', 'set-language'],
-  Utility: ['move', 'avatar', 'embed', 'userinfo', 'serverinfo'],
-  Etc: ['stoptyping']
+  Utility: ['move', 'avatar', 'embed', 'userinfo', 'serverinfo']
 }

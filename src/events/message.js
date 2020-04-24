@@ -1,4 +1,4 @@
-const guildData = require('../cache/index.js').GuildData
+const guildLanguage = require('../cache/index.js').GuildLanguage
 const { messageUtils, languageUtils, commandUtils } = require('../Utils/index.js')
 const Commands = require('../commands/index.js').commandNames
 
@@ -7,7 +7,7 @@ exports.condition = (bot, message) => {
     return false
   }
 
-  const GuildDefinedLanguage = guildData[message.guild.id] && guildData[message.guild.id].language ? guildData[message.guild.id].language : ''
+  const GuildDefinedLanguage = guildLanguage[message.guild.id] && guildLanguage[message.guild.id].language ? guildLanguage[message.guild.id].language : ''
   const Send = messageUtils.configSend(message.channel, languageUtils.init(GuildDefinedLanguage === '' ? languageUtils.fallbackLanguage : GuildDefinedLanguage))
 
   if (!message.channel.permissionsFor(bot.user.id).has('EMBED_LINKS')) {
@@ -41,7 +41,7 @@ exports.condition = (bot, message) => {
 
 exports.run = async (bot, message) => {
   const ArgsManager = messageUtils.argsManager(message, process.env.PREFIX)
-  const GuildDefinedLanguage = guildData[message.guild.id] && guildData[message.guild.id].language ? guildData[message.guild.id].language : ''
+  const GuildDefinedLanguage = guildLanguage[message.guild.id] && guildLanguage[message.guild.id].language ? guildLanguage[message.guild.id].language : ''
   const I18n = await languageUtils.init(GuildDefinedLanguage === '' ? languageUtils.fallbackLanguage : GuildDefinedLanguage)
   const checkMissingPermission = commandUtils.checkCommandPermissions(message, ArgsManager.CommandName[0], I18n)
   const Send = messageUtils.configSend(message.channel, I18n)

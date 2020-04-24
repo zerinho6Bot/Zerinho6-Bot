@@ -1,5 +1,4 @@
 
-const { GuildStats, GuildWantingStats } = require('../../cache/index.js')
 /**
   * This class contains function to check if there's server data(members, roles and channels count) by year/month.
   * @class
@@ -91,6 +90,7 @@ exports.ServerStats = class {
    * @returns {Boolean}
    */
   guildWantsStats (id) {
+    const { GuildWantingStats } = require('../../cache/index.js')
     if (!GuildWantingStats.servers[id]) {
       return false
     }
@@ -104,6 +104,8 @@ exports.ServerStats = class {
    * @returns {Boolean}
    */
   isGuildUpdated (id) {
+    const { GuildWantingStats } = require('../../cache/index.js')
+
     if (!GuildWantingStats[id]) {
       return false
     }
@@ -198,8 +200,10 @@ exports.ServerStats = class {
    * @param {Boolean} [caresAboutDay] - If true, it'll check if a update was already made today.
    */
   updateServersStats (caresAboutDay) {
+    const { GuildStats, GuildWantingStats } = require('../../cache/index.js')
     if (caresAboutDay) {
       if (this.currentDay === GuildWantingStats.setupConfigs.lastDayChecked) {
+        Log.info('Data was already updated today.')
         return
       }
     }
@@ -208,22 +212,22 @@ exports.ServerStats = class {
     const ServersIds = Object.keys(Servers)
 
     if (ServersIds.length === 0) {
+      Log.info('No server ID wanting stat detected, returning')
       return
     }
-
     for (let i = 0; i < ServersIds.length; i++) {
       try {
-        const Guild = this.bot.guilds.get(ServersIds[i])
+        const Guild = this.bot.guilds.cache.get(ServersIds[i])
         if (this.isGuildUpdated(Guild.id)) {
+          Log.info(`Guild ${Guild.id} is already updated, returning...`)
           return
         }
-
         const CheckedStats = this.writeIfNotAvailable(Guild.id)
         const Property = CheckedStats[Guild.id][this.currentYear][this.currentMonth]
 
         Property.membersCount = Guild.memberCount
-        Property.rolesCount = Guild.roles.size
-        Property.channelsCount = Guild.channels.size
+        Property.rolesCount = Guild.roles.cache.size
+        Property.channelsCount = Guild.channels.cache.size
         GuildWantingStats.servers[Guild.id].lastMonthUpdated = this.currentMonth
       } catch (e) {
         // The bot's probaly not at the guild anymore.
@@ -235,7 +239,7 @@ exports.ServerStats = class {
     GuildWantingStats.setupConfigs.lastDayChecked = this.currentDay
 
     // If there's another way to acess the write function, please tell me.
-    const { cacheUtils } = require('./index.js')
+    const cacheUtils = require('./index.js')
     cacheUtils.write('GuildStats', GuildStats)
     cacheUtils.write('GuildWantingStats', GuildWantingStats)
   }

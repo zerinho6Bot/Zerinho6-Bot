@@ -5,14 +5,14 @@ const LanguageListLiteral = LanguageList.join(', ')
 exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
   const cacheUtils = require('../Utils/index.js').cacheUtils
   if (!ArgsManager.Argument) {
-    fastEmbed.addField(i18n.__('set-language:languageList'), LanguageListLiteral)
+    fastEmbed.addField(i18n.__('Setlanguage_languageList'), LanguageListLiteral)
     Send(fastEmbed, true)
     return
   }
 
   if (!LanguageList.includes(ArgsManager.Argument[0])) {
     fastEmbed.setDescription(LanguageListLiteral)
-    Send('set-language:languageNotExist')
+    Send('Setlanguage_languageNotExist')
     Send(fastEmbed, true)
     return
   }
@@ -21,7 +21,7 @@ exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
 
   if (GuildLanguage[Guild.id]) {
     if (ArgsManager.Argument[0] === GuildLanguage[Guild.id].language) {
-      Send('set-language:languageIsDefault')
+      Send('Setlanguage_languageIsDefault')
       return
     }
 
@@ -35,8 +35,19 @@ exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
 
   const Result = cacheUtils.write('GuildLanguage', GuildLanguage)
   if (Result) {
-    Send('set-language:languageDone')
+    Send('Setlanguage_languageDone')
   } else {
-    Send('set-language:languageError')
+    Send('Setlanguage_languageError')
   }
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 1,
+    argumentsNeeded: false,
+    argumentsFormat: ['en'],
+    imageExample: 'https://media.discordapp.net/attachments/499671331021914132/703002395973517352/unknown.png'
+  }
+
+  return helpEmbed(message, i18n, Options)
 }

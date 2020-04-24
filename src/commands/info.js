@@ -10,6 +10,7 @@ exports.run = async ({ message, bot, i18n, fastEmbed, Send }) => {
   fastEmbed.addField(i18n.__('Info_RAM'), `\`\`\`JavaScript\n${Math.round(process.memoryUsage().rss / 1024 / 1024)}(RSS)\`\`\``, true)
   fastEmbed.addField(i18n.__('Info_uptime'), `\`\`\`JavaScript\n${Math.floor(process.uptime() / 3600 % 24)}:${Math.floor(process.uptime() / 60 % 60)}:${Math.floor(process.uptime() % 60)}\`\`\``, true)
   fastEmbed.addField(i18n.__('Info_ownerID'), `\`\`\`JavaScript\n${process.env.OWNER}\`\`\``, true)
+  fastEmbed.addField(i18n.__('Info_officialServer'), 'https://discord.gg/8JGrPsw')
 
   const Msg = await Send(fastEmbed, true)
   await Msg.react('ℹ')

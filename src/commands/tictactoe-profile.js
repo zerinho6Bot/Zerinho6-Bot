@@ -9,7 +9,7 @@ exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
   if (user === null) {
     if (ArgsManager.Argument && ArgsManager.Argument[0]) {
       if (isNaN(ArgsManager.Argument[0])) {
-        Send('tictactoe-profile:argsNotNumber', true)
+        Send('TictactoeProfile_argsNotNumberOrMention')
         return
       }
       user = ArgsManager.Argument[0]
@@ -19,13 +19,24 @@ exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
   }
 
   if (!TictactoeProfiles[user]) {
-    Send('tictactoe-profile:userNotFound', true)
+    Send('TictactoeProfile_userNotFound')
     return
   }
 
   user = TictactoeProfiles[user]
-  fastEmbed.setTitle(`${i18n.__('tictactoe-profile:profileOf')} ${user.tag}`)
-  fastEmbed.setDescription(`**${i18n.__('tictactoe-profile:wins')}**: ${user.wins}\n**${i18n.__('tictactoe-profile:loses')}**: ${user.loses}\n**${i18n.__('tictactoe-profile:draws')}**: ${user.draws}\n**${i18n.__('tictactoe-profile:matchs')}**: ${user.matchs}`)
+  fastEmbed.setTitle(`${i18n.__('TictactoeProfile_profileOf')} ${user.tag}`)
+  fastEmbed.setDescription(`**${i18n.__('TictactoeProfile_won')}**: ${user.wins}\n**${i18n.__('TictactoeProfile_loses')}**: ${user.loses}\n**${i18n.__('TictactoeProfile_draws')}**: ${user.draws}\n**${i18n.__('TictactoeProfile_matchs')}**: ${user.matchs}`)
 
   Send(fastEmbed, true)
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 1,
+    argumentsNeeded: true,
+    argumentsFormat: ['@Moru Zerinho#9399'],
+    imageExample: 'https://media.discordapp.net/attachments/499671331021914132/566605395553026060/unknown.png'
+  }
+
+  return helpEmbed(message, i18n, Options)
 }

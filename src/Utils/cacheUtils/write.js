@@ -27,7 +27,7 @@ exports.write = (file, content) => {
       // Object.keys(require.cache[require.resolve(Path.join(__dirname, `../../cache/${file}.json`))]).forEach((key) => { delete require.cache[key] })
       delete require.cache[require.resolve(Path.join(__dirname, `../../cache/${file}.json`))]
     } catch (e) {
-      Log.warn(`"Could clear cache, error: ${e.toString()}`)
+      Log.warn(`Could clear cache, error: ${e.toString()}`)
     }
   })
   return true

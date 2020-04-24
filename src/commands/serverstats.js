@@ -1,5 +1,3 @@
-const { StorageUtils } = require('../Utils/index.js')
-const { GuildStats, GuildWantingStats } = require('../cache/index.js')
 const Time = new Date()
 const TimeYear = Time.getFullYear()
 const TimeMonth = Time.getMonth()
@@ -27,8 +25,8 @@ function MonthsToNumber (i18n, month) {
   month = typeof month === 'number' ? Months(i18n, month) : month
   function MonthsTranslated () {
     let newArr = []
-    for (let i = 0; i < Object.values(i18n.__('serverstats_months')).length; i++) {
-      newArr = newArr.concat(Object.values(i18n.__('serverstats_months'))[i].toLowerCase())
+    for (let i = 0; i < Object.values(i18n.__('Serverstats_months')).length; i++) {
+      newArr = newArr.concat(Object.values(i18n.__('Serverstats_months'))[i].toLowerCase())
     }
     return newArr
   }
@@ -36,7 +34,9 @@ function MonthsToNumber (i18n, month) {
 }
 
 exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
-  const ServerStats = new StorageUtils.ServerStats(GuildStats, bot)
+  const { cacheUtils } = require('../Utils/index.js')
+  const { GuildStats, GuildWantingStats } = require('../cache/index.js')
+  const ServerStats = new cacheUtils.ServerStats(GuildStats, bot)
 
   if (!ServerStats.guildWantsStats(message.guild.id)) {
     if (!message.channel.permissionsFor(message.author.id).has('MANAGE_GUILD')) {
@@ -46,7 +46,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
 
     Send('Serverstats_guildStatsDisabled')
     await message.channel.awaitMessages((msg) => msg.author.id === message.author.id, { time: 30000, max: 1 })
-      .then((c) => {
+      .then(async (c) => {
         const Msg = c.first()
         const MsgLower = Msg.content.toLowerCase()
         if (MsgLower === i18n.__('Global_No').toLowerCase()) {
@@ -59,21 +59,20 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
           GuildWantingStats.servers[Msg.guild.id] = {
             lastMonthUpdated: 13 // Little trick, if I put 0 and the month is January...
           }
-          StorageUtils.write('GuildWantingStats')
+          await cacheUtils.write('GuildWantingStats', GuildWantingStats)
           Send('Serverstats_decidedYes_Part2')
-          ServerStats.updateServersStats()
+          await ServerStats.updateServersStats()
 
           /*
           Since updateServersStats doesn't return nothing and it won't take that
           long to update the JSON, I'll do this.
           */
-          setTimeout(() => {
-            Send('Serverstats_decidedYes_Part3')
-          }, 2000)
+          Send('Serverstats_decidedYes_Part3')
         } else {
           Send('Serverstats_noOptionGiven')
         }
       })
+    return
   }
   // Guild have stats...
 
@@ -165,7 +164,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
   * @returns {String}
   */
   function returnSpecifiedDifference (ServerStats, oldYear, oldMonth, oldData, newYear, newMonth, newData) {
-    return `${ServerStats.getDifference(oldData, newData)} (${oldData} ${i18n.__('serverstats:from')} ${oldYear}[${Months(i18n, oldMonth)}] - ${newData} ${i18n.__('serverstats:from')} ${newYear}[${Months(i18n, newMonth)}])${ServerStats.getStatus(oldData - newData)}`
+    return `${ServerStats.getDifference(oldData, newData)} (${oldData} ${i18n.__('Serverstats_from')} ${oldYear}[${Months(i18n, oldMonth)}] - ${newData} ${i18n.__('Serverstats_from')} ${newYear}[${Months(i18n, newMonth)}])${ServerStats.getStatus(oldData - newData)}`
   }
 
   /**
@@ -192,7 +191,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
      * @param {Object} secondData
      */
   function returnSpecifiedComparedData (comparationEmbed, ServerStats, firstYear, firstMonth, firstData, secondYear, secondMonth, secondData) {
-    comparationEmbed.setTitle(`${i18n.__('serverstats:comparing')} ${firstYear}(${Months(i18n, firstMonth)}) ${i18n.__('serverstats:with')} ${secondYear}(${Months(i18n, secondMonth)})`)
+    comparationEmbed.setTitle(`${i18n.__('Serverstats_comparing')} ${firstYear}(${Months(i18n, firstMonth)}) ${i18n.__('Serverstats_with')} ${secondYear}(${Months(i18n, secondMonth)})`)
 
     /**
     * Executes the returnSpecifiedDifference with most of arguments already defined so you don't need to repeat everything.
@@ -205,25 +204,25 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
       return returnSpecifiedDifference(ServerStats, firstYear, firstMonth, oldData, secondYear, secondMonth, newData)
     }
 
-    comparationEmbed.addField(i18n.__('serverstats:memberDifference'), lessParamForSpecifiedDifference(firstData.membersCount, secondData.membersCount), true)
-    comparationEmbed.addField(i18n.__('serverstats:roleDifference'), lessParamForSpecifiedDifference(firstData.rolesCount, secondData.rolesCount), true)
-    comparationEmbed.addField(i18n.__('serverstats:channelDifference'), lessParamForSpecifiedDifference(firstData.channelsCount, secondData.channelsCount), true)
+    comparationEmbed.addField(i18n.__('Serverstats_memberDifference'), lessParamForSpecifiedDifference(firstData.membersCount, secondData.membersCount), true)
+    comparationEmbed.addField(i18n.__('Serverstats_roleDifference'), lessParamForSpecifiedDifference(firstData.rolesCount, secondData.rolesCount), true)
+    comparationEmbed.addField(i18n.__('Serverstats_channelDifference'), lessParamForSpecifiedDifference(firstData.channelsCount, secondData.channelsCount), true)
 
     return comparationEmbed
   }
 
   const FullDataFromServer = ServerStats.getDataFromServer(message.guild.id)
 
-  if (ArgsManager.Argument.length !== 3) {
-    fastEmbed.setTitle(i18n.__('serverstats:yourOptions'))
+  if (!ArgsManager.Argument || ArgsManager.Argument.length !== 3) {
+    fastEmbed.setTitle(i18n.__('Serverstats_yourOptions'))
     fastEmbed.setDescription(castadeVisualizer(FullDataFromServer))
-    Send(fastEmbed)
+    Send(fastEmbed, true)
     return
   }
 
   const ArgsLower = ArgsManager.Argument[0].toLowerCase()
   const CorrectArgs = typeof ArgsManager.Argument[2] === 'string' ? ArgsManager.Argument[2].toLowerCase() : ArgsManager.Argument[2]
-  if (ArgsLower === i18n.__('serverstats:see')) {
+  if (ArgsLower === i18n.__('Serverstats_see')) {
     if (validadeYearAndMonth(ServerStats, ArgsManager.Argument[1], CorrectArgs) === false) {
       return
     }
@@ -232,12 +231,12 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
     const Month = translateMonth(CorrectArgs)
     const DataFromMonth = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, Year), Month)
 
-    fastEmbed.setTitle(`${i18n.__('serverstats:summaryOf')} ${Year} ${Months(i18n, Month)}`)
-    fastEmbed.addField(i18n.__('serverstats:members'), DataFromMonth.membersCount, true)
-    fastEmbed.addField(i18n.__('serverstats:roles'), DataFromMonth.rolesCount, true)
-    fastEmbed.addField(i18n.__('serverstats:channels'), DataFromMonth.channelsCount, true)
+    fastEmbed.setTitle(`${i18n.__('Serverstats_summaryOf')} ${Year} ${Months(i18n, Month)}`)
+    fastEmbed.addField(i18n.__('Serverstats_members'), DataFromMonth.membersCount, true)
+    fastEmbed.addField(i18n.__('Serverstats_roles'), DataFromMonth.rolesCount, true)
+    fastEmbed.addField(i18n.__('Serverstats_channels'), DataFromMonth.channelsCount, true)
 
-    const Msg = await Send(fastEmbed)
+    const Msg = await Send(fastEmbed, true)
     if ((Year !== TimeYear || Month !== TimeMonth) && ServerStats.isComparationFromMonthAvailable(message.guild.id, TimeYear, TimeMonth)) {
       await Msg.react('🔁')
       const Collection = Msg.createReactionCollector((r, u) => r.emoji.name === '🔁' && !u.bot && u.id === message.author.id, { time: 30000 })
@@ -254,7 +253,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
     }
   }
 
-  if (ArgsLower === i18n.__('serverstats:comparingLower')) {
+  if (ArgsLower === i18n.__('Serverstats_compare')) {
     if (validadeYearAndMonth(ServerStats, ArgsManager.Argument[1], CorrectArgs) === false) {
       return
     }
@@ -262,7 +261,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
     let firstYear = translateYear(ArgsManager.Argument[1])
     let firstMonth = translateMonth(CorrectArgs)
 
-    Send('serverstats:sendAnotherYearAndMonth')
+    Send('Serverstats_sendYearAndMonth')
     await message.channel.awaitMessages((msg) => msg.author.id === message.author.id, { time: 30000, max: 1 })
       .then((c) => {
         const Msg = c.first()
@@ -278,7 +277,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
         secondMonth = translateMonth(secondMonth)
 
         if (firstYear === secondYear && firstMonth === secondMonth) {
-          Send('serverstats:sameDateDetected')
+          Send('Serverstats_sameDateDetected')
           return
         }
         // Time to do cursed things.
@@ -296,9 +295,20 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
         const FirstDataFromMonth = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, firstYear), firstMonth)
         const SecondDataFromMonth = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, secondYear), secondMonth)
 
-        Send(returnSpecifiedComparedData(fastEmbed, ServerStats, firstYear, firstMonth, FirstDataFromMonth, secondYear, secondMonth, SecondDataFromMonth))
+        Send(returnSpecifiedComparedData(fastEmbed, ServerStats, firstYear, firstMonth, FirstDataFromMonth, secondYear, secondMonth, SecondDataFromMonth), true)
       })
   } else {
-    Send('serverstats:anIdiotsGuide')
+    Send('Serverstats_anIdiotsGuide')
   }
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 3,
+    argumentsNeeded: false,
+    argumentsFormat: [i18n.__('Serverstats_operationExample'), i18n.__('Serverstats_yearExample'), i18n.__('Serverstats_monthExample')],
+    imageExample: 'https://media.discordapp.net/attachments/499671331021914132/702997435886338128/unknown.png'
+  }
+
+  return helpEmbed(message, i18n, Options)
 }

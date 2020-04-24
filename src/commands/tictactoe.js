@@ -85,10 +85,10 @@ exports.run = async function ({ message, i18n, Send, fastEmbed }) {
     */
     getMatchResult (playerN) {
       if (this.winner === 3) {
-        return i18n.__('tictactoe:draw')
+        return i18n.__('Tictactoe_draw')
       }
 
-      return this.winner === playerN ? i18n.__('tictactoe:winner') : i18n.__('tictactoe:loser')
+      return this.winner === playerN ? i18n.__('Tictactoe_winner') : i18n.__('Tictactoe_loser')
     }
 
     /**
@@ -106,7 +106,7 @@ exports.run = async function ({ message, i18n, Send, fastEmbed }) {
       TurnEqualsX ? this.player1.moves = this.player1.moves.concat(house + 1) : this.player2.moves = this.player2.moves.concat(house + 1)
       this.map[house] = TurnEqualsX ? 1 : 2
       this.turn = TurnEqualsX ? this.o : this.x
-      this.description = `${TurnEqualsX ? this.player1.emoji : this.player2.emoji} ${i18n.__('tictactoe:turn')} (${this.turn === this.x ? this.player1.tag : this.player2.tag}).\n\n${this.draw()}`
+      this.description = `${TurnEqualsX ? this.player1.emoji : this.player2.emoji} ${i18n.__('Tictactoe_turn')} (${this.turn === this.x ? this.player1.tag : this.player2.tag}).\n\n${this.draw()}`
 
       const Winner = this.check()
 
@@ -115,7 +115,7 @@ exports.run = async function ({ message, i18n, Send, fastEmbed }) {
         this.winner = Winner
 
         const playerWhoWon = Winner === 1 ? this.player1 : this.player2
-        this.description = (Winner === 3 ? `:loudspeaker: ${i18n.__('tictactoe:draw')}` : `${playerWhoWon.emoji} - ${playerWhoWon.tag} ${i18n.__('tictactoe:winner')}!`) + `\n\n${this.draw()}`
+        this.description = (Winner === 3 ? `:loudspeaker: ${i18n.__('Tictactoe_draw')}` : `${playerWhoWon.emoji} - ${playerWhoWon.tag} ${i18n.__('Tictactoe_winner')}!`) + `\n\n${this.draw()}`
         return true
       }
       return false
@@ -203,17 +203,17 @@ exports.run = async function ({ message, i18n, Send, fastEmbed }) {
   }
 
   if (message.mentions.members.first().id === message.author.id) {
-    Send('tictactoe:selfMention')
+    Send('Rpg_selfMention')
     return
   }
 
   if (message.mentions.members.first().bot) {
-    Send('tictactoe:botMention')
+    Send('Rpg_botMention')
     return
   }
 
   if (PlayersPlaying.has(message.author.id) || PlayersPlaying.has(message.mentions.members.first().id)) {
-    Send('tictactoe:oneOfThePlayersIsAlreadyPlaying')
+    Send('Rpg_oneIsAlreadyPlaying')
     return
   }
 
@@ -267,24 +267,37 @@ exports.run = async function ({ message, i18n, Send, fastEmbed }) {
     PlayersPlaying.delete(message.mentions.members.first().id)
 
     if (!Game.finished) {
-      Send('tictactoe:timeExpired')
+      Send('Rpg_timeExpired')
       return
     }
 
-    const ResultEmbed = messageUtils.zerinhoEmbed(message.member)
+    const ResultEmbed = messageUtils.fastEmbed(message.member)
     const Time = Math.floor((new Date() - Game.time) / 1000)
     const Players = Game.players
 
     ResultEmbed.setTitle(i18n.__('tictactoe:results'))
-    ResultEmbed.setDescription(`${i18n.__('tictactoe:theMatchTaken.part1')} ${Time} ${i18n.__('tictactoe:theMatchTaken.part2')}.${Game.secret ? '\n\nWith the love of zerinho6 and topera\n<:zerinicon:317871174266912768> :heart: <:Toperaicon:317871116934840321>' : ''}`)
-    ResultEmbed.setFooter(`${i18n.__('tictactoe:matchCode')}: ${MatchId}`)
+    ResultEmbed.setDescription(`${i18n.__('TictactoeMatch_MatchTook', { time: Time })}.${Game.secret ? `\n\n${i18n.__('Tictactoe_secret')}` : ''}`)
+    // You mean a lot for me. ~ Zerinho6
+    // ResultEmbed.setDescription(`${i18n.__('tictactoe:theMatchTaken.part1')} ${Time} ${i18n.__('tictactoe:theMatchTaken.part2')}.${Game.secret ? `\n\n${i18n.__('Tictactoe_secret')}` : ''}`)
+    ResultEmbed.setFooter(`${i18n.__('Tictactoe_matchCode')}: ${MatchId}`)
 
     for (let i = 0; i < 2; i++) {
-      ResultEmbed.addField(Players[i].tag, `${i18n.__('tictactoe:matchResult')}: ${Game.getMatchResult(i + 1)}\n${i18n.__('tictactoe:moves')}: ${Players[i].moves.join(', ')}`)
+      ResultEmbed.addField(Players[i].tag, `${i18n.__('Tictactoe_matchResult')}: ${Game.getMatchResult(i + 1)}\n${i18n.__('Tictactoe_moves')}: ${Players[i].moves.join(', ')}`)
     }
 
     Send(ResultEmbed, true)
     Game.updatePlayersOnlineStats()
     Game.uploadMatch(Time)
   })
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 1,
+    argumentsNeeded: true,
+    argumentsFormat: ['@Moru Zerinho#9399'],
+    imageExample: 'https://media.discordapp.net/attachments/499671331021914132/566604076201017357/unknown.png'
+  }
+
+  return helpEmbed(message, i18n, Options)
 }

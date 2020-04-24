@@ -55,5 +55,8 @@
     },
     "userinfo": {
         "redir": "Userinfo_description"
+    },
+    "credits": {
+        "redir": "Credits_description"
     }
 }
