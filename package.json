@@ -6,6 +6,9 @@
   "private": true,
   "bugs": "https://github.com/zerinho6bot/Zerinho6-Bot/issues",
   "repository": "https://github.com/zerinho6bot/Zerinho6-Bot",
+  "engines": {
+    "node": "12.x.x"
+  },
   "scripts": {
     "test": "standard & node src/index.js",
     "start": "node src/index.js"
@@ -18,7 +21,7 @@
     "discord.js",
     "bot"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^12.1.1",
     "dotenv": "^8.0.0",
