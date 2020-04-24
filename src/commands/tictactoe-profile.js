@@ -1,31 +1,42 @@
-const { TictactoeProfiles } = require("../local_storage");
-exports.run = ({ message, args, t, zSend, zEmbed }) => {
-	let user = null;
+exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
+  const { TictactoeProfiles } = require('../cache/index.js')
+  let user = null
 
-	if (message.mentions.users.first()) {
-		user = TictactoeProfiles[message.mentions.users.first().id];
-	}
+  if (message.mentions.users.first()) {
+    user = TictactoeProfiles[message.mentions.users.first().id]
+  }
 
-	if (user === null) {
-		if (args[0]) {
-			if (isNaN(args[0])) {
-				zSend("tictactoe-profile:argsNotNumber", true);
-				return;
-			}
-			user = args[0];
-		} else {
-			user = message.author.id;
-		}
-	}
+  if (user === null) {
+    if (ArgsManager.Argument && ArgsManager.Argument[0]) {
+      if (isNaN(ArgsManager.Argument[0])) {
+        Send('TictactoeProfile_argsNotNumberOrMention')
+        return
+      }
+      user = ArgsManager.Argument[0]
+    } else {
+      user = message.author.id
+    }
+  }
 
-	if(!TictactoeProfiles[user]) {
-		zSend("tictactoe-profile:userNotFound", true);
-		return;
-	}
+  if (!TictactoeProfiles[user]) {
+    Send('TictactoeProfile_userNotFound')
+    return
+  }
 
-	user = TictactoeProfiles[user];
-	zEmbed.setTitle(`${t("tictactoe-profile:profileOf")} ${user.tag}`);
-	zEmbed.setDescription(`**${t("tictactoe-profile:wins")}**: ${user.wins}\n**${t("tictactoe-profile:loses")}**: ${user.loses}\n**${t("tictactoe-profile:draws")}**: ${user.draws}\n**${t("tictactoe-profile:matchs")}**: ${user.matchs}`);
+  user = TictactoeProfiles[user]
+  fastEmbed.setTitle(`${i18n.__('TictactoeProfile_profileOf')} ${user.tag}`)
+  fastEmbed.setDescription(`**${i18n.__('TictactoeProfile_won')}**: ${user.wins}\n**${i18n.__('TictactoeProfile_loses')}**: ${user.loses}\n**${i18n.__('TictactoeProfile_draws')}**: ${user.draws}\n**${i18n.__('TictactoeProfile_matchs')}**: ${user.matchs}`)
 
-	zSend(zEmbed);
-};
+  Send(fastEmbed, true)
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 1,
+    argumentsNeeded: true,
+    argumentsFormat: ['@Moru Zerinho#9399'],
+    imageExample: 'https://media.discordapp.net/attachments/499671331021914132/566605395553026060/unknown.png'
+  }
+
+  return helpEmbed(message, i18n, Options)
+}

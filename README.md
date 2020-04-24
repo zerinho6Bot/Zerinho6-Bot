@@ -4,45 +4,27 @@
   <img width="200" src="https://cdn.discordapp.com/emojis/317871174266912768.png">
 </p>
 <p align="center">  
-  <img src="https://api.codacy.com/project/badge/Grade/6b171d4f87074da686cb6b96639b139b">
   <a href="https://discordapp.com/oauth2/authorize?client_id=332968532096843776&scope=bot&permissions=379968" target="_blank"><img
     src="https://img.shields.io/badge/invite-to%20your%20Discord%20server-7289da.svg?style=flat-square&logo=discord" alt="Invite Zerinho6 Bot"></a>
   <a title="Dependencies" target="_blank" href="https://david-dm.org/zerinho6bot/Zerinho6-Bot/"><img src="https://david-dm.org/zerinho6bot/Zerinho6-Bot.svg?style=flat-square"></a>
   <img src="https://img.shields.io/badge/library-discord.js-blue.svg?style=flat-square" alt="Library">
-  
+  <a title="JavaScript Standard" target="_blank" href=https://github.com/standard/standard><img src="https://cdn.rawgit.com/standard/standard/master/badge.svg"></a>
 </p>
 
 ## Introduction 
 
 Zerinho6 Bot is a Lite and fast bot that's focused on self-host but available for a public build, I've been working on it since 2016 and because of nice people I'm learning how to make a better code and that's also a reason(not the only or main) for Zerinho6 Bot to be open-source.
 
-## What Zerinho6-Bot code gives me?
-
-- Easy to create new locales files and to configure it.
-- High specific command permissions configuration, example:
-  -  Specific Authors
-  -  Specific Channels 
-  -  Specific Guilds
-  -  Specific Roles
-  -  Specific RoleName
-  -  Specific Attchs Count
-  -  NeedMention
-  -  UserNeed (permission)
-  -  BotOwner
-  -  GuildOnwer; Those are only examples, there's probaly more and you can see some of them inside command_needs on src/local_storage folder
-- Low RAM usage, 30 - 45MB in 3-9 guilds, 80-130MB in 35-43 guilds. (Stats from Glitch.com hosting so it can be lower or higher.)
-- Lots and lots of documentation to help you understand what's hapenning on each function.
 
 ## Requirements
 
-- I recomment **atleast [node](https://nodejs.org/) 10.x.x, [and here's why](https://github.com/discordjs/discord.js/issues/1386)**
-
+- Node.js 12.x.x
 - [A Discord bot account and the bot Token.](https://discordapp.com/developers/applications)
 - [Git](https://git-scm.com/)
 
 ## Setup
 
-Inside src, create a ``.env`` file **via a IDE because you need it to be without name and windows won't let you do that**...
+Inside the app folder, create a ``.env`` file **via a IDE because you need it to be without name and windows won't let you do that**...
 
 Remember, ``.env`` should not have spaces.
 
@@ -62,16 +44,9 @@ You still need to change the values..
 
 ° **TERMINAL_RELOAD_INTERVAL** Being how fast the terminal will update if FAST_LOAD is active.
 
-Open the console window on the src folder and type ``npm i``, after that you can do ``node bot.js``. There'll be a message saying when the bot's ready or a lot of things if FAST_LOAD is enabled.
+° **SET_ACTIVITY** If you want the bot to define it's status.
 
-Want to know more about the code? There's a whole [Wiki](https://github.com/zerinho6bot/Zerinho6-Bot/wiki) made for for!
-## Helping
-
-I'll be very happy with any possible help that you want to give to Zerinho6 Bot, but please, make sure you read the [Wiki](https://github.com/zerinho6bot/Zerinho6-Bot/wiki) and know how the system works, thank you!!!!
-
-## Translating
-
-You wanna translate you bot to your not-yet-translated language? [There's a topic on Wiki saying how you can do that!](https://github.com/zerinho6bot/Zerinho6-Bot/wiki/Translating.)
+Open the console window on the app folder and type ``npm i``, after that you can do ``npm start``. There'll be a message saying when the bot's ready or a lot of things if FAST_LOAD is enabled.
 
 ## Here's a list of really nice people that made this project possible
 
@@ -95,8 +70,8 @@ You wanna translate you bot to your not-yet-translated language? [There's a topi
 
 **Most of the users from BR PROGRAMMERS**: Without they, Zerinho6 Bot wouldn't exist anymore.
 
-**Leticia(Known as topera and my GF)**: For making the bot icon and being such adorable person.
+**Leticia(Known as topera)**: For making the bot icon and being such adorable person.
 
 ## "Hey, I want to contact you"
 
-M-me? Seriusly? You can find my e-mail on my github profile and if you want to talk on Discord, here's my Discord tag: ``Moru Zerinho6#9939``
+M-me? Seriusly? You can find my e-mail on my github profile and if you want to talk on Discord, here's my Discord tag: ``Moru Zerinho6#9939`` or my ID: ``134292889177030657``

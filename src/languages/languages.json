@@ -1,0 +1,960 @@
+{
+    "Global_No": {
+        "en": "No",
+        "pt-br": "Não"
+    },
+    "Global_Yes": {
+        "en": "Yes",
+        "pt-br": "Sim"
+    },
+    "Global_Or": {
+        "en": "or",
+        "pt-br": "ou"
+    },
+    "Message_errorMissingCommandName": {
+        "en": "You forgot the command name.",
+        "pt-br": "Você esqueceu o nome do comando."
+    },
+    "Message_errorCommandDoesntExist": {
+        "en": "That command doesn't exist.",
+        "pt-br": "Esse comando não existe."
+    },
+    "Message_errorCooldownWarning": {
+        "en": "Hello there. You need to wait {{amount}} seconds to use another command.",
+        "pt-br": "Calma lá. Você precisa esperar {{amount}} segundos para usar outro comando."
+    },
+    "Message_errorMissingEmbedLinks": {
+        "en": "Hello there, I would like to ask for EMBED_LINKS permission on this channel so my commands can work, if you don't understand this message, mention an Staff.",
+        "pt-br": "Eu preciso da permissão EMBED_LINKS para que meus comandos funcionem, se você não entende essa mensagem, marque um Staff."
+    },
+    "Utils_commandUtils_onlyOwner": {
+        "en": "Only the bot owner can use this command.",
+        "pt-br": "Apenas o dono do bot pode usar esse comando."
+    },
+    "Utils_commandUtils_specificNeeds_specificAuthor_pluralReturn": {
+        "en": "Only users with one of those IDs can use that command:",
+        "pt-br": "Apenas usuários com um desses IDs podem usar esse comando:"
+    },
+    "Utils_commandUtils_specificNeeds_specificAuthor_defaultReturn": {
+        "en": "Only a user with the follow ID can use that command:",
+        "pt-br": "Apenas um usuário com o seguinte ID pode usar esse comando:"
+    },
+    "Utils_commandUtils_specificNeeds_specificGuild_pluralReturn": {
+        "en": "You can only use that command in a guild with one of those IDs:",
+        "pt-br": "Você só pode usar esse comando em um servidor com um desses IDs:"
+    },
+    "Utils_commandUtils_specificNeeds_specificGuild_defaultReturn": {
+        "en": "You can only use this command in a guild with this ID:",
+        "pt-br": "Você só pode usar esse comando em um servidor com o seguinte ID:"
+    },
+    "Utils_commandUtils_specificNeeds_specificChannel_pluralReturn": {
+        "en": "You can only use this command in a channel with one of those IDs:",
+        "pt-br": "Você só pode usar esse comando em um servidor com um desses IDs:"
+    },
+    "Utils_commandUtils_specificNeeds_specificChannel_defaultReturn": {
+        "en": "You can only use this command in a channel with this ID:",
+        "pt-br": "Você só pode usar esse comando em um servidor com o seguinte ID:"
+    },
+    "Utils_commandUtils_specificNeeds_specificRole_defaultReturn": {
+        "en": "You can only use this command with a role with the follow ID:",
+        "pt-br": "Você só pode usar esse comando se você tiver um cargo com o seguinte ID:"
+    },
+    "Utils_commandUtils_specificNeeds_specificRole_nameReturn": {
+        "en": "You can only use this command with a role with the follow name:",
+        "pt-br": "Você só pode usar esse comando se você tiver um cargo com o seguinte nome:"
+    },
+    "Utils_commandUtils_needArg_default": {
+        "en": "This command required an argument to work.",
+        "pt-br": "Esse comando precisa de um argumento para funcionar."
+    },
+    "Utils_commandUtils_needArg_CommandNeeds": {
+        "en": "This command needs {{arguments}} arguments and your message only has **{{givenMessageArguments}}**.",
+        "pt-br": "Esse comando precisa de {{arguments}} argumentos e sua mensagem só tem **{{givenMessageArguments}}**."
+    },
+    "Utils_commandUtils_needAttch_defaultReturn": {
+        "en": "You need to use the command with an attachment.",
+        "pt-br": "Você precisa enviar um arquivo com o comando."
+    },
+    "Utils_commandUtils_needAttch_pluralReturn": {
+        "en": "You need to use the command with {{amount}} attachments.",
+        "pt-br": "Você precisa enviar {{amount}} arquivos com o comando."
+    },
+    "Utils_commandUtils_needMention_defaultReturn": {
+        "en": "You need to mention someone in order to use this command.",
+        "pt-br": "Você precisa mencionar alguém para utilizar essa comando."
+    },
+    "Utils_commandUtils_needMention_pluralReturn": {
+        "en": "You need to mention {{amount}} users in order to use this command.",
+        "pt-br": "Você precisa mencionar {{amount}} pessoas para utilizar essa comando."
+    },
+    "Utils_commandUtils_userNeed": {
+        "en": "You need {{permission}} permission to use this command.",
+        "pt-br": "Você precisa da permissão {{permission} para usar esse comando."
+    },
+    "Utils_commandUtils_guildOwner": {
+        "en": "Only the guild owner can use this command.",
+        "pt-br": "Apenas o dono do servidor pode usar esse comando."
+    },
+    "Help_Bot": {
+        "en": "Bot Category",
+        "pt-br": "Categoria Bot"
+    },
+    "Help_Games": {
+        "en": "Games Category",
+        "pt-br": "Categoria Jogos"
+    },
+    "Help_Staff": {
+        "en": "Staff Category",
+        "pt-br": "Categoria Staff"
+    },
+    "Help_Utility": {
+        "en": "Utility Category",
+        "pt-br": "Categoria Utilidade"
+    },
+    "Help_Etc": {
+        "en": "Etc Category",
+        "pt-br": "Categoria Aleatória"
+    },
+    "Help_typeWithCommandName": {
+        "en": "**Type \"{{prefix}}help commandName\" to see a manual about that command.\nExample: {{prefix}}help avatar**",
+        "pt-br": "**Digite \"{{prefix}}help nomeDoComando\" para ver um manual desse comando.\nExemplo: {{prefix}}help avatar**"
+    },
+    "Help_errorNoHelpEmbed": {
+        "en": "That command doesn't seem to have a help defined for it yet.",
+        "pt-br": "Esse comando não tem um comando de ajuda definido para ele ainda."
+    },
+    "Help_NoArgument": {
+        "en": "No argument",
+        "pt-br": "Nenhum argumento"
+    },
+    "Help_OneArgument": {
+        "en": "One argument",
+        "pt-br": "Um argumento"
+    },
+    "Help_TwoArguments": {
+        "en": "Two arguments",
+        "pt-br": "Dois argumentos"
+    },
+    "Help_ThreeArguments": {
+        "en": "Three arguments",
+        "pt-br": "Três argumentos"
+    },
+    "Help_FourArguments": {
+        "en": "Four arguments",
+        "pt-br": "Quatro argumentos"
+    },
+    "Help_FiveArguments": {
+        "en": "Five arguments",
+        "pt-br": "Cinco argumentos"
+    },
+    "Help_SixArguments": {
+        "en": "Six arguments",
+        "pt-br": "Seis argumentos"
+    },
+    "Help_FirstArgument": {
+        "en": "First argument",
+        "pt-br": "Primeiro argumento"
+    },
+    "Help_SecondArgument": {
+        "en": "Second argument",
+        "pt-br": "Segundo argumento"
+    },
+    "Help_ThirdArgument": {
+        "en": "Third argument",
+        "pt-br": "Terceiro argumento"
+    },
+    "Help_FourthArgument": {
+        "en": "Fourth argument",
+        "pt-br": "Quarto argumento"
+    },
+    "Help_FifthArgument": {
+        "en": "Fifth argument",
+        "pt-br": "Quinto argumento"
+    },
+    "Help_SixthArgument": {
+        "en": "Sixth argument",
+        "pt-br": "Sexto argumento"
+    },
+    "Help_ArgumentsFormat": {
+        "en": "Arguments Format",
+        "pt-br": "Formato dos Argumentos"
+    },
+    "Help_Info": {
+        "en": "Info",
+        "pt-br": "Informações"
+    },
+    "Help_ArgumentsRequired": {
+        "en": "Arguments: {{howMany}}\nAre arguments required: {{required}}",
+        "pt-br": "Argumentos: {{howMany}}\nArguments são necessários: {{required}}"
+    },
+    "Help_description": {
+        "en": "Shows the bot command and it's manual.",
+        "pt-br": "Mostra a lista de comandos e o manual deles."
+    },
+    "Avatar_server": {
+        "en": "guild",
+        "pt-br": "servidor"
+    },
+    "Avatar_description": {
+        "en": "Look your avatar, someone's avatar or the server icon.",
+        "pt-br": "Veja o seu avatar, o avatar de outra pessoa ou o ícone do servidor."
+    },
+    "Bot-invite_IdOrMentionNotDetected": {
+        "en": "ID or Mention not detected.",
+        "pt-br": "ID ou Menção não detectada."
+    },
+    "Bot-invite_CouldntFindThatUser": {
+        "en": "Couldn't find that account.",
+        "pt-br": "Não foi possivel achar essa conta."
+    },
+    "Bot-invite_userIsntBot": {
+        "en": "That account isn't a bot account, use the ``userinfo`` command for not bot accounts.",
+        "pt-br": "Essa conta não é uma conta bot, use o comando ``userinfo`` para contas não bot."
+    },
+    "Bot-invite_invite": {
+        "en": "Invite",
+        "pt-br": "Convite"
+    },
+    "Bot-invite_description": {
+        "en": "Returns an invite of the given bot ID or the mentioned bot.",
+        "pt-br": "Retorna um convite do ID do bot dado como argumento ou o bot mencionado."
+    },
+    "Bot-invite_botID": {
+        "en": "Bot ID",
+        "pt-br": "ID do bot"
+    },
+    "Bot-invite_botMention": {
+        "en": "Bot Mention",
+        "pt-br": "Menção do Bot"
+    },
+    "Bot-invite_errorWrongArgument": {
+        "en": "Your argument isn't an ID or Bot Mention",
+        "pt-br": "Seu argumento não é um ID ou menção de bot"
+    },
+    "Embed_fieldContainsTooMuch": {
+        "en": "The embed field contains too much, the name can only have {{name}} amount of characters and the description can have up to {{description}} characters.",
+        "pt-br": "O embed tem muito conteudo, o nome do embed só pode conter {{name}} caracteres e a descrição pode contar {{description}} caracteres."
+    },
+    "Embed_description": {
+        "en": "Make a custom embed message.",
+        "pt-br": "Faça uma mensagem embed."
+    },
+    "Embed_argumentFormat_example1": {
+        "en": "Hello",
+        "pt-br": "Olá"
+    },
+    "Embed_argumentFormat_example2": {
+        "en": "World",
+        "pt-br": "Mundo"
+    },
+    "Eval_description": {
+        "en": "Executes the given code.",
+        "pt-br": "Executa o código dado como argumento."
+    },
+    "Eval_code": {
+        "en": "Code",
+        "pt-br": "Código"
+    },
+    "Eval_result": {
+        "en": "Result",
+        "pt-br": "Resultado"
+    },
+    "Info_description": {
+        "en": "Shows the bot system info.",
+        "pt-br": "Mostra informações de sistema do bot."
+    },
+    "Info_officialServer": {
+        "en": "Official Server",
+        "pt-br": "Servidor Oficial"
+    },
+    "Info_guilds": {
+        "en": "Guilds",
+        "pt-br": "Servidores"
+    },
+    "Info_users": {
+        "en": "Users",
+        "pt-br": "Usuários"
+    },
+    "Info_gitRepository": {
+        "en": "Git Repository",
+        "pt-br": "Repositorio Git"
+    },
+    "Info_reportBugsAt": {
+        "en": "Report bugs at",
+        "pt-br": "Reporte bugs em"
+    },
+    "Info_defaultLanguage": {
+        "en": "Default Language",
+        "pt-br": "Linguagem Padrão"
+    },
+    "Info_RAM": {
+        "en": "RAM",
+        "pt-br": "RAM"
+    },
+    "Info_uptime": {
+        "en": "Uptime",
+        "pt-br": "Tempo acordado"
+    },
+    "Info_ownerID": {
+        "en": "Owner ID",
+        "pt-br": "ID do dono"
+    },
+    "Info_History": {
+        "en": "History",
+        "pt-br": "História"
+    },
+    "Info_ZerinhoHistory": {
+        "en": "Back in 2016, I was nedding bots for my server, and I really wanted one with advanded auto-reply, thing that only Tatsumaki bot had at the time(back when mee6 was trash, lol) and I really wanted more, then I found a bot called 'Mixy' that had this function, I added to my server and started to use it a lot, the owner of the bot noticed that(the basic console.log(message.guild.name...) ) and made the bot make a invite link to enter on the server, I noticed that it was Smix tue bot owner because I already meet him on another server but I was surprised that it made all the way to my server to talk with me about the bot and the updates, because, just like Zerinho6 Bot, it isn't public fucused but personal usage, then he showed me the code of the bot(It was horrible, but it was a trainee developer and atleast the code works) I was like 'What the f is that, what i'm looking at?' and since then I started to learn programming and work on Zerinho6 Bot.",
+        "pt-br": "La em 2016, eu estava precisando de bots para o meu servidor, e eu realmente precisava de um com um modulo de auto-resposta avançada, coisa que apenas a Tatsumaki tinha no momento(Época que o mee6 era uma merda, lol) e eu realmente queria mais, então eu achei um bot chamado 'Mixy' que tinha essa função, eu o adicionei no meu servidor e comecei a usar bastante, o dono do bot notou isso e fez o bot criar um link de convite no servidor, eu notei que Smix era o dono do bot pois eu já conhecia ele de outro servidor, mas eu estava surpreso que ele foi ate o meu servidor falar sobre o bot e atualizações pois, assim como o Zerinho6 Bot, o foco dele não é o uso publico, mas sim pessoal, então ele me mostoru o codigo do bot(Era horrivel, mas ele era novo e o codigo pelo menos funcionava), eu estava tipo 'Mas que p, é essa, o que eu estou olhando?' e desde então eu comecei a aprender programação e trabalhar no Zerinho6 Bot."
+    },
+    "Render_wrongFormat": {
+        "en": "The argument is in the wrong format, it should follow this format: ``https://discordapp.com/channels/422897054386225173/586285188158586881/701893082379190364``",
+        "pt-br": "O argumento está no formato incorreto, ele deve seguir o seguinte formato: ``https://discordapp.com/channels/422897054386225173/586285188158586881/701893082379190364``"
+    },
+    "Render_incorrectID": {
+        "en": "The IDs of the links are invalid.",
+        "pt-br": "Os IDs no link são inválidos."
+    },
+    "Render_messageIsFromAnotherServer": {
+        "en": "The message you gave is from another server.",
+        "pt-br": "A mensagem que você deu é de outro servidor."
+    },
+    "Render_invalidChannelReference": {
+        "en": "The channel to given is not an channel mention or a channel ID.",
+        "pt-br": "O canal dado como argumento não é uma menção de canal nem um ID de canal."
+    },
+    "Render_invalidChannel": {
+        "en": "I couldn't find that channel.",
+        "pt-br": "Não consegui achar esse canal."
+    },
+    "Render_messageNotFound": {
+        "en": "Couldn't find the message.",
+        "pt-br": "Não foi possivel achar a mensagem."
+    },
+    "Render_noPermissionToDelete": {
+        "en": "You don't have permisiion to delete the message(that you want to move).",
+        "pt-br": "Você não tem permissão para deletar a mensagem(que você quer enviar)."
+    },
+    "Render_noPermissionToSee": {
+        "en": "You don't have permission to see messages on that channel..",
+        "pt-br": "Você não tem permissão para enviar mensagens nesse canal.."
+    },
+    "Render_noPermissionToManage": {
+        "en": "I don't have permission to manage messages on this channel.",
+        "pt-br": "Eu não tenho permissão permissão para gerenciar mensagens nesse canal."
+    },
+    "Render_nsfwChannel": {
+        "en": "You're trying to move a message from a nsfw channel to a not nsfw channel. No.",
+        "pt-br": "Você está tentando enviar uma mensagem de um canal nsfw para um canal nsfw. Não."
+    },
+    "Render_couldntDeleteMessage": {
+        "en": "Couldn't delete the message that you want to move.",
+        "pt-br": "Não foi possivel deletar a mensagem que você quer mover."
+    },
+    "Render_messageSentBy": {
+        "en": "Message from",
+        "pt-br": "Mensagem de"
+    },
+    "Render_movedFrom": {
+        "en": "moved from",
+        "pt-br": "movida de"
+    },
+    "Render_by": {
+        "en": "by",
+        "pt-br": "por"
+    },
+    "Render_missingEmbedPermission": {
+        "en": "I'm missing embed links permission on that channel.",
+        "pt-br": "Eu preciso da permissão de enviar links embed nesse canal."
+    },
+    "Move_description": {
+        "en": "Move a messagem from a channel to another.",
+        "pt-br": "Mova uma mensagem de um canal pra outro."
+    },
+    "Ping_ping": {
+        "en": "Ping",
+        "pt-br": "Ping"
+    },
+    "Ping_pong": {
+        "en": "Pong",
+        "pt-br": "Pong"
+    },
+    "Ping_ms": {
+        "en": "ms",
+        "pt-br": "ms"
+    },
+    "Ping_description": {
+        "en": "See bot's ping.",
+        "pt-br": "Veja o ping do bot."
+    },
+    "Ram_heapUsed": {
+        "en": "heapUsed",
+        "pt-br": "heapUsed"
+    },
+    "Ram_description": {
+        "en": "See how much RAM the bot is using.",
+        "pt-br": "Veja quanta RAM o bot está usando."
+    },
+    "Render_tryingToRenderMessageFromNsfw": {
+        "en": "You're trying to render a message from a nsfw channel to a not nsfw channel.",
+        "pt-br": "Você está tentando renderizar uma mensagem de um canal nsfw para um canal não nsfw."
+    },
+    "Render_description": {
+        "en": "Renders a message using it's link.",
+        "pt-br": "Renderiza uma mensagem usando o link dela."
+    },
+    "Render_channel": {
+        "en": "Channel",
+        "pt-br": "Canal"
+    },
+    "Rpg_actionStillOnCooldown": {
+        "en": "That action is still on cooldown.",
+        "pt-br": "Essa ação ainda está recarregando."
+    },
+    "Rpg_dagger": {
+        "en": "Dagger",
+        "pt-br": "Adaga"
+    },
+    "Rpg_shield": {
+        "en": "Shield",
+        "pt-br": "Escudo"
+    },
+    "Rpg_candy": {
+        "en": "Candy",
+        "pt-br": "Doce"
+    },
+    "Rpg_candle": {
+        "en": "Candle",
+        "pt-br": "Vela"
+    },
+    "Rpg_nauseated_face": {
+        "en": "Nausea",
+        "pt-br": "Nausea"
+    },
+    "Rpg_hp": {
+        "en": "HP",
+        "pt-br": "HP"
+    },
+    "Rpg_actions": {
+        "en": "Actions",
+        "pt-br": "Ações"
+    },
+    "Rpg_turnOf": {
+        "en": "Turn of",
+        "pt-br": "Turno de"
+    },
+    "Rpg_history": {
+        "en": "History",
+        "pt-br": "Historia"
+    },
+    "Rpg_times": {
+        "en": "Time(s)",
+        "pt-br": "Tempo"
+    },
+    "Rpg_damageDealt(DaggerAndShield)": {
+        "en": "Damage Dealt(Dagger and Shield)",
+        "pt-br": "Dano causado(Adaga e Escudo)"
+    },
+    "Rpg_damageDealt": {
+        "en": "Damage Dealt From {{what}}",
+        "pt-br": "Dano causado por {{what}}"
+    },
+    "Rpg_damageBlocked": {
+        "en": "Damage Blocked",
+        "pt-br": "Dano Bloqueado"
+    },
+    "Rpg_healthRestored": {
+        "en": "Health Restored",
+        "pt-br": "Vida Restaurada"
+    },
+    "Rpg_timesUsedEachActions": {
+        "en": "Times that you used each action",
+        "pt-br": "Quantidade de vezes que você usou cada ação"
+    },
+    "Rpg_damageDealtAndRestoredHistory": {
+        "en": "Damage Dealt and Healed History",
+        "pt-br": "Historia do dano causado e restaurado"
+    },
+    "Rpg_winner": {
+        "en": "Winner",
+        "pt-br": "Vencedor(a)"
+    },
+    "Rpg_noOne": {
+        "en": "No one",
+        "pt-br": "Ninguém"
+    },
+    "Rpg_selfMention": {
+        "en": "You can't play with yourself on that game.",
+        "pt-br": "Você não pode jogar sozinho."
+    },
+    "Rpg_botMention": {
+        "en": "You can't play with a bot on this game.",
+        "pt-br": "Você não pode jogar com um bot."
+    },
+    "Rpg_oneIsAlreadyPlaying": {
+        "en": "One of the players are already playing.",
+        "pt-br": "Um dos jogadores já está participando de uma partida."
+    },
+    "Rpg_timeExpired": {
+        "en": "Time expired.",
+        "pt-br": "Tempo expirado."
+    },
+    "Rpg_description": {
+        "en": "Play a rpg math with someone!\n\nInstructions:\n\nEach player have **200 health**, that's you max health and there's no way to pass that, your objective is to kill the enemy making his health 0 or lower than 0.\n\nYou have 5 **actions**:\n\n🗡 -Dagger: Deal **30 damage** to the enemy.\n🛡 -Shield: Makes dagger deal half of the damage and repeal 5 damage, **works for only one turn and doesn't protect from candle**.\n🕯 -Candle: Deal **15 damage** to the enemy, it ignores shield protection and you don't take damage back from it.\n🍬 -Candy: **Heal for 20** and removes nausea if you have it.\n🤢 -Nausea: Makes the enemy suffer from nausea, it'll take **6 damage** each turn.\n\nAfter using any action it'll go on a cooldown of 3 turns, you can't use it if the action is not with the value of 0, a :x: will appear to make it more easy to see what you can and can't use.",
+        "pt-br": "Jogue uma partida rpg com alguém!\n\nInstruções:\n\nCada jogador tem 200 de vida, essa é a sua vida máxima e não tem jeito de ultrapassar isso, seu objetivo é matar o inimigo, reduzindo a vida dele para 0 ou menos.\n\nVocê tem 5 **ações**:\n\n🗡 -Adaga: Dê **30 de dano** ao inimigo.\n🛡 -Escudo: Faz a adaga dar apenas metade do dano e repele 5 de dano, **funciona por apenas um turno e não protege contra vela.**\n🕯 -Vela: dê **15 de dano** ao inimigo, o dano ignora escudo e o dano não é repelado.\n🍬 -Doce: **Cure 20 de vida** e remova o efeito de nausea se você tiver.\n🤢 -Nausea: Faça o inimigo sofrer de nausea, ele vai levar **6 de dano** a cada turno ate que ele se cure com o Doce.\n\nApós usar cada ação, ela vai ir para um tempo de recarga de 3 turnos, você não pode usar a ação ate que esse tempo de recarga chegue em 0, um :x: vai aparecer na habilidade que você não pode usar para te ajudar."
+    },
+    "Serverinfo_unrestricted": {
+        "en": "Unrestricted",
+        "pt-br": "Irrestrito"
+    },
+    "Serverinfo_needEmail": {
+        "en": "You need an e-mail to be able to talk on this guild.",
+        "pt-br": "Você precisa de um e-mail para poder utilizar esse servidor."
+    },
+    "Serverinfo_waitFiveMinutesOnDiscord": {
+        "en": "You need to wait 5 minutes after having created an Discord Account.",
+        "pt-br": "Você precisa esperar 5 minutes depois de ter criado a conta no Discord."
+    },
+    "Serverinfo_waitTenMinutesOnTheServer": {
+        "en": "You need to wait 10 minutes after joining the guild.",
+        "pt-br": "Você precisa esperar 10 minutes depois de entrar no servidor."
+    },
+    "Serverinfo_heyYouGuysDontHavePhones": {
+        "en": "You need a phone number to use this guild.",
+        "pt-br": "Você precisa de um número para usar esse servidor"
+    },
+    "Serverinfo_guildName": {
+        "en": "Guild Name",
+        "pt-br": "Nome do Servidor"
+    },
+    "Serverinfo_memberCount": {
+        "en": "Member Count",
+        "pt-br": "Quantidade de Membros"
+    },
+    "Serverinfo_guildRegion": {
+        "en": "Guild Region",
+        "pt-br": "Região do Servidor"
+    },
+    "Serverinfo_guildID": {
+        "en": "Guild ID",
+        "pt-br": "ID do Servidor"
+    },
+    "Serverinfo_guildCreatedAt": {
+        "en": "Guild Created at",
+        "pt-br": "Servidor criado em"
+    },
+    "Serverinfo_roleAmount": {
+        "en": "Role Amount",
+        "pt-br": "Quantidade de cargos"
+    },
+    "Serverinfo_guildOwner": {
+        "en": "Guild Owner",
+        "pt-br": "Dono do Servidor"
+    },
+    "Serverinfo_verificationLevel": {
+        "en": "Verification Level",
+        "pt-br": "Nivel de Verificação"
+    },
+    "Serverinfo_thisGuildIsVerified": {
+        "en": "This guild is verified.",
+        "pt-br": "Esse servidor é verificado."
+    },
+    "Serverinfo_description": {
+        "en": "See informations about the server where the command is being executed.",
+        "pt-br": "Veja as informações do servidor."
+    },
+    "Serverstats_january": {
+        "en": "January",
+        "pt-br": "Janeiro"
+    },
+    "Serverstats_february": {
+        "en": "February",
+        "pt-br": "Fevereiro"
+    },
+    "Serverstats_march": {
+        "en": "March",
+        "pt-br": "Março"
+    },
+    "Serverstats_april": {
+        "en": "April",
+        "pt-br": "Abril"
+    },
+    "Serverstats_may": {
+        "en": "May",
+        "pt-br": "Maio"
+    },
+    "Serverstats_june": {
+        "en": "June",
+        "pt-br": "junho"
+    },
+    "Serverstats_july": {
+        "en": "Joly",
+        "pt-br": "Julho"
+    },
+    "Serverstats_august": {
+        "en": "August",
+        "pt-br": "Agosto"
+    },
+    "Serverstats_september": {
+        "en": "September",
+        "pt-br": "Setembro"
+    },
+    "Serverstats_october": {
+        "en": "October",
+        "pt-br": "Outubro"
+    },
+    "Serverstats_november": {
+        "en": "November",
+        "pt-br": "Novembro"
+    },
+    "Serverstats_december": {
+        "en": "December",
+        "pt-br": "Dezembro"
+    },
+    "Serverstats_months": {
+        "en": {
+            "january": "January",
+			"february": "February",
+			"march": "March",
+			"april": "April",
+			"may": "May",
+			"june": "June",
+			"july": "Joly",
+			"august": "August",
+			"september": "September",
+			"october": "October",
+			"november": "November",
+			"december": "December"
+        },
+        "pt-br": {
+            "january": "Janeiro",
+			"february": "Fevereiro",
+			"march": "Março",
+			"april": "Abril",
+			"may": "Maio",
+			"june": "Junho",
+			"july": "Jolho",
+			"august": "Agosto",
+			"september": "Setembro",
+			"october": "Outubro",
+			"november": "Novembro",
+			"december": "Dezembro"
+        }
+    },
+    "Serverstats_guildStatsDisabledNoPermission": {
+        "en": "This guild din't enable the serverStats command yet, ask for a Staff with MANAGE_GUILD permission.",
+        "pt-br": "Esse servidor ainda não habilitou o serverStats, fale com alguém que tenha a permissão de MANAGE_GUILD(Gerenciar Servidor)"
+    },
+    "Serverstats_guildStatsDisabled": {
+        "en": "This guild doesn't have ServerStats enabled, do you want to enable it now? (Type: yes **or** no)",
+        "pt-br": "Esse servidor ainda não habilitou o serverStats, você deseja habilitar? (Digite: sim **ou** não)"
+    },
+    "Serverstats_decidedNo": {
+        "en": "**No**, ok.",
+        "pt-br": "**Não**, ok."
+    },
+    "Serverstats_decidedYes": {
+        "en": "**Yes**, fine...defining this guild as one that wants stats...",
+        "pt-br": "**Sim**, ok...definindo o servidor como um que quer as informações..."
+    },
+    "Serverstats_decidedYes_Part2": {
+        "en": "Writing stats from this month(This can take some seconds..)",
+        "pt-br": "Escrevendo as informações desse mês..."
+    },
+    "Serverstats_decidedYes_Part3": {
+        "en": "Done, please execute the command again if you want to see the stats that I stored from this month.",
+        "pt-br": "Feito, por favor execute o comando novamente se você quer ver as informações que eu armazenei desse mês."
+    },
+    "Serverstats_noOptionGiven": {
+        "en": "No reply given.",
+        "pt-br": "Nenhuma resposta foi dada."
+    },
+    "Serverstats_yearIsNotAvailable": {
+        "en": "That year is not available",
+        "pt-br": "Este ano não está disponivel"
+    },
+    "Serverstats_monthIsNotAvailable": {
+        "en": "That month is not available",
+        "pt-br": "Este mês não está disponivel"
+    },
+    "Serverstats_from": {
+        "en": "from",
+        "pt-br": "de"
+    },
+    "Serverstats_comparing": {
+        "en": "Comparing",
+        "pt-br": "Comparando"
+    },
+    "Serverstats_with": {
+        "en": "with",
+        "pt-br": "com"
+    },
+    "Serverstats_memberDifference": {
+        "en": "Member Difference",
+        "pt-br": "Diferença de Membros"
+    },
+    "Serverstats_roleDifference": {
+        "en": "Role Difference",
+        "pt-br": "Diferença de Cargos"
+    },
+    "Serverstats_channelDifference": {
+        "en": "Channels Difference",
+        "pt-br": "Diferença de Canais"
+    },
+    "Serverstats_yourOptions": {
+        "en": "Your Options",
+        "pt-br": "Suas opções"
+    },
+    "Serverstats_see": {
+        "en": "see",
+        "pt-br": "ver"
+    },
+    "Serverstats_summaryOf": {
+        "en": "Summary of",
+        "pt-br": "Resumo de"
+    },
+    "Serverstats_members": {
+        "en": "Members",
+        "pt-br": "Membros"
+    },
+    "Serverstats_roles": {
+        "en": "Roles",
+        "pt-br": "Cargos"
+    },
+    "Serverstats_channels": {
+        "en": "Channels",
+        "pt-br": "Canais"
+    },
+    "Serverstats_compare": {
+        "en": "compare",
+        "pt-br": "comparar"
+    },
+    "Serverstats_sendYearAndMonth": {
+        "en": "Ok, send another year and month to compare.(Example: `2019 January`)",
+        "pt-br": "Ok, envie outro ano e mês para comparar.(Exemplo: `2019 Janeiro`)"
+    },
+    "Serverstats_sameDateDetected": {
+        "en": "It looks like the datas that you request for are exactly the same.",
+        "pt-br": "Parece que as datas que você enviou são exatamente iguais."
+    },
+    "Serverstats_anIdiotsGuide": {
+        "en": "Use the help command if you don't know how to use this command, example: `prefix.help command`.",
+        "pt-br": "Use o comando de ajuda caso você não saiba usar o comando, exemplo: `prefix.help comando`"
+    },
+    "Serverstats_description": {
+        "en": "There's 2 operations: `see` and `compare`.\n\n`see` - you only need to give one year and month, if available, you'll see member, roles and channels count of that month in that year.\n\n`compare` - you'll give the year and date just like with `see`, but the bot will ask for another year and month to compare.\n\n``year`` can be a number(ex: 2018) or ~ (Will get the current year);\n``month`` can be a number(0 to 11), month name(January) or ~ (Will get the current month).**\n\nThe bot will not store any data if the command is not enabled, someone with MANAGE_GUILD NEEDS TO ENABLED FIRST**, the bot will update the stats everyday or on every restart, if while updating the stats the bot doesn't find the guild, it'll delete the whole data from every year, there's no save.",
+        "pt-br": "Existem 2 operações: `ver` e `comparar`.\n\n`ver` - você só precisa dar um ano e mês, se disponivel, você vai ver informações como quantidade de membros, cargos e canais.\n\n`comparar` - você precisa dar o ano e o mês igual como na operação `ver`, mas depois disso o bot vai pedir para você dar outro ano e mês para comparar suas informações.\n\n``ano`` pode ser um número(ex: 2018) ou ~ (O bot vai automaticamente trocar pelo ano atual);\n``mês`` pode ser um número(0 a 11), nome do mês(Janeiro) ou ~ (O bot vai automaticamente trocar pelo mês atual).**\n\nO bot não vai armazenar nenhuma data enquanto o comando não for habilitado, alguém com a permissão de MANAGE_GUILD(Gerenciar Servidor) PRECISA HABILITAR PRIMEIRO**, o bot vai procurar pelo servidor a cada 24h ou a cada vez que ele reiniciar, se, enquanto o bot estiver atualizando os dados, ele não achar o servidor, TODA a data será deletada, não tem backup."
+    },
+    "Serverstats_operationExample": {
+        "en": "``see`` or ``compare``",
+        "pt-br": "``ver`` ou ``comparar``"
+    },
+    "Serverstats_yearExample": {
+        "en": "``2020``(any year) or ``~``(places the current year)",
+        "pt-br": "``2020``(qualquer ano) ou ``~``(o bot troca pelo ano atual)"
+    },
+    "Serverstats_monthExample": {
+        "en": "``january``(any month) or ``0``(number of the month starting at 0 up to 11)",
+        "pt-br": "``janeiro``(qualquer mês) ou ``0``(Número do mês começando em 0 e terminando em 11)"
+    },
+    "Setlanguage_languageList": {
+        "en": "Language List",
+        "pt-br": "Lista de Linguagens"
+    },
+    "Setlanguage_languageNotExist": {
+        "en": "That language doesn't exist, here's a list of languages that does exist.",
+        "pt-br": "Essa lingua não existe, aqui está uma lista de das linguagens que existem."
+    },
+    "Setlanguage_languageIsDefault": {
+        "en": "That language is already the defined language.",
+        "pt-br": "Essa linguagem já é a linguagem definida."
+    },
+    "Setlanguage_languageDone": {
+        "en": "Done, :thumbsup:",
+        "pt-br": "Feito, :thumbsup:"
+    },
+    "Setlanguage_languageError": {
+        "en": "An error happened, :thumbsdown:",
+        "pt-br": "Um erro ocorreu, :thumbsdown:"
+    },
+    "Setlanguage_description": {
+        "en": "Change the server language. Give no argument to see the available languages.",
+        "pt-br": "Muda a linguagem do servidor. Não dê nenhum argumento para ver a lista de linguagens que você pode escolher."
+    },
+    "TictactoeMatch_matchNotFound": {
+        "en": "I couldn't find that match.",
+        "pt-br": "Não consegui achar essa partida."
+    },
+    "TictactoeMatch_vs": {
+        "en": "VS",
+        "pt-br": "VS"
+    },
+    "TictactoeMatch_MatchTook": {
+        "en": "The match has taken {{time}} seconds.",
+        "pt-br": "A partida durou {{time}} segundos"
+    },
+    "TictactoeMatch_theWinner": {
+        "en": "The winner was",
+        "pt-br": "O vencedor foi"
+    },
+    "TictactoeMatch_movimentsOf": {
+        "en": "Moviments of",
+        "pt-br": "Movimentos de"
+    },
+    "TictactoeMatch_description": {
+        "en": "See match details by match-code.\n\n'How to get match-code': Play a Tictactoe match, finish it(it doesn't matter who won), get the match-code on the embed footer.",
+        "pt-br": "Mostra os detalhes de uma partida pelo código da partida.\n\n'Como pegar o código de partida': Jogue uma partida de jogo da velha, finalize ela(não importa quem ganhar), copie o codigo da partida obtivel no fundo do embed."
+    },
+    "TictactoeProfile_argsNotNumberOrMention": {
+        "en": "You dind't mention anyone as args or gave an ID.",
+        "pt-br": "Você não mencionou ninguém ou deu um ID como argumento."
+    },
+    "TictactoeProfile_userNotFound": {
+        "en": "I couldn't find that user on my database.",
+        "pt-br": "Eu não consegui achar esse usuário na minha database."
+    },
+    "TictactoeProfile_profileOf": {
+        "en": "Profile of",
+        "pt-br": "Perfil de"
+    },
+    "TictactoeProfile_won": {
+        "en": "Won",
+        "pt-br": "Venceu"
+    },
+    "TictactoeProfile_loses": {
+        "en": "Loses",
+        "pt-br": "Perdas"
+    },
+    "TictactoeProfile_draws": {
+        "en": "Draws",
+        "pt-br": "Empates"
+    },
+    "TictactoeProfile_matchs": {
+        "en": "Matchs",
+        "pt-br": "Partidas"
+    },
+    "TictactoeProfile_description": {
+        "en": "Shows the Tictactoe profile of a user.",
+        "pt-br": "Mostra o historico no jogo de velha de um usuário."
+    },
+    "Tictactoe_draw": {
+        "en": "draw",
+        "pt-br": "empate"
+    },
+    "Tictactoe_winner": {
+        "en": "Winner",
+        "pt-br": "Ganhador"
+    },
+    "Tictactoe_loser": {
+        "en": "Loser",
+        "pt-br": "Perdedor"
+    },
+    "Tictactoe_turn": {
+        "en": "Turn!",
+        "pt-br": "Turno!"
+    },
+    "Tictactoe_results": {
+        "en": "Results",
+        "pt-br": "Resultados"
+    },
+    "Tictactoe_secret": {
+        "en": "This secret does not hold the value that into once had, but, the fact that you took time to search for it gives the value that it needs.\n<:zerinicon:317871174266912768> :heart: <:Toperaicon:317871116934840321>",
+        "pt-br": "Esse segredo não segura mais o valor que antes tinha, mas, o fato que você usou seu tempo para procurar por ele, concede mais valor do que antes tinha.\n<:zerinicon:317871174266912768> :heart: <:Toperaicon:317871116934840321>"
+    },
+    "Tictactoe_matchCode": {
+        "en": "Match Code",
+        "pt-br": "Código da partida"
+    },
+    "Tictactoe_matchResult": {
+        "en": "Match Result",
+        "pt-br": "Resultado da Partida"
+    },
+    "Tictactoe_moves": {
+        "en": "Moves",
+        "pt-br": "Movimentos"
+    },
+    "Tictactoe_description": {
+        "en": "Play tictactoe with someone! It saves your wins, loses, draws, matchs, and even the match via the match code that can be used as argument on tictactoe-match command.\n\n_There's a easter egg on the game, try to play it with p1 having 'zerinho6' username or p2 having 'topera' or both!_",
+        "pt-br": "Jogue uma partida de jogo de velha!Esse comando salva as partidas, suas virotias, derrotas, empates; Utilize o codigo da partida como argumento no comando tictactoe-match.\n\n_Tem um pequeno easter egg, jogue com o primeiro jogador estando com um nome que contenha 'zerinho6' ou o segundo estando com 'topera' ou ambos!_"
+    },
+    "Userinfo_invalidID": {
+        "en": "You need to send a valid user ID as argument.",
+        "pt-br": "Você precisa enviar um ID de usuário como argumento."
+    },
+    "Userinfo_couldNotFindUser": {
+        "en": "I couldn't find that user.",
+        "pt-br": "Eu não consegui achar esse usuário."
+    },
+    "Userinfo_tag": {
+        "en": "Tag",
+        "pt-br": "Tag"
+    },
+    "Userinfo_id": {
+        "en": "ID",
+        "pt-br": "ID"
+    },
+    "Userinfo_accountCreatedIn": {
+        "en": "Account created in",
+        "pt-br": "Conta criada em"
+    },
+    "Userinfo_hexColor": {
+        "en": "Hex Code",
+        "pt-br": "Código da Cor"
+    },
+    "Userinfo_roleAmount": {
+        "en": "Role Amount",
+        "pt-br": "Quantidade de cargos"
+    },
+    "Userinfo_joinedAt": {
+        "en": "Joined at",
+        "pt-br": "Entrou em"
+    },
+    "Userinfo_noRole": {
+        "en": "No role",
+        "pt-br": "Nenhum cargo"
+    },
+    "Userinfo_description": {
+        "en": "See your information or information about someone else with their ID as argument.",
+        "pt-br": "Veja sua informação ou a informação de outra pessoa dando o ID dela como argumento."
+    },
+    "Stoptyping_description": {
+        "en": "Makes so the bot stops typing if he doesn't stop typing on the channel.",
+        "pt-br": "Faz com que o bot pare de digitar caso ele não esteja parando de digitar no canal."
+    },
+    "Credits_description": {
+        "en": "See Zerinho6 Bot credits.",
+        "pt-br": "Veja os créditos do Zerinho6 Bot."
+    },
+    "Credits_credits": {
+        "en": "Credits",
+        "pt-br": "Créditos"
+    },
+    "Credits_users": {
+        "en": "Users",
+        "pt-br": "Usuários"
+    },
+    "Credits_guilds": {
+        "en": "Guilds",
+        "pt-br": "Servidores"
+    },
+    "Credits_artWork": {
+        "en": "Art Work",
+        "pt-br": "Trabalho de Arte"
+    },
+    "Credits_codeHelp": {
+        "en": "Code Help",
+        "pt-br": "Ajuda em Código"
+    },
+    "Credits_ideas": {
+        "en": "Ideas",
+        "pt-br": "Ideias"
+    },
+    "Credits_translation": {
+        "en": "Translation",
+        "pt-br": "Tradução"
+    },
+    "Credits_embedDescription": {
+        "en": "A long way from where we started, a long way yet to go. Here are people that helped me and still help though that way.",
+        "pt-br": "Um caminho longo desde onde começamos, um caminho longo ainda a ser caminhado. Aqui estão as pessoas que me ajudaram ou continuam ajudando a passar por esse caminho."
+    }
+}

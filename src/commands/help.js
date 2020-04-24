@@ -1,91 +1,41 @@
-const { CommandUtils, BootUtils, MessageUtils } = require("../Utils");
-const { CommandNeeds } = require("../local_storage");
-const EnvVariables = BootUtils.envConfigs();
+exports.run = ({ ArgsManager, fastEmbed, i18n, Send, message }) => {
+  const Commands = require('./index.js')
+  const getCommandRequirer = require('../Utils/commandUtils/index.js').getCommandRequirer
+  if (!ArgsManager.Argument) {
+    const Advanced = Commands.advanced
+    const AdvancedKeys = Object.keys(Advanced)
+    for (let i = 0; i < AdvancedKeys.length; i++) {
+      const Value = Advanced[AdvancedKeys[i]]
+      fastEmbed.addField(`**${i18n.__(`Help_${AdvancedKeys[i]}`)}** (${Value.length})`, `\`\`${Value.join('``, ``')}\`\``)
+    }
+    fastEmbed.setTitle('BETA MODE')
+    fastEmbed.setDescription(i18n.__('Help_typeWithCommandName', { prefix: process.env.PREFIX }))
+    Send(fastEmbed, true)
+    return
+  }
 
-exports.run = async ({ message, args, t, zSend, zEmbed, zSendAsync }) => {
-	const ArgsLower = args[0] ? args[0].toLowerCase() : "";
+  const CommandNames = Commands.commandNames
+  const FixedArgument = ArgsManager.Argument[0].toLowerCase()
+  if (!CommandNames.includes(FixedArgument)) {
+    Send('Message_errorCommandDoesntExist')
+    return
+  }
 
-	function renderCommands() {
-		return `${CommandUtils.getAvailableCommandsForUser(message)}`;
-	}
+  if (!getCommandRequirer(FixedArgument).helpEmbed) {
+    Send('Help_errorNoHelpEmbed')
+    return
+  }
+  const { helpEmbedFactory } = require('../Utils/messageUtils/index.js')
+  Send(getCommandRequirer(FixedArgument).helpEmbed({ ArgsManager, fastEmbed, i18n, Send, message, helpEmbed: helpEmbedFactory }), true)
+}
 
-	function renderArguments(command) {
-		let argument = "";
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 1,
+    argumentsNeeded: false,
+    argumentsFormat: ['avatar'],
+    imageExample: 'https://cdn.discordapp.com/attachments/499671331021914132/701889372093546516/unknown.png'
+  }
 
-		const Keys = Object.keys(t(`help:${command}.description.argumentOptions`));
-		const Values = Object.values(t(`help:${command}.description.argumentOptions`));
-
-		Keys.forEach((e, index) => {
-			argument += `🔹 ${t(`help:${Keys[index]}`)}: **${Values[index]}**\n`;
-		});
-
-		return "\n" + t(`help:argumentOptions`) + "\n" + argument;
-	}
-
-	//Oh boy, time to mess things up.
-	if (!Object.keys(t(`help:${ArgsLower}`)).length > 0) {
-
-		zEmbed.addField(t("help:commands"), renderCommands());
-		zEmbed.setDescription(`**${t("please:prefixLiteral")}**: \`${EnvVariables.PREFIX}\`\n${t("please:CPW")} ${EnvVariables.PREFIX}avatar\n\n${t("help:wantToKnowMore")} ${EnvVariables.PREFIX}help ${t("help:command")}\n\n${t("help:exclusiveCommandsWarning")}\n\n**${t("updates:version")}**: ${t("updates:ver")}\n\n${t("updates:changelog")}`);
-		
-		const Msg = await zSendAsync(zEmbed);
-		await Msg.react("ℹ");
-		zSend("help:pressTheReactionForFullCommandList", true);
-		const COLLECTION = Msg.createReactionCollector((r, u) => r.emoji.name === "ℹ" && !u.bot && u.id === message.author.id, { time: 30000 });
-
-		COLLECTION.on("collect", (r) => {
-			zEmbed.fields[0] = {
-				name: "Commands",
-				value: CommandUtils.getEveryCommand().join(", ") + `\n\n${t("help:formatExplanation")}`,
-				inline: true
-			}
-			Msg.edit(zEmbed);
-		});
-	} else {
-		zEmbed.setTitle(ArgsLower.charAt(0).toUpperCase() + ArgsLower.slice(1));
-		zEmbed.setImage(t(`help:${ArgsLower}.image`));
-		zEmbed.setDescription(`${t(`please:source`)}: ${t(`help:${ArgsLower}.description.actualDescription`)}\n${renderArguments(ArgsLower)}`);
-
-		let commandAsks = CommandNeeds[ArgsLower];
-
-		if (commandAsks === undefined || commandAsks.options === undefined) {
-			zSend(zEmbed);
-			return;
-		}
-
-		commandAsks = commandAsks.options;
-		const Keys = Object.keys(commandAsks);
-		const Values = Object.values(commandAsks);
-
-		function getString(key, value) {
-			switch(key) {
-				case "userNeed":
-					return `${t("permissionsExplanations:userNeed")} ${value}`;
-				case "needArg":
-					return typeof value === "number" ? `${t("permissionsExplanations:needArgs")} ${value}` : t("permissionsExplanations:needArg");
-				case "needMention":
-					return Array.isArray(value) ? `${t("permissionsExplanations:needMentions")} ${value.join(", ")}` : `${t("permissionsExplanations:needMention")} ${value}`;
-				case "specificGuild":
-					return Array.isArray(value) ? `${t("permissionsExplanations:specificGuilds")} ${value.join(", ")}` :`${t("permissionsExplanations:specificGuild")} ${value}`;
-				case "specificChannel":
-					return Array.isArray(value) ? `${t("permissionsExplanations:specificChannels")} ${value.join(", ")}` : `${t("permissionsExplanations:specificChannel")} ${value}`;
-				case "specificAuthor":
-					return Array.isArray(value) ? `${t("permissionsExplanations:specificAuthors")} ${value.join(", ")}` : `${t("permissionsExplanations:specificAuthor")} ${value}`;
-				case "specificRole":
-					return isNaN(value) ? `${t("permissionsExplanations:specificRoleName")} ${value}` : `${t("permissionsExplanations:specificRole")} ${value}`;
-				case "needAttch":
-					return typeof value === "number" ? `${t("permissionsExplanations:needAttachs")} ${value}` : t("permissionsExplanations:needAttch");
-				default:
-				return t(`permissionsExplanations:${key}`) === "" ? t(`permissionsExplanations:unknown`) : t(`permissionsExplanations:${key}`);
-			}
-		}
-
-		for (let i = 0; i < Keys.length; i++) {
-			commandAsks[Keys[i]] = getString(Keys[i], Values[i]);
-		}
-
-		zEmbed.addField(t("help:needs"), MessageUtils.beautify(commandAsks));
-
-		zSend(zEmbed);
-	}
-};
+  return helpEmbed(message, i18n, Options)
+}

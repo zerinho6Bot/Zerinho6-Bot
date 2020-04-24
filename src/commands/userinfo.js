@@ -1,30 +1,43 @@
-const { UserUtils } = require("../Utils");
-const Moment = require("moment");
-exports.run = async ({ bot, args, message, t, zSend, zEmbed }) => {
-	let user = message.author;
+const Moment = require('moment')
 
-	if (!isNaN(args[0]) && args[0].length >= 16 && 18 >= args.length) {
-		if (args[0] !== message.author.id) {
-			const SearchedUser = await UserUtils.searchUser(bot, args[0]);
+exports.run = async ({ bot, ArgsManager, message, i18n, Send, fastEmbed }) => {
+  let user = message.author
 
-			if (SearchedUser === null) {
-				zSend("bot-invite:CouldntFindThatUser", true);
-				return;
-			}
-			user = SearchedUser;
-		}
-	}
+  if (ArgsManager.ID) {
+    if (!isNaN(ArgsManager.ID[0]) && ArgsManager.ID[0].length >= 16 && ArgsManager.ID[0].length <= 18) {
+      if (ArgsManager.ID[0] !== message.author.id) {
+        const SearchedUser = await bot.users.fetch(ArgsManager.ID[0])
 
-	zEmbed.addField(t("userinfo:tag"), user.username + user.discriminator, true);
-	zEmbed.addField(t("help:id"), user.id, true);
-	zEmbed.addField(t("userinfo:accountCreatedIn"), Moment(user.createdAt).format("LL"), true);
+        if (SearchedUser === null) {
+          Send('Userinfo_couldNotFindUser')
+          return
+        }
+        user = SearchedUser
+      }
+    }
+  }
 
-	const Member = message.guild.member(user);
-	if (Member !== null) {
-		zEmbed.addField(t("userinfo:hexColor"), Member.displayHexColor, true);
-		zEmbed.addField(t("userinfo:roleAmount"), Member.roles.size > 1 ? Member.roles.size : t("userinfo:noRole"), true);
-		zEmbed.addField(t("userinfo:joinedAt"), Moment(Member.joinedAt).format("LL"), true);
-	}
-	zEmbed.setThumbnail(user.displayAvatarURL);
-	zSend(zEmbed);
-};
+  fastEmbed.addField(i18n.__('Userinfo_tag'), user.tag, true)
+  fastEmbed.addField(i18n.__('Userinfo_id'), user.id, true)
+  fastEmbed.addField(i18n.__('Userinfo_accountCreatedIn'), Moment(user.createdAt).format('LL'), true)
+
+  const Member = message.guild.member(user)
+  if (Member !== null) {
+    fastEmbed.addField(i18n.__('Userinfo_hexColor'), Member.displayHexColor, true)
+    fastEmbed.addField(i18n.__('Userinfo_roleAmount'), Member.roles.cache.size > 1 ? Member.roles.cache.size : i18n.__('Userinfo_noRole'), true)
+    fastEmbed.addField(i18n.__('Userinfo_joinedAt'), Moment(Member.joinedAt).format('LL'), true)
+  }
+  fastEmbed.setThumbnail(user.displayAvatarURL({ dynamic: true }))
+  Send(fastEmbed, true)
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 1,
+    argumentsNeeded: false,
+    argumentsFormat: ['134292889177030657'],
+    imageExample: 'https://media.discordapp.net/attachments/499671331021914132/703034904358944838/unknown.png'
+  }
+
+  return helpEmbed(message, i18n, Options)
+}

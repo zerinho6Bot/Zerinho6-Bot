@@ -1,0 +1,62 @@
+{
+    "avatar": {
+        "redir": "Avatar_description"
+    },
+    "help": {
+        "redir": "Help_description"
+    },
+    "bot-invite": {
+        "redir": "Bot-invite_description"
+    },
+    "embed": {
+        "redir": "Embed_description"
+    },
+    "eval": {
+        "redir": "Eval_description"
+    },
+    "info": {
+        "redir": "Info_description"
+    },
+    "move": {
+        "redir": "Move_description"
+    },
+    "ping": {
+        "redir": "Ping_description"
+    },
+    "ram": {
+        "redir": "Ram_description"
+    },
+    "render": {
+        "redir": "Render_description"
+    },
+    "rpg": {
+        "redir": "Rpg_description"
+    },
+    "serverinfo": {
+        "redir": "Serverinfo_description"
+    },
+    "serverstats": {
+        "redir": "Serverstats_description"
+    },
+    "set-language": {
+        "redir": "Setlanguage_description"
+    },
+    "stoptyping": {
+        "redir": "Stoptyping_description"
+    },
+    "tictactoe-match": {
+        "redir": "TictactoeMatch_description"
+    },
+    "tictactoe-profile": {
+        "redir": "TictactoeProfile_description"
+    },
+    "tictactoe": {
+        "redir": "Tictactoe_description"
+    },
+    "userinfo": {
+        "redir": "Userinfo_description"
+    },
+    "credits": {
+        "redir": "Credits_description"
+    }
+}
