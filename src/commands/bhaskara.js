@@ -1,5 +1,24 @@
+exports.condition = ({ ArgsManager, Send }) => {
+  // 3 = The number of arguments we need.
+  for (let i = 0; i < 3; i++) {
+    if (!isNaN(ArgsManager.Argument[i])) {
+      continue
+    }
+    Send('Bhaskara_anArgumentIsNaN')
+    return false
+  }
+
+  return true
+}
+
 exports.run = ({ ArgsManager, Send }) => {
-  const [A, B, C] = [ArgsManager.Argument[0], ArgsManager.Argument[1], ArgsManager.Argument[2]]
+  /*
+  I do Number() even though they passed the isNaN
+  test on condition because each math operation will
+  need to parse the String to a valid number. Doing this
+  before all the math you make things faster. ~ Zerinho6
+  */
+  const [A, B, C] = [Number(ArgsManager.Argument[0]), Number(ArgsManager.Argument[1]), Number(ArgsManager.Argument[2])]
   const Δ = (B * B) - 4 * A * C
   const X1 = (-B + Math.sqrt(Δ)) / (2 * A)
   const X2 = (-B - Math.sqrt(Δ)) / (2 * A)

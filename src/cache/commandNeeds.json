@@ -50,5 +50,10 @@
 		"options": {
 			"needArg": 3
 		}
+	},
+	"give": {
+		"options": {
+			"needArg": 3
+		}
 	}
 }

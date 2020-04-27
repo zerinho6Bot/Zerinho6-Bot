@@ -11,6 +11,18 @@
         "en": "or",
         "pt-br": "ou"
     },
+    "Global_UserID": {
+        "en": "UserID",
+        "pt-br": "ID do usuário"
+    },
+    "Global_I": {
+        "en": "I'm",
+        "pt-br": "Eu"
+    },
+    "Global_You": {
+        "en": "You're",
+        "pt-br": "Você"
+    },
     "Message_errorMissingCommandName": {
         "en": "You forgot the command name.",
         "pt-br": "Você esqueceu o nome do comando."
@@ -960,5 +972,25 @@
     "Bhaskara_description": {
         "en": "Executes the bhaskara options and returns the results, the first argument is the A value, second the B valu and the third is the C value.",
         "pt-br": "Executa a formula de bhaskara, o primeiro argumento é o valor A, o segundo argumento é o valor B e o ultimo é o valor C"
+    },
+    "Bhaskara_anArgumentIsNaN": {
+        "en": "One of your arguments aren't a number.",
+        "pt-br": "Um dos seus argumentos não é um número."
+    },
+    "Buy_roleLiteral": {
+        "en": "role",
+        "pt-br": "cargo"
+    },
+    "Buy_roleLiteralPlural": {
+        "en": "roles",
+        "pt-br": "cargos"
+    },
+    "Buy_tagLiteral": {
+        "en": "tag",
+        "pt-br": "tag"
+    },
+    "Buy_tagLiteralPlural": {
+        "en": "tags",
+        "pt-br": "tags"
     }
 }

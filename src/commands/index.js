@@ -19,14 +19,15 @@ exports.requirer = {
   serverstats: require('./serverstats.js'),
   ping: require('./ping.js'),
   credits: require('./credits.js'),
-  bhaskara: require('./bhaskara.js')
+  bhaskara: require('./bhaskara.js'),
+  profile: require('./profile.js')
 }
 
 exports.commandNames = [
   'set-language', 'ram', 'avatar',
   'help', 'tictactoe', 'tictactoe-profile',
   'tictactoe-match', 'embed', 'bot-invite',
-  'eval', 'stoptyping', 'userinfo',
+  'eval', 'stoptyping', 'userinfo', 'profile',
   'serverinfo', 'render', 'move', 'rpg', 'info',
   'serverstats', 'ping', 'credits', 'bhaskara'
 ]
@@ -36,5 +37,6 @@ exports.advanced = {
   Games: ['rpg', 'tictactoe', 'tictactoe-profile', 'tictactoe-match'],
   Staff: ['move', 'set-language'],
   Utility: ['move', 'avatar', 'embed', 'userinfo', 'serverinfo'],
-  Etc: ['bhaskara']
+  Etc: ['bhaskara'],
+  Profile: ['profile', 'give', 'buy']
 }

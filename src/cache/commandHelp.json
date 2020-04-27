@@ -61,5 +61,14 @@
     },
     "bhaskara": {
         "redir": "Bhaskara_description"
+    },
+    "profile": {
+        "redir": "Profile_description"
+    },
+    "give": {
+        "redir": "Give_description"
+    },
+    "buy": {
+        "redir": "Buy_description"
     }
 }
