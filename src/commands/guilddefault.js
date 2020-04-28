@@ -1,10 +1,6 @@
 exports.condition = ({ ArgsManager, message, Send, i18n }) => {
   const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
-  if (!message.guild.member(message.author.id).hasPermission('MANAGE_GUILD')) {
-    Send('Move_errorMissingPermission', false, { who: i18n.__('Global_You'), permission: 'MANAGE_GUILD' })
-    return false
-  }
 
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')

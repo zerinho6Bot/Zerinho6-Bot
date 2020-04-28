@@ -63,7 +63,27 @@
 	},
 	"guilddefault": {
 		"options": {
+			"needArg": 2,
+			"userNeed": "MANAGE_GUILD"
+		}
+	},
+	"myprofile": {
+		"options": {
 			"needArg": 2
+		}
+	},
+	"moneymanager": {
+		"options": {
+			"needArg": 3,
+			"userNeed": "MANAGE_GUILD",
+			"needMention": true
+		}
+	},
+	"itemmanager": {
+		"options": {
+			"needArg": 4,
+			"userNeed": "MANAGE_GUILD",
+			"needMention": true
 		}
 	}
 }

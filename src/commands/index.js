@@ -20,7 +20,14 @@ exports.requirer = {
   ping: require('./ping.js'),
   credits: require('./credits.js'),
   bhaskara: require('./bhaskara.js'),
-  profile: require('./profile.js')
+  profile: require('./profile.js'),
+  give: require('./give.js'),
+  buy: require('./buy.js'),
+  daily: require('./daily.js'),
+  iteminfo: require('./iteminfo.js'),
+  guilddefault: require('./guilddefault.js'),
+  myprofile: require('./myprofile.js'),
+  moneymanager: require('./moneymanager.js')
 }
 
 exports.commandNames = [
@@ -30,8 +37,8 @@ exports.commandNames = [
   'eval', 'stoptyping', 'userinfo', 'profile',
   'serverinfo', 'render', 'move', 'rpg', 'info',
   'serverstats', 'ping', 'credits', 'bhaskara',
-  'buy', 'give', 'daily', 'iteminfo',
-  'guilddefault'
+  'buy', 'give', 'daily', 'iteminfo', 'myprofile',
+  'guilddefault', 'moneymanager', 'itemmanager'
 ]
 
 exports.advanced = {
@@ -40,5 +47,5 @@ exports.advanced = {
   Staff: ['move', 'set-language'],
   Utility: ['move', 'avatar', 'embed', 'userinfo', 'serverinfo'],
   Etc: ['bhaskara'],
-  Profile: ['profile', 'give', 'buy', 'daily', 'iteminfo', 'guilddefault']
+  Profile: ['profile', 'give', 'buy', 'daily', 'iteminfo', 'guilddefault', 'myprofile', 'moneymanager', 'itemmanager']
 }

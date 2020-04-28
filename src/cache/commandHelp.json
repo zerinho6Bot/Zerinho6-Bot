@@ -79,5 +79,14 @@
     },
     "guilddefault": {
         "redir": "Guilddefault_description"
+    },
+    "myprofile": {
+        "redir": "Myprofile_description"
+    },
+    "moneymanager": {
+        "redir": "Moneymanager_description"
+    },
+    "itemmanager": {
+        "redir": "Itemmanager_description"
     }
 }
