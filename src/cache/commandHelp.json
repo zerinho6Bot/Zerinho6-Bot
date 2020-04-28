@@ -70,5 +70,14 @@
     },
     "buy": {
         "redir": "Buy_description"
+    },
+    "daily": {
+        "redir": "Daily_description"
+    },
+    "iteminfo": {
+        "redir": "Iteminfo_description"
+    },
+    "guilddefault": {
+        "redir": "Guilddefault_description"
     }
 }

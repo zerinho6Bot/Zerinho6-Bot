@@ -55,5 +55,15 @@
 		"options": {
 			"needArg": 3
 		}
+	},
+	"iteminfo": {
+		"options": {
+			"needArg": 2
+		}
+	},
+	"guilddefault": {
+		"options": {
+			"needArg": 2
+		}
 	}
 }

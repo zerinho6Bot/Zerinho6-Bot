@@ -29,7 +29,9 @@ exports.commandNames = [
   'tictactoe-match', 'embed', 'bot-invite',
   'eval', 'stoptyping', 'userinfo', 'profile',
   'serverinfo', 'render', 'move', 'rpg', 'info',
-  'serverstats', 'ping', 'credits', 'bhaskara'
+  'serverstats', 'ping', 'credits', 'bhaskara',
+  'buy', 'give', 'daily', 'iteminfo',
+  'guilddefault'
 ]
 
 exports.advanced = {
@@ -38,5 +40,5 @@ exports.advanced = {
   Staff: ['move', 'set-language'],
   Utility: ['move', 'avatar', 'embed', 'userinfo', 'serverinfo'],
   Etc: ['bhaskara'],
-  Profile: ['profile', 'give', 'buy']
+  Profile: ['profile', 'give', 'buy', 'daily', 'iteminfo', 'guilddefault']
 }
