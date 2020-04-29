@@ -85,5 +85,17 @@
 			"userNeed": "MANAGE_GUILD",
 			"needMention": true
 		}
+	},
+	"sale": {
+		"options": {
+			"needArg": 5,
+			"userNeed": "MANAGE_ROLES"
+		}
+	},
+	"unsell": {
+		"options": {
+			"needArg": 2,
+			"userNeed": "MANAGE_ROLES"
+		}
 	}
 }

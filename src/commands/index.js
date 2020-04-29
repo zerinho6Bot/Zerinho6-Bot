@@ -27,11 +27,12 @@ exports.requirer = {
   iteminfo: require('./iteminfo.js'),
   guilddefault: require('./guilddefault.js'),
   myprofile: require('./myprofile.js'),
-  moneymanager: require('./moneymanager.js')
+  moneymanager: require('./moneymanager.js'),
+  sale: require('./sale.js')
 }
 
 exports.commandNames = [
-  'set-language', 'ram', 'avatar',
+  'set-language', 'ram', 'avatar', 'sale',
   'help', 'tictactoe', 'tictactoe-profile',
   'tictactoe-match', 'embed', 'bot-invite',
   'eval', 'stoptyping', 'userinfo', 'profile',
@@ -47,5 +48,5 @@ exports.advanced = {
   Staff: ['move', 'set-language'],
   Utility: ['move', 'avatar', 'embed', 'userinfo', 'serverinfo'],
   Etc: ['bhaskara'],
-  Profile: ['profile', 'give', 'buy', 'daily', 'iteminfo', 'guilddefault', 'myprofile', 'moneymanager', 'itemmanager']
+  Profile: ['profile', 'give', 'buy', 'daily', 'iteminfo', 'guilddefault', 'myprofile', 'moneymanager', 'itemmanager', 'sale', 'unsell', 'currency']
 }

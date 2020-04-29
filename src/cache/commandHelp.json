@@ -88,5 +88,14 @@
     },
     "itemmanager": {
         "redir": "Itemmanager_description"
+    },
+    "sale": {
+        "redir": "Sale_description"
+    },
+    "unsell": {
+        "redir": "Unsell_description"
+    },
+    "currency": {
+        "redir": "Currency_description"
     }
 }
