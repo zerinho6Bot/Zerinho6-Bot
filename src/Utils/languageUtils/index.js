@@ -1,4 +1,5 @@
 exports.init = require('./init.js').init
+exports.profileOperationAllLanguages = require('./operationLanguages').profileOperationAllLanguages
 
 // Changing this will change what languages the definelanguage command accepts.
 exports.acceptableLanguages = ['pt-br', 'en']

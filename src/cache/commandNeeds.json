@@ -97,5 +97,11 @@
 			"needArg": 2,
 			"userNeed": "MANAGE_ROLES"
 		}
+	},
+	"currency": {
+		"options": {
+			"needArg": true,
+			"userNeed": "MANAGE_GUILD"
+		}
 	}
 }

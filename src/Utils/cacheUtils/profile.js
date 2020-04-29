@@ -248,7 +248,6 @@ module.exports.Profile = class {
       code: '',
       emoji: '',
       value: 0,
-      description: '',
       gainOnDaily: true,
       specialBonus: {
         enabled: false,
