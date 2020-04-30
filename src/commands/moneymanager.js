@@ -1,6 +1,5 @@
-const { cacheUtils } = require('../Utils/index.js')
-
 exports.condition = ({ ArgsManager, message, Send, i18n }) => {
+  const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
@@ -9,14 +8,14 @@ exports.condition = ({ ArgsManager, message, Send, i18n }) => {
   }
 
   if (!Profile.GuildData) {
-    Send('Moneymanager_guildHasNoData')
+    Send('Itemmanager_guildHasNoData')
     return false
   }
 
   const MentionedUser = message.mentions.users.first()
 
   if (MentionedUser.bot) {
-    Send('Moneymanager_botHaveNoBank')
+    Send('Itemmanager_botNotAllowed')
     return false
   }
 
@@ -31,7 +30,7 @@ exports.condition = ({ ArgsManager, message, Send, i18n }) => {
   }
 
   const CoinName = ArgsManager.Argument[1]
-  if (!isNaN(CoinName) || CoinName.length > 20 || !Profile.GuildCoin(CoinName)) {
+  if (!isNaN(CoinName) || CoinName.length > Profile.lengthLimit || !Profile.GuildCoin(CoinName)) {
     Send('Moneymanager_invalidCoinName')
     return false
   }
@@ -56,13 +55,14 @@ exports.condition = ({ ArgsManager, message, Send, i18n }) => {
 }
 
 exports.run = ({ message, ArgsManager, Send }) => {
+  const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
   const MentionedUser = message.mentions.users.first()
   const CoinName = ArgsManager.Argument[1]
   const Value = ArgsManager.Argument[2]
 
   Profile.UserWallet(MentionedUser.id)[CoinName].holds += parseInt(Value)
-  cacheUtils.write('guildProfile', Profile.guildConfig)
+  cacheUtils.write('GuildProfile', Profile.guildConfig)
   Send('Moneymanager_editedCoin', false, { coin: CoinName, name: MentionedUser.username, amount: Profile.UserWallet(MentionedUser.id)[CoinName].holds })
 }
 

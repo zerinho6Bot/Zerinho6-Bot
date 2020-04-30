@@ -100,7 +100,7 @@ exports.run = async ({ message, ArgsManager, Send, bot }) => {
   const ParsedMoney = parseInt(ArgsManager.Argument[2])
   Profile.UserWallet(FromUser.id)[ArgsManager.Argument[1]].holds += ParsedMoney
   Profile.UserWallet(message.author.id)[ArgsManager.Argument[1]].holds -= ParsedMoney
-  cacheUtils.write('guildProfile', Profile.guildConfig)
+  cacheUtils.write('GuildProfile', Profile.guildConfig)
   Send('Give_sentMoney', false, { amount: ArgsManager.Argument[2], coin: ArgsManager.Argument[1], name: FromUser.username })
 }
 

@@ -1,7 +1,6 @@
-const { Profiles } = require('../cache/index.js')
-const { cacheUtils } = require('../Utils/index.js')
-
 exports.condition = async ({ message, ArgsManager, Send, i18n }) => {
+  const { Profiles } = require('../cache/index.js')
+  const { cacheUtils } = require('../Utils/index.js')
   const Choices = [
     i18n.__('Myprofile_background'),
     i18n.__('Myprofile_description'),
@@ -32,26 +31,26 @@ exports.condition = async ({ message, ArgsManager, Send, i18n }) => {
       Profiles[message.author.id].background = ArgsManager.Argument[1]
       break
     case i18n.__('Myprofile_description'):
-      if (FullArgument.length > 2048 || FullArgument < 1) {
+      if (!isNaN(FullArgument) || FullArgument.length > 2048 || FullArgument < 1) {
         Send('Myprofile_descriptionTooLong')
         return false
       }
       Profiles[message.author.id].description = FullArgument
       break
     case i18n.__('Myprofile_clan'):
-      if (ArgsManager.Argument[1].length < 2 || ArgsManager.Argument[1].length > 6) {
+      if (!isNaN(ArgsManager.Argument[1]) || ArgsManager.Argument[1].length < 2 || ArgsManager.Argument[1].length > 6) {
         Send('Myprofile_invalidClan')
         return false
       }
       Profiles[message.author.id].clan = ArgsManager.Argument[1]
       break
     default:
-      delete Profile[message.author.id]
+      delete Profiles[message.author.id]
       Send('Myprofile_profileDeleted')
       break
   }
 
-  cacheUtils.write('profiles', Profiles)
+  cacheUtils.write('Profiles', Profiles)
   Send('Myprofile_updateDone')
 }
 

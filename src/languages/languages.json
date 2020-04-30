@@ -1061,6 +1061,10 @@
         "pt-br": "Não tem nenhuma moeda para coletar ainda, a ultima vez que você coletou foi a {{amount}} {{time}} atrás, você precisa esperar 24 horas.",
         "en": "There's no coin for you to collect yet, your last daily was {{amount}} {{time}} ago, you need to wait 24 hours."
     },
+    "Daily_dailySpecial": {
+        "en": "Daily Special!!",
+        "pt-br": "Daily Especial!!"
+    },
     "Daily_noCoinAvailableToCollect": {
         "en": "There's no coin available for you to collect. (This means that the server has coins that can't be earned by daily)",
         "pt-br": "Não tem nenhuma moeda disponível para você coletar. (Isso significa que o servidor tem moedas que não é possivel obter pelo daily)"
@@ -1211,7 +1215,7 @@
     },
     "Currency_coinCreated": {
         "pt-br": "Criado uma nova moeda chamada {{name}}, código: {{code}}, emoji: {{emoji}} e valor: {{value}}.",
-        "en": "Created a new coin with the name {{name}}, code: {{code}}, emoji: {{emoji}} and value: {{value}."
+        "en": "Created a new coin with the name {{name}}, code: {{code}}, emoji: {{emoji}} and value: {{value}}."
     },
     "Currency_errorNoGuildCoin": {
         "pt-br": "Parece que esse servidor não tem nenhuma moeda, crie uma!",
@@ -1268,6 +1272,18 @@
     "Currency_coinExample": {
         "en": "SLBCoin",
         "pt-br": "MoedaSLB"
+    },
+    "Currency_code": {
+        "en": "code",
+        "pt-br": "código"
+    },
+    "Currency_emoji": {
+        "en": "emoji",
+        "pt-br": "emoji"
+    },
+    "Currency_value": {
+        "en": "value",
+        "pt-br": "valor"
     },
     "Currency_description": {
         "pt-br": "Mostra o valor, crie, edite, delete uma moeda.\n\nExistem 4 escolhas, ver informações de uma moeda, criar uma moeda, editar uma moeda ou deletar uma moeda.\n\nPara visualizar uma moeda use ``ze.currency nomeDaMoeda``\n\nPara criar uma moeda use ``ze.currency criar nomeDaMoeda valorDaMoeda codigoDaMoeda idDoEmojiPraMoeda ganharEmDaily``\n\nSe você quiser adicionar um bonus para membros que coletam varías vezes, faça: ``ze.currency criar nomeDaMoeda valorDaMoeda codigoDaMoeda idDoEmojiPraMoeda ganharEmDaily valorAdicional dailyPrecisoProValorAdicional``\n\nPara editar uma moeda use: ``ze.currency editar nomeDaMoeda propriedadePraEditar novoValorDaPropriedade``\n\nPara deletar uma moeda use ``ze.currency deletar nomeDaMoeda``",
@@ -1344,5 +1360,301 @@
     "Guilddefault_Realdescription": {
         "pt-br": "Mude a descrição ou fundo do profile do servidor.",
         "en": "Change the description or background of the guild profile."
+    },
+    "Iteminfo_invalidItemType": {
+        "en": "The type of the item can only be ``role`` or ``tag``.",
+        "pt-br": "O tipo do item só pode ser ``cargo`` ou ``tag``."
+    },
+    "Iteminfo_notSellingItemFromThatType": {
+        "en": "This guild is not selling any item from that type.",
+        "pt-br": "Esse servidor não está vendendo nenhum item desse tipo."
+    },
+    "Iteminfo_errorCouldFindItem": {
+        "pt-br": "{{argument}}, Eu não consegui achar esse item, talvez não esteja mais em venda.",
+        "en": "{{argument}}, I couldn't find that item, maybe it isn't in sale anymore."
+    },
+    "Iteminfo_coinTradesTo": {
+        "en": "This tag trades into the coin {{coin}} and you get {{return}} of it.",
+        "pt-br": "Essa tag é trocada pela moeda {{coin}} e você recebe {{return}} dela."
+    },
+    "Iteminfo_itemNameExample": {
+        "en": "falledInLegoCity",
+        "pt-br": "souGadoFeliz"
+    },
+    "Iteminfo_description": {
+        "pt-br": "Veja as informações de um item em venda.",
+        "en": "See informations about an item in sale."
+    },
+    "Itemmanager_guildHasNoData": {
+        "en": "This guild has no data, somehow..",
+        "pt-br": "Esse servidor não tem nenhuma data, de alguma forma.."
+    },
+    "Itemmanager_botNotAllowed": {
+        "en": "Bots aren't allowed.",
+        "pt-br": "Bots não são permitidos."
+    },
+    "Itemmanager_invalidItemType": {
+        "en": "Invalid itemType, the itemType can only be ``tag`` or ``role``",
+        "Pt-br": "Tipo de item invalido, ele só pode ser ``tag`` ou ``cargo``"
+    },
+    "Itemmanager_thisTypeHasNoItems": {
+        "en": "This guild has no itens of that type.",
+        "pt-br": "Esse servidor não tem nenhum item desse tipo."
+    },
+    "Itemmanager_invalidItemName": {
+        "en": "The item name isn't valid, it can't have more than 40 characters.",
+        "pt-br": "O nome do item é inválido, ele só pode ter ate 40 caracteres."
+    },
+    "Itemmanager_userHasNoInventory": {
+        "en": "That user doesn't have an inventory.",
+        "pt-br": "Esse usuário não tem inventório."
+    },
+    "Itemmanager_remove": {
+        "en": "remove",
+        "pt-br": "remover"
+    },
+    "Itemmanager_add": {
+        "en": "add",
+        "pt-br": "adicionar"
+    },
+    "Itemmanager_invalidOperation": {
+        "en": "Invalid operation, it can only be ``remove`` or ``add``.",
+        "pt-br": "Operação inválida, ela só pode ser ``remover`` ou ``adicionar``."
+    },
+    "Itemmanager_couldntFindInInvetory": {
+        "en": "Couldn't find that item in user inventory.",
+        "pt-br": "Parece que esse usuário não tem esse item."
+    },
+    "Itemmanager_userAlreadyOwns": {
+        "en": "The user already owns that item.",
+        "pt-br": "O usuário já tem esse item."
+    },
+    "Itemmanager_removed": {
+        "en": "removed",
+        "pt-br": "removido"
+    },
+    "Itemmanager_added": {
+        "en": "added",
+        "pt-br": "adicionado"
+    },
+    "Itemmanager_from": {
+        "en": "from",
+        "pt-br": "de"
+    },
+    "Itemmanager_itemTypeExample": {
+        "en": "``tag`` or ``role``",
+        "pt-br": "``tag`` ou ``cargo``"
+    },
+    "Itemmanager_removeAddExample": {
+        "en": "``remove`` or ``add``",
+        "pt-br": "``remover`` ou ``adicionar``"
+    },
+    "Itemmanager_description": {
+        "pt-br": "Adicione ou remova um item de alguém do servidor.",
+        "en": "Add or remove an item from someone on the server."
+    },
+    "Moneymanager_userHasNoBank": {
+        "en": "That user has no bank.",
+        "pt-br": "Esse usuário não tem um banco."
+    },
+    "Moneymanager_userHasNoCoin": {
+        "en": "This user has no coin.",
+        "pt-br": "Esse usuário não tem nenhuma moeda."
+    },
+    "Moneymanager_invalidCoinName": {
+        "en": "Invalid coin name or it doesn't exist.",
+        "pt-br": "Moeda inválida ou ela não existe."
+    },
+    "Moneymanager_invalidAmount": {
+        "pt-br": "A quantidade que você quer remover do usuário, não pode deixar ele com menos de 0 de valor com a moeda.",
+        "en": "The amount you want to remove from the user let his value with the coin be lower than 0."
+    },
+    "Moneymanager_editedCoin": {
+        "pt-br": "Editada a moeda {{coin}} do {{name}} para {{amount}}.",
+        "en": "Edited {{name}} {{coin}} coin to {{amount}}."
+    },
+    "Moneymanager_moneyExample": {
+        "en": "SLBCoin",
+        "pt-br": "MoedaSLB"
+    },
+    "Moneymanager_description": {
+        "pt-br": "Edite a quantidade de dinheiro que a pessoa mencionada tem no servidor.",
+        "en": "Edit how much the mentioned member has of a specific coin in the server."
+    },
+    "Myprofile_background": {
+        "en": "background",
+        "pt-br": "fundo"
+    },
+    "Myprofile_description": {
+        "en": "description",
+        "pt-br": "descrição"
+    },
+    "Myprofile_clan": {
+        "en": "clan",
+        "pt-br": "clã"
+    },
+    "Myprofile_delete": {
+        "en": "delete",
+        "pt-br": "deletar"
+    },
+    "Myprofile_wrongProperty": {
+        "en": "Invalid property, it can only be ``background``, ``description``, ``clan`` or ``delete``.",
+        "pt-br": "Propriedade inválida, ela só pode ser ``fundo``, ``descrição``, ``clã`` ou ``deletar``."
+    },
+    "Myprofile_invalidImageLink": {
+        "en": "Invalid image link, see if it ends with \"?\" if it does, delete everything after it, with it.",
+        "pt-br": "Link de imagem inválido, veja se ele termina com \"?\" se sim, delete tudo depois dele, junto com ele."
+    },
+    "Myprofile_descriptionTooLong": {
+        "en": "The background can't have more than 2048 characters.",
+        "pt-br": "O fundo não pode ter mais de 2048 caracteres."
+    },
+    "Myprofile_invalidClan": {
+        "en": "The clan can only have up to 6 characters and can't have less than 2 characters.",
+        "pt-br": "O clã só pode ter ate 6 caracteres e não pode ter menos de 2 caracteres."
+    },
+    "Myprofile_profileDeleted": {
+        "en": "Profile deleted.",
+        "pt-br": "Perfil deletado."
+    },
+    "Myprofile_updateDone": {
+        "en": "Update done.",
+        "pt-br": "Atualização feita."
+    },
+    "Myprofile_operationExample": {
+        "en": "``background``, ``description``, ``clan`` or ``delete``.",
+        "pt-br": "``fundo``, ``descrição``, ``clã`` ou ``deletar``."
+    },
+    "Myprofile_valueExample": {
+        "en": "``imageLink``, ``anything``, ``clanName``, ``~``",
+        "pt-br": "``linkDeImagem``, ``qualquerCoisa``, ``siglaDoClã``, ``~``"
+    },
+    "Myprofile_realDescription": {
+        "pt-br": "Edite informações globais do seu profile, como clã, descrição e fundo.\n\nO primeiro argumento pode ser entre clã, fundo, descrição e deletar\nO segundo argumento muda dependendo do primeiro, que pode ser link_de_imagem, texto, palavra de no minimo 2 letras e no maximo 6 letras ou ~.",
+        "en": "Edit global information about your profile, like clan, description and background.\n\nThe first argument can be a clan, background, description and delete\nThe second argument changes depending of the first argument, it can be imageLink, text, a word of a minimun 2 digits or max of 6 digits ou ~."
+    },
+    "Profile_enablingSystem": {
+        "en": "Enabling system, next time the system will be available.",
+        "pt-br": "Ativando sistema, o sistema vai estar ativado na proxima vez."
+    },
+    "Profile_disable": {
+        "en": "disable",
+        "pt-br": "desativar"
+    },
+    "Profile_noPermissionToDisable": {
+        "en": "You don't have permission to disable the profile system.",
+        "pt-br": "Você não tem permissão para desativar o sistema de perfil."
+    },
+    "Profile_userDoesntHaveProfile": {
+        "en": "That user doesn't have an profile.",
+        "pt-br": "Esse usuário não tem um perfil."
+    },
+    "Profile_serverEconomy": {
+        "en": "Server Economy",
+        "pt-br": "Economia no Servidor"
+    },
+    "Profile_tags": {
+        "en": "Tags",
+        "pt-br": "Tags"
+    },
+    "Profile_description": {
+        "pt-br": "Veja o seu profile no servidor, habilite se tiver permissão ou desative usando ``desativar`` como argumento.",
+        "en": "See your guild profile, enable if you have the permission or disable using ``disable`` argument."
+    },
+    "Sale_errorMaxItensInSale": {
+        "en": "This guild already has 100 items in sale.",
+        "pt-br": "Esse servidor já tem 100 itens em venda."
+    },
+    "Sale_noRoleToSell": {
+        "en": "There's no role on this guild to sell.",
+        "pt-br": "Não tem nenhum cargo nesse servidor para vender."
+    },
+    "Sale_invalidRoleID": {
+        "en": "Invalid role ID.",
+        "pt-br": "ID de cargo inválido."
+    },
+    "Sale_roleDoesntExist": {
+        "en": "That role doesn't exist.",
+        "pt-br": "Eses cargo não existe"
+    },
+    "Sale_roleGivenIsHigher": {
+        "en": "The role you're trying to sell is at a position higher than your highest role position.",
+        "pt-br": "O cargo que você está tentando vender esta em uma posição acima da posição do seu maior cargo."
+    },
+    "Sale_roleAboveBotRole": {
+        "en": "The role you're trying to sell is higher than my highest role.",
+        "pt-br": "O cargo que você está tentando vender esta acima do meu maior cargo."
+    },
+    "Sale_errorRoleAlreadyInSale": {
+        "pt-br": "{{argument}}, Esse cargo já está em venda.",
+        "en": "{{argument}}, That role is already in sale."
+    },
+    "Sale_roleNameIsBig": {
+        "en": "The role name can't have more than 40 characters(without spaces).",
+        "pt-br": "O nome do cargo não pode ter mais de 40 caracteres(sem espaços)"
+    },
+    "Sale_descriptionIsBig": {
+        "en": "The description can't have more than 1024 characters.",
+        "pt-br": "A descrição não pode ter mais de 1024 caracteres."
+    },
+    "Sale_tagNameIsBig": {
+        "en": "The name of the tag can't have more than 40 characters (without spaces).",
+        "pt-br": "O nome da tag não pode ter mais de 40 caracteres (sem espaços)."
+    },
+    "Sale_tagAlreadyExists": {
+        "en": "That tag already exists.",
+        "pt-br": "Essa tag já existe."
+    },
+    "Sale_coinToTradeDoesntExist": {
+        "en": "The coin that you wanna set to trade doesn't exist.",
+        "pt-br": "A moeda que você definir como troca não existe."
+    },
+    "Sale_invalidReturnValue": {
+        "en": "The return value must be bigger than 0.",
+        "pt-br": "O valor de retorno deve ser maior que 0."
+    },
+    "Sale_coinReturnDontExistTogether": {
+        "en": "Both the coinTrade and returnValue must be \"~\" if one or other doesn't.",
+        "pt-br": "Ambos moedaDeTroca e valorDeRetorno devem ser \"~\" se não quiser definir."
+    },
+    "Sale_nowSelling": {
+        "pt-br": "Vendendo {{itemType}} chamado {{name}} com o valor {{value}} usando a moeda {{coin}}.",
+        "en": "Now selling {{itemType}} called {{name}} with the value {{value}} using the coin {{coin}}."
+    },
+    "Sale_itemTypeExample": {
+        "en": "``tag`` or ``role``",
+        "pt-br": "``tag`` ou ``cargo``"
+    },
+    "Sale_itemNameExample": {
+        "en": "falledInLegoCity",
+        "pt-br": "souGadoFeliz"
+    },
+    "Sale_coinName": {
+        "en": "SLBCoin",
+        "pt-br": "moedaSLB"
+    },
+    "Sale_descriptionExample": {
+        "en": "This role exists.",
+        "pt-br": "Esse cargo existe."
+    },
+    "Sale_description": {
+        "pt-br": "Venda um item.",
+        "en": "Sell an item."
+    },
+    "Unsell_couldntFindItem": {
+        "en": "Couldn't find that item.",
+        "pt-br": "Não foi possivel achar esse item."
+    },
+    "Unsell_roleIsHigher": {
+        "en": "The role you're trying to unsell is higher than your highest role position.",
+        "pt-br": "O cargo que você está tentando tirar da venda está acima do seu maior cargo."
+    },
+    "Unsell_deleted": {
+        "pt-br": "Deletado a {{itemType}} {{itemName}}.",
+        "en": "Deleted {{itemName}} {{itemType}}."
+    },
+    "Unsell_description": {
+        "pt-br": "Tire um item da venda, sem remover dos usuários que tem ele.",
+        "en": "Remove a item from selling, without removing from the users that have it."
     }
 }

@@ -1,6 +1,5 @@
-const { cacheUtils, languageUtils } = require('../Utils/index.js')
-
 exports.condition = ({ message, ArgsManager, Send, fastEmbed, i18n }) => {
+  const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
@@ -10,11 +9,11 @@ exports.condition = ({ message, ArgsManager, Send, fastEmbed, i18n }) => {
   const GuildCoins = Profile.GuildCoins
   const Coins = Object.keys(GuildCoins)
 
-  if (Coins.length > 0) {
+  if (Coins.length > 0 && ArgsManager.Argument.length <= 1) {
     if (isNaN(ArgsManager.Argument[0]) && ArgsManager.Argument[0].length < Profile.lengthLimit && GuildCoins[ArgsManager.Argument[0]]) {
       const Coin = Profile.GuildCoin(ArgsManager.Argument[0])
       fastEmbed.setTitle(`${ArgsManager.Argument[0]} (${Coin.code})`)
-      fastEmbed.setDescription(`${isNaN(Coin.emoji) ? Coin.emoji : `<:${message.guild.emojis.cache.get(Coin.emoji).name}:${message.guild.emojis.get(Coin.emoji).id}>`} - _${i18n.__('Currency_coinValue', { value: Coin.value })}_`)
+      fastEmbed.setDescription(`${isNaN(Coin.emoji) ? Coin.emoji : `<:${message.guild.emojis.cache.get(Coin.emoji).name}:${message.guild.emojis.cache.get(Coin.emoji).id}>`} - _${i18n.__('Currency_coinValue', { value: Coin.value })}_`)
       Send(fastEmbed, true)
       return false
     } else {
@@ -55,9 +54,10 @@ exports.condition = ({ message, ArgsManager, Send, fastEmbed, i18n }) => {
 }
 
 exports.run = ({ message, ArgsManager, Send, i18n }) => {
+  const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
   const Choices = [i18n.__('Currency_Create'), i18n.__('Currency_Edit'), i18n.__('Currency_Delete')]
-  switch (ArgsManager[0].toLowerCase()) {
+  switch (ArgsManager.Argument[0].toLowerCase()) {
     case Choices[0]:
       exports.create({ message, ArgsManager, Send, Profile, i18n })
       break
@@ -72,7 +72,7 @@ exports.run = ({ message, ArgsManager, Send, i18n }) => {
 
 exports.create = ({ message, ArgsManager, Send, Profile, i18n }) => {
   // ze.currency create kekCoin 200 KEK :kekwhatthefuck:
-
+  const { cacheUtils, languageUtils } = require('../Utils/index.js')
   if (Object.keys(Profile.GuildCoins).length >= Profile.maxGuildCoins) {
     Send('Currency_errorMaxGuildCoins', false, { amount: Profile.maxGuildCoins })
     return
@@ -109,8 +109,8 @@ exports.create = ({ message, ArgsManager, Send, Profile, i18n }) => {
   }
 
   const YesNo = [
-    i18n.__('Global_yes'),
-    i18n.__('Global_no')
+    i18n.__('Global_Yes'),
+    i18n.__('Global_No')
   ]
   if (!YesNo.includes(ArgsManager.Argument[5].toLowerCase())) {
     Send('Currency_invalidGainDaily')
@@ -132,7 +132,7 @@ exports.create = ({ message, ArgsManager, Send, Profile, i18n }) => {
   Coin.code = CodeName
   Coin.emoji = Emoji
   Coin.value = parseInt(Value)
-  Coin.gainOnDaily = ArgsManager.Argument[5].toLowerCase() === i18n.__('Global_yes')
+  Coin.gainOnDaily = ArgsManager.Argument[5].toLowerCase() === i18n.__('Global_Yes')
   if (ArgsManager.Argument.length >= 7) {
     Coin.specialBonus = {
       enabled: true,
@@ -140,11 +140,12 @@ exports.create = ({ message, ArgsManager, Send, Profile, i18n }) => {
       requiredDaily: parseInt(ArgsManager.Argument[7])
     }
   }
-  cacheUtils.write('guildProfile', Profile.guildConfig)
+  cacheUtils.write('GuildProfile', Profile.guildConfig)
   Send('Currency_coinCreated', false, { name: CoinName, code: CodeName, emoji: Emoji, value: Value })
 }
 
 exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
+  const { cacheUtils } = require('../Utils/index.js')
   // ze.currency edit kekMoney [code, emoji, value, ondaily, special, bonus, dailyrequired] newValue
   if (Object.keys(Profile.GuildCoins).length <= 0) {
     Send('Currency_errorNoGuildCoin')
@@ -179,8 +180,8 @@ exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
     return
   }
   const YesNo = [
-    i18n.__('Global_yes'),
-    i18n.__('Global_no')
+    i18n.__('Global_Yes'),
+    i18n.__('Global_No')
   ]
   switch (Property) {
     case i18n.__('Currency_code'):
@@ -204,16 +205,16 @@ exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
         return
       }
 
-      if ((newValue.toLowerCase() === i18n.__('Global_yes') && Profile.GuildCoin(CoinName).gainOnDaily) ||
-      (newValue.toLowerCase() === i18n.__('Global_no') && Profile.GuildCoin(CoinName).gainOnDaily === false)) {
+      if ((newValue.toLowerCase() === i18n.__('Global_Yes') && Profile.GuildCoin(CoinName).gainOnDaily) ||
+      (newValue.toLowerCase() === i18n.__('Global_No') && Profile.GuildCoin(CoinName).gainOnDaily === false)) {
         Send('Currency_thatValueIsSet')
         return
       }
 
       if (Property === i18n.__('Currency_onDaily')) {
-        Profile.GuildCoin(CoinName).gainOnDaily = newValue.toLowerCase() === i18n.__('Global_yes')
+        Profile.GuildCoin(CoinName).gainOnDaily = newValue.toLowerCase() === i18n.__('Global_Yes')
       } else {
-        Profile.GuildCoin(CoinName).specialBonus.enabled = newValue.toLowerCase() === i18n.__('Global_yes')
+        Profile.GuildCoin(CoinName).specialBonus.enabled = newValue.toLowerCase() === i18n.__('Global_Yes')
       }
       break
     case i18n.__('Currency_bonusDaily'):
@@ -243,12 +244,13 @@ exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
       break
   }
 
-  cacheUtils.write('guildProfile', Profile.guildConfig)
+  cacheUtils.write('GuildProfile', Profile.guildConfig)
   Send('Currency_editedCoin', false, { coin: CoinName, property: Property, newProperty: newValue })
 }
 
 exports.delete = ({ Send, ArgsManager, Profile, i18n }) => {
   // ze.currency delete kekMoney
+  const { cacheUtils } = require('../Utils/index.js')
   if (Object.keys(Profile.GuildCoins).length <= 0) {
     Send('Currency_errorNoGuildCoin')
     return
@@ -278,7 +280,7 @@ exports.delete = ({ Send, ArgsManager, Profile, i18n }) => {
       }
     }
   }
-  cacheUtils.write('guildProfile', Profile.guildConfig)
+  cacheUtils.write('GuildProfile', Profile.guildConfig)
   Send('Currency_deleteCoin', false, { coin: CoinName })
 }
 

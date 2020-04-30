@@ -81,7 +81,7 @@
         "redir": "Guilddefault_Realdescription"
     },
     "myprofile": {
-        "redir": "Myprofile_description"
+        "redir": "Myprofile_realDescription"
     },
     "moneymanager": {
         "redir": "Moneymanager_description"

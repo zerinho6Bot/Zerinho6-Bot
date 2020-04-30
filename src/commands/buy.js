@@ -1,6 +1,5 @@
-const cacheUtils = require('../Utils/index').cacheUtils
-
 exports.condition = ({ bot, message, Send, ArgsManager, i18n }) => {
+  const cacheUtils = require('../Utils/index').cacheUtils
   const Profile = new cacheUtils.Profile(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
@@ -32,13 +31,14 @@ exports.condition = ({ bot, message, Send, ArgsManager, i18n }) => {
 }
 
 exports.run = ({ message, Send, fastEmbed, ArgsManager, i18n }) => {
+  const cacheUtils = require('../Utils/index').cacheUtils
   // ze.buy 2    3        4    5
   // ze.buy role MoruClan info
   const Profile = new cacheUtils.Profile(message.guild)
   const Roles = Profile.FindGuildSelling('roles')
   const Tags = Profile.FindGuildSelling('tags')
 
-  if (!ArgsManager.argument) {
+  if (!ArgsManager.Argument) {
     if (Object.keys(Roles).length > 0) {
       fastEmbed.addField(`${i18n.__('Buy_Roles')} (${Object.keys(Roles).length})`, `\`\`${Object.keys(Roles).join('``, ``')}\`\``)
     }
@@ -130,7 +130,7 @@ exports.run = ({ message, Send, fastEmbed, ArgsManager, i18n }) => {
   }
 
   UserWallet[Item.coin].holds -= Item.value
-  cacheUtils.write('guildProfile', Profile.guildConfig)
+  cacheUtils.write('GuildProfile', Profile.guildConfig)
 }
 
 exports.helpEmbed = ({ message, helpEmbed, i18n }) => {

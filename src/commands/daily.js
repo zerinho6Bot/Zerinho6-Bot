@@ -26,7 +26,7 @@ exports.run = ({ message, Send, i18n }) => {
     return
   }
 
-  if (!Profile.UserBack(message.author.id)) {
+  if (!Profile.UserBank(message.author.id)) {
     Log.info(`Creating back for user ${message.author.id}`)
     Profile.GuildBank[message.author.id] = Profile.DefaultUserBankProperties
     createdToday = true
@@ -76,7 +76,7 @@ exports.run = ({ message, Send, i18n }) => {
 
   if (requiresUpdate) {
     Log.info('Updating guildProfile, daily reported.')
-    cacheUtils.write('guildProfile', Profile.guildConfig)
+    cacheUtils.write('GuildProfile', Profile.guildConfig)
   }
 
   let collectedCoinsStr = ''

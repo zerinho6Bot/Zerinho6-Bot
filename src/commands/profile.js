@@ -1,7 +1,6 @@
-const { Profiles } = require('../cache/index.js')
-const { cacheUtils } = require('../Utils/index.js')
-
 exports.condition = ({ message, ArgsManager, i18n, Send }) => {
+  const { Profiles } = require('../cache/index.js')
+  const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
@@ -12,20 +11,20 @@ exports.condition = ({ message, ArgsManager, i18n, Send }) => {
 
     Send('Profile_enablingSystem')
     if (!Profile.GuildData) {
-      Profile.guildProfile[message.guild.id] = Profile.DefaultGuildProperties
+      Profile.guildConfig[message.guild.id] = Profile.DefaultGuildProperties
     }
-    cacheUtils.write('guildProfile', Profile.guildConfig)
+    cacheUtils.write('GuildProfile', Profile.guildConfig)
     return false
   }
 
-  if (ArgsManager.Argument && ArgsManager.Argument[0] === i18n.__('Profile_disable')) {
+  if (ArgsManager.Argument && ArgsManager.Argument[0].toLowerCase() === i18n.__('Profile_disable')) {
     if (!message.guild.member(message.author.id).hasPermission('MANAGE_GUILD')) {
       Send('Profile_noPermissionToDisable')
       return false
     }
 
     delete Profile.guildConfig[message.guild.id]
-    cacheUtils.write('guildProfile', Profile.guildConfig)
+    cacheUtils.write('GuildProfile', Profile.guildConfig)
     return false
   }
 
@@ -39,13 +38,15 @@ exports.condition = ({ message, ArgsManager, i18n, Send }) => {
       return false
     }
     Profiles[CheckFor] = Profile.DefaultProfileProperties
-    cacheUtils.write('profiles', Profiles)
+    cacheUtils.write('Profiles', Profiles)
   }
 
   return true
 }
 
 exports.run = async ({ message, ArgsManager, fastEmbed, Send, i18n, bot }) => {
+  const { Profiles } = require('../cache/index.js')
+  const { cacheUtils } = require('../Utils/index.js')
   const GuildProfile = new cacheUtils.Profile(message.guild)
   const Guild = GuildProfile.GuildData
   const CheckFor = ArgsManager.ID ? ArgsManager.ID[0]
@@ -53,10 +54,10 @@ exports.run = async ({ message, ArgsManager, fastEmbed, Send, i18n, bot }) => {
       : message.author.id
   const FromUser = CheckFor === message.author.id ? message.author
     : await bot.users.fetch(CheckFor)
-  const Profile = Profiles[FromUser]
+  const Profile = Profiles[CheckFor]
   const User = {
-    background: Profile.background.length <= 0 ? Guild.profile.defaultConfig.background : Profile.background,
-    description: Profile.description.length <= 0 ? Guild.profile.defaultConfig.description : Profile.description
+    background: Profile && Profile.background && Profile.background !== '' ? Profile.background : Guild.profile.defaultConfig.background,
+    description: Profile && Profile.description && Profile.description !== '' ? Profile.description : Guild.profile.defaultConfig.description
   }
 
   if (!FromUser) {

@@ -47,7 +47,7 @@ exports.run = ({ message, ArgsManager, Send, i18n }) => {
     Profile.GuildDefaults.description = FullArgument
   }
 
-  cacheUtils.write('guildProfile', Profile.guildConfig)
+  cacheUtils.write('GuildProfile', Profile.guildConfig)
   Send('Guilddefault_definedGuildDefault')
 }
 

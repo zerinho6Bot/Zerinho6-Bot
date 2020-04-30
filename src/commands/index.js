@@ -28,7 +28,10 @@ exports.requirer = {
   guilddefault: require('./guilddefault.js'),
   myprofile: require('./myprofile.js'),
   moneymanager: require('./moneymanager.js'),
-  sale: require('./sale.js')
+  itemmanager: require('./itemmanager.js'),
+  sale: require('./sale.js'),
+  unsell: require('./unsell.js'),
+  currency: require('./currency.js')
 }
 
 exports.commandNames = [
@@ -39,7 +42,8 @@ exports.commandNames = [
   'serverinfo', 'render', 'move', 'rpg', 'info',
   'serverstats', 'ping', 'credits', 'bhaskara',
   'buy', 'give', 'daily', 'iteminfo', 'myprofile',
-  'guilddefault', 'moneymanager', 'itemmanager'
+  'guilddefault', 'moneymanager', 'itemmanager',
+  'currency', 'unsell'
 ]
 
 exports.advanced = {

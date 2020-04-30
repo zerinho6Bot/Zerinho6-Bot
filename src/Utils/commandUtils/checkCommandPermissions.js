@@ -84,8 +84,8 @@ exports.checkCommandPermissions = (message, command, t) => {
   }
 
   if (CommandPerms.needArg) {
-    if (IsType('needArg', 'number') && !Args.ArgumentWithID && CommandPerms.needArg > Args.ArgumentWithID.length) {
-      return t.__('Utils_commandUtils_needArg_commandNeeds', { arguments: CommandPerms.needArg, givenMessageArguments: Args.ArgumentWithID.length })
+    if (IsType('needArg', 'number') && (!Args.Argument || Args.Argument.length < CommandPerms.needArg)) {
+      return t.__('Utils_commandUtils_needArg_CommandNeeds', { arguments: CommandPerms.needArg, givenMessageArguments: Args.Argument ? Args.Argument.length : 0 })
     }
 
     if (!Args.Argument || !Args.Argument.length >= 1) {

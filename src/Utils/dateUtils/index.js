@@ -1,1 +1,1 @@
-exports.date = require('./Date.js').Date
+exports.Date = require('./Date.js').Date

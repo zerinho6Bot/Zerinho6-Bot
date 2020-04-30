@@ -1,11 +1,9 @@
-const { cacheUtils } = require('../Utils/index.js')
-
 exports.condition = ({ bot, ArgsManager, message, Send, i18n }) => {
   if (!message.channel.permissionsFor(bot.user.id).has('MANAGE_ROLES')) {
-    Send('Move_errorMissingPermission', false, { who: i18n.__('Global_I'), permission: 'MANAGE_ROLES' })
+    Send('Global_errorMissingPermission', false, { who: i18n.__('Global_I'), permission: 'MANAGE_ROLES' })
     return false
   }
-
+  const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
@@ -17,6 +15,7 @@ exports.condition = ({ bot, ArgsManager, message, Send, i18n }) => {
 }
 
 exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
+  const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
   const SellStr = ArgsManager.Argument[0].toLowerCase() === i18n.__('Buy_roleLiteral') || ArgsManager.Argument[0].toLowerCase() === i18n.__('Buy_roleLiteralPlural') ? i18n.__('Buy_roleLiteral') : i18n.__('Buy_tagLiteral')
   const Roles = Profile.FindGuildSelling('roles')
@@ -37,12 +36,12 @@ exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
   }
 
   if (CoinName.length <= 0 || CoinName.length > Profile.lengthLimit || !Profile.GuildCoin(CoinName)) {
-    Send('Sale_errorInvalidCoinName', false, { argument: i18n.__('Help_ThirdArgument') })
+    Send('Currency_errorInvalidCoinName', false, { argument: i18n.__('Help_ThirdArgument') })
     return
   }
 
   if (isNaN(Value) || Value <= 0) {
-    Send('Sale_errorInvalidCoinValue', false, { argument: i18n.__('Help_FirthArgument') })
+    Send('Currency_errorInvalidCoinValue', false, { argument: i18n.__('Help_FirthArgument') })
     return
   }
 
@@ -65,12 +64,12 @@ exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
     const Member = message.guild.member(message.author.id)
     const Role = message.guild.roles.cache.get(ItemName)
 
-    if (Role.position > Member.highestRole.position) {
+    if (Role.position > Member.roles.highest.position) {
       Send('Sale_roleGivenIsHigher')
       return
     }
 
-    if (Role.position > message.guild.member(bot.user.id).highestRole.position) {
+    if (Role.position > message.guild.member(bot.user.id).roles.highest.position) {
       Send('Sale_roleAboveBotRole')
       return
     }
@@ -151,7 +150,7 @@ exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
     [Item.coin, Item.value, Item.name, Item.description] = [NewTag.coin, NewTag.value, FixedTagName, Description]
   }
 
-  cacheUtils.write('guildProfile', Profile.guildConfig)
+  cacheUtils.write('GuildProfile', Profile.guildConfig)
   Send('Sale_nowSelling', false, { itemType: SellStr, name: Item.name, value: Item.value, coin: Item.coin })
 }
 
@@ -159,7 +158,7 @@ exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
   const Options = {
     argumentsLength: 5,
     argumentsNeeded: true,
-    argumentsFormat: [i18n.__('Sale_itemTypeExample'), i18n.__('Sale_itemNameExample'), i18n.__('Give_SecondArgumentExample'), i18n.__('Moneymanager_ThirdArgumentExample'), i18n.__('Sale_tagDescriptionExample')]
+    argumentsFormat: [i18n.__('Sale_itemTypeExample'), i18n.__('Sale_itemNameExample'), i18n.__('Sale_coinName'), 15, i18n.__('Sale_descriptionExample')]
   }
 
   return helpEmbed(message, i18n, Options)

@@ -1,6 +1,5 @@
-const { cacheUtils } = require('../Utils/index.js')
-
 exports.condition = ({ ArgsManager, message, Send, i18n }) => {
+  const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
@@ -37,16 +36,17 @@ exports.condition = ({ ArgsManager, message, Send, i18n }) => {
 }
 
 exports.run = ({ ArgsManager, message, Send, fastEmbed, i18n }) => {
+  const { cacheUtils } = require('../Utils/index.js')
   const Profile = new cacheUtils.Profile(message.guild)
   const FixedItemName = ArgsManager.Argument[1].replace(/\s+/g, '')
   const SearchFor = ArgsManager.Argument[0].toLowerCase().includes(i18n.__('Buy_roleLiteral')) ? 'roles' : 'tags'
-  const Item = Profile.FindGuildItem(SearchFor)
+  const Item = Profile.FindGuildItem(SearchFor, FixedItemName)
   fastEmbed.setTitle(FixedItemName)
   if (Item.description) {
     fastEmbed.setDescription(Item.description)
   }
 
-  if (Item.coinTrade) {
+  if (Item.coinTrade && Item.coinTrade.coin !== '') {
     fastEmbed.setFooter(i18n.__('Iteminfo_coinTradesTo', { coin: Item.coinTrade.coin, return: Item.coinTrade.return }))
   }
   Send(fastEmbed, true)
