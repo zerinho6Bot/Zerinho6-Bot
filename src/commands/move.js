@@ -85,7 +85,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, Send, fastEmbed }) => {
     Channel.send(Msg.content)
 
     if (Msg.attachments.size >= 1) {
-      Channel.send(new Discord.Attachment(Msg.attachments.first().url))
+      Channel.send(new Discord.MessageAttachment(Msg.attachments.first().url))
     }
 
     return

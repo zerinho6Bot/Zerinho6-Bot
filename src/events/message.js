@@ -1,12 +1,9 @@
-const guildLanguage = require('../cache/index.js').GuildLanguage
-const { messageUtils, languageUtils, commandUtils } = require('../Utils/index.js')
-const Commands = require('../commands/index.js').commandNames
-
 exports.condition = (bot, message) => {
   if (message.author.bot || !message.content.toLowerCase().startsWith(process.env.PREFIX) || message.channel.type !== 'text' || !message.channel.permissionsFor(bot.user.id).has('SEND_MESSAGES')) {
     return false
   }
-
+  const guildLanguage = require('../cache/index.js').GuildLanguage
+  const { messageUtils, languageUtils } = require('../Utils/index.js')
   const GuildDefinedLanguage = guildLanguage[message.guild.id] && guildLanguage[message.guild.id].language ? guildLanguage[message.guild.id].language : ''
   const Send = messageUtils.configSend(message.channel, languageUtils.init(GuildDefinedLanguage === '' ? languageUtils.fallbackLanguage : GuildDefinedLanguage))
 
@@ -22,6 +19,7 @@ exports.condition = (bot, message) => {
     return false
   }
 
+  const Commands = require('../commands/index.js').commandNames
   if (!Commands.includes(ArgsManager.CommandName[0])) {
     Log.info(`${message.author.id} tried to execute a command that doesn't exist, command: ${ArgsManager.CommandName[0]}`)
     Send('Message_errorCommandDoesntExist')
@@ -40,6 +38,8 @@ exports.condition = (bot, message) => {
 }
 
 exports.run = async (bot, message) => {
+  const guildLanguage = require('../cache/index.js').GuildLanguage
+  const { messageUtils, languageUtils, commandUtils } = require('../Utils/index.js')
   const ArgsManager = messageUtils.argsManager(message, process.env.PREFIX)
   const GuildDefinedLanguage = guildLanguage[message.guild.id] && guildLanguage[message.guild.id].language ? guildLanguage[message.guild.id].language : ''
   const I18n = await languageUtils.init(GuildDefinedLanguage === '' ? languageUtils.fallbackLanguage : GuildDefinedLanguage)

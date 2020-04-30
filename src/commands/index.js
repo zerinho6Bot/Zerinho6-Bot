@@ -18,21 +18,39 @@ exports.requirer = {
   info: require('./info.js'),
   serverstats: require('./serverstats.js'),
   ping: require('./ping.js'),
-  credits: require('./credits.js')
+  credits: require('./credits.js'),
+  bhaskara: require('./bhaskara.js'),
+  profile: require('./profile.js'),
+  give: require('./give.js'),
+  buy: require('./buy.js'),
+  daily: require('./daily.js'),
+  iteminfo: require('./iteminfo.js'),
+  guilddefault: require('./guilddefault.js'),
+  myprofile: require('./myprofile.js'),
+  moneymanager: require('./moneymanager.js'),
+  itemmanager: require('./itemmanager.js'),
+  sale: require('./sale.js'),
+  unsell: require('./unsell.js'),
+  currency: require('./currency.js')
 }
 
 exports.commandNames = [
-  'set-language', 'ram', 'avatar',
+  'set-language', 'ram', 'avatar', 'sale',
   'help', 'tictactoe', 'tictactoe-profile',
   'tictactoe-match', 'embed', 'bot-invite',
-  'eval', 'stoptyping', 'userinfo',
+  'eval', 'stoptyping', 'userinfo', 'profile',
   'serverinfo', 'render', 'move', 'rpg', 'info',
-  'serverstats', 'ping', 'credits'
+  'serverstats', 'ping', 'credits', 'bhaskara',
+  'buy', 'give', 'daily', 'iteminfo', 'myprofile',
+  'guilddefault', 'moneymanager', 'itemmanager',
+  'currency', 'unsell'
 ]
 
 exports.advanced = {
   Bot: ['ram', 'help', 'bot-invite', 'info', 'ping', 'credits', 'stoptyping'],
   Games: ['rpg', 'tictactoe', 'tictactoe-profile', 'tictactoe-match'],
   Staff: ['move', 'set-language'],
-  Utility: ['move', 'avatar', 'embed', 'userinfo', 'serverinfo']
+  Utility: ['move', 'avatar', 'embed', 'userinfo', 'serverinfo'],
+  Etc: ['bhaskara'],
+  Profile: ['profile', 'give', 'buy', 'daily', 'iteminfo', 'guilddefault', 'myprofile', 'moneymanager', 'itemmanager', 'sale', 'unsell', 'currency']
 }

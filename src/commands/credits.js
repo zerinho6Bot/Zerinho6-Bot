@@ -5,7 +5,7 @@ exports.run = ({ Send, fastEmbed, i18n }) => {
   fastEmbed.addField(i18n.__('Credits_artWork'), 'Leticia and Moru Zerinho6')
   fastEmbed.addField(i18n.__('Credits_codeHelp'), 'Nirewen, davipatury, Acnologia, Fernando, Honux, Skelun')
   fastEmbed.addField(i18n.__('Credits_ideas'), 'Miki, Enio, Corvo, Hellow, Rook, Amorelli, Shadow, Glot, Alpeck, Skelun, Fizz')
-  fastEmbed.addField(i18n.__('Credits_translation'), 'Moru Zerinho, Hellow')
+  fastEmbed.addField(i18n.__('Credits_translation'), 'Moru Zerinho6, Hellow')
   fastEmbed.setDescription(i18n.__('Credits_embedDescription'))
   Send(fastEmbed, true)
 }

@@ -45,5 +45,63 @@
 		"options": {
 			"needMention": true
 		}
+	},
+	"bhaskara": {
+		"options": {
+			"needArg": 3
+		}
+	},
+	"give": {
+		"options": {
+			"needArg": 3
+		}
+	},
+	"iteminfo": {
+		"options": {
+			"needArg": 2
+		}
+	},
+	"guilddefault": {
+		"options": {
+			"needArg": 2,
+			"userNeed": "MANAGE_GUILD"
+		}
+	},
+	"myprofile": {
+		"options": {
+			"needArg": 2
+		}
+	},
+	"moneymanager": {
+		"options": {
+			"needArg": 3,
+			"userNeed": "MANAGE_GUILD",
+			"needMention": true
+		}
+	},
+	"itemmanager": {
+		"options": {
+			"needArg": 4,
+			"userNeed": "MANAGE_GUILD",
+			"needMention": true
+		}
+	},
+	"sale": {
+		"options": {
+			"needArg": 5,
+			"userNeed": "MANAGE_ROLES"
+		}
+	},
+	"unsell": {
+		"options": {
+			"needArg": 2,
+			"userNeed": "MANAGE_ROLES"
+		}
+	},
+	"currency": {
+		"options": {
+			"needArg": true,
+			"userNeed": "MANAGE_GUILD"
+		}
 	}
 }

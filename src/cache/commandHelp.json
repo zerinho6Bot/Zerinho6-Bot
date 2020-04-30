@@ -58,5 +58,44 @@
     },
     "credits": {
         "redir": "Credits_description"
+    },
+    "bhaskara": {
+        "redir": "Bhaskara_description"
+    },
+    "profile": {
+        "redir": "Profile_description"
+    },
+    "give": {
+        "redir": "Give_description"
+    },
+    "buy": {
+        "redir": "Buy_description"
+    },
+    "daily": {
+        "redir": "Daily_description"
+    },
+    "iteminfo": {
+        "redir": "Iteminfo_description"
+    },
+    "guilddefault": {
+        "redir": "Guilddefault_Realdescription"
+    },
+    "myprofile": {
+        "redir": "Myprofile_realDescription"
+    },
+    "moneymanager": {
+        "redir": "Moneymanager_description"
+    },
+    "itemmanager": {
+        "redir": "Itemmanager_description"
+    },
+    "sale": {
+        "redir": "Sale_description"
+    },
+    "unsell": {
+        "redir": "Unsell_description"
+    },
+    "currency": {
+        "redir": "Currency_description"
     }
 }
