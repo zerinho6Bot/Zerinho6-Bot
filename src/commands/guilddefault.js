@@ -26,7 +26,7 @@ exports.condition = ({ ArgsManager, message, Send, i18n }) => {
       }
       break
     default:
-      if (FullArgument.length > 1024) {
+      if (!isNaN(FullArgument) || FullArgument.length > 1024) {
         Send('Guilddefault_invalidDescription')
         return false
       }
@@ -55,7 +55,7 @@ exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
   const Options = {
     argumentsLength: 2,
     argumentsNeeded: true,
-    argumentsFormat: [i18n.__('guildDefault_propertyExample'), i18n.__('guildDefault_secondArgumentExample')]
+    argumentsFormat: [i18n.__('GuildDefault_propertyExample'), i18n.__('GuildDefault_secondArgumentExample')]
   }
 
   return helpEmbed(message, i18n, Options)

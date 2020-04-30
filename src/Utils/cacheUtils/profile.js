@@ -64,7 +64,7 @@ module.exports.Profile = class {
 
   /**
    * Gets the guild coins.
-   * @returns {Object}
+   * @returns {Array<Object>}
    */
   get GuildCoins () {
     if (this.ProfileDisabledForGuild()) {
@@ -259,7 +259,8 @@ module.exports.Profile = class {
 
   get DefaultMoneyProperties () {
     return {
-      holds: 0
+      holds: 0,
+      daily: 0
     }
   }
 

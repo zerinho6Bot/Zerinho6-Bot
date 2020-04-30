@@ -11,11 +11,14 @@ exports.condition = ({ message, ArgsManager, Send, fastEmbed, i18n }) => {
   const Coins = Object.keys(GuildCoins)
 
   if (Coins.length > 0) {
-    if (isNaN(ArgsManager.Argument[0]) && ArgsManager.Argument[0].length < 20 && GuildCoins[ArgsManager.Argument[0]]) {
+    if (isNaN(ArgsManager.Argument[0]) && ArgsManager.Argument[0].length < Profile.lengthLimit && GuildCoins[ArgsManager.Argument[0]]) {
       const Coin = Profile.GuildCoin(ArgsManager.Argument[0])
       fastEmbed.setTitle(`${ArgsManager.Argument[0]} (${Coin.code})`)
       fastEmbed.setDescription(`${isNaN(Coin.emoji) ? Coin.emoji : `<:${message.guild.emojis.cache.get(Coin.emoji).name}:${message.guild.emojis.get(Coin.emoji).id}>`} - _${i18n.__('Currency_coinValue', { value: Coin.value })}_`)
       Send(fastEmbed, true)
+      return false
+    } else {
+      Send('Currency_coinDoesntExist')
       return false
     }
   }
@@ -30,7 +33,7 @@ exports.condition = ({ message, ArgsManager, Send, fastEmbed, i18n }) => {
   switch (ArgsManager.Argument[0].toLowerCase()) {
     case Choices[0]:
       if (ArgsManager.Argument.length < 5) {
-        Send('Currency_errorTheOperationNeedsArgs', false, { operation: i18n.__('Currency_Create'), amount: 4 })
+        Send('Currency_errorTheOperationNeedsArgs', false, { operation: i18n.__('Currency_Create'), amount: 5 })
         return false
       }
       break
@@ -149,7 +152,7 @@ exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
   }
 
   const CoinName = ArgsManager.Argument[1]
-  const Property = ArgsManager.Argument[2]
+  const Property = ArgsManager.Argument[2].toLowerCase()
   const newValue = ArgsManager.Argument[3]
   if (!isNaN(CoinName) || CoinName.length > Profile.lengthLimit || CoinName.length <= 0) {
     Send('Currency_errorInvalidCoinName', false, { argument: i18n.__('Help_SecondArgument') })
@@ -195,6 +198,7 @@ exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
       Profile.GuildCoin(CoinName).emoji = newValue
       break
     case i18n.__('Currency_onDaily'):
+    case i18n.__('Currency_special'):
       if (!YesNo.includes(newValue.toLowerCase())) {
         Send('Currency_invalidYesNo')
         return
@@ -206,7 +210,29 @@ exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
         return
       }
 
-      // FINISH
+      if (Property === i18n.__('Currency_onDaily')) {
+        Profile.GuildCoin(CoinName).gainOnDaily = newValue.toLowerCase() === i18n.__('Global_yes')
+      } else {
+        Profile.GuildCoin(CoinName).specialBonus.enabled = newValue.toLowerCase() === i18n.__('Global_yes')
+      }
+      break
+    case i18n.__('Currency_bonusDaily'):
+    case i18n.__('Currency_dailyRequired'):
+      if (isNaN(newValue) || newValue < 1) {
+        Send('Currency_invalidDailyArg')
+        return
+      }
+
+      if (Property === i18n.__('Currency_dailyRequired')) {
+        if (newValue > 100) {
+          Send('Currency_dailyRequiredBig')
+          return
+        }
+
+        Profile.GuildCoin(CoinName).specialBonus.requiredDaily = parseInt(newValue)
+      } else {
+        Profile.GuildCoin(CoinName).specialBonus.specialValue = parseInt(newValue)
+      }
       break
     default:
       if (isNaN(newValue) || newValue < 1) {
@@ -217,6 +243,51 @@ exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
       break
   }
 
-  Send('Currency_editedCoin', false, { coin: CoinName, property: Property, newProperty: newValue })
   cacheUtils.write('guildProfile', Profile.guildConfig)
+  Send('Currency_editedCoin', false, { coin: CoinName, property: Property, newProperty: newValue })
+}
+
+exports.delete = ({ Send, ArgsManager, Profile, i18n }) => {
+  // ze.currency delete kekMoney
+  if (Object.keys(Profile.GuildCoins).length <= 0) {
+    Send('Currency_errorNoGuildCoin')
+    return
+  }
+  const CoinName = ArgsManager.Argument[1]
+  if (!isNaN(CoinName) || CoinName.length > Profile.lengthLimit || CoinName.length <= 0) {
+    Send('Currency_errorInvalidCoinCode', false, { argument: i18n.__('Help_SecondArgument') })
+    return
+  }
+
+  if (!Profile.GuildCoin(CoinName)) {
+    Send('Currency_errorCoinDontExist', false, { argument: i18n.__('Help_SecondArgument') })
+    return
+  }
+
+  delete Profile.GuildCoins[CoinName]
+
+  if (Object.keys(Profile.GuildBank).length > 0) {
+    const Users = Object.keys(Profile.GuildBank)
+    for (let i = 0; i < Users.length; i++) {
+      const UserCoins = Object.keys(Profile.UserWallet(Users[i]))
+
+      for (let e = 0; e < UserCoins.length; e++) {
+        if (UserCoins[e] === CoinName) {
+          delete Profile.GuildBank[Users[i]].wallet[UserCoins[e]]
+        }
+      }
+    }
+  }
+  cacheUtils.write('guildProfile', Profile.guildConfig)
+  Send('Currency_deleteCoin', false, { coin: CoinName })
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 1,
+    argumentsNeeded: true,
+    argumentsFormat: [i18n.__('Currency_coinExample')]
+  }
+
+  return helpEmbed(message, i18n, Options)
 }

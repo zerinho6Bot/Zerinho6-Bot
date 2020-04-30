@@ -16,12 +16,13 @@ exports.run = ({ message, Send, i18n }) => {
   const Coins = Profile.GuildCoins
   const CoinsName = Object.keys(Coins)
   const CollectedCoins = []
+  const CollectedSpecials = []
   let requiresUpdate = false
   let createdToday = false
   let collectedAnyCoin = false
 
   if (CoinsName.length <= 0) {
-    Send('daily_guildHasNoCoin')
+    Send('Daily_guildHasNoCoin')
     return
   }
 
@@ -39,13 +40,29 @@ exports.run = ({ message, Send, i18n }) => {
     Log.info(`The user ${message.author.id} was created today or passed a day.`)
     for (let i = 0; i < CoinsName.length; i++) {
       const CurrentCoin = CoinsName[i]
-      if (Profile.GuildCoin(CurrentCoin).gainOnDaily === false) {
+      const Coin = Profile.GuildCoin(CurrentCoin)
+      if (Coin.gainOnDaily === false) {
         continue
       }
       if (!UserBank.wallet[CoinsName[i]]) {
         UserBank.wallet[CoinsName[i]] = Profile.DefaultMoneyProperties
       }
-      UserBank.wallet[CoinsName[i]].holds += Profile.GuildCoin(CoinsName[i]).value
+      UserBank.wallet[CoinsName[i]].holds += Coin.value
+      if (Coin.specialBonus &&
+      Coin.specialBonus.enabled) {
+        if (!UserBank.wallet[CoinsName[i]].daily) {
+          UserBank.wallet[CoinsName[i]].daily = 0
+        }
+
+        UserBank.wallet[CoinsName[i]].daily++
+
+        if (UserBank.wallet[CoinsName[i]].daily >= Coin.specialBonus.requiredDaily) {
+          // specialValue
+          UserBank.wallet[CoinsName[i]].daily = 0
+          UserBank.wallet[CoinsName[i]].holds += Coin.specialBonus.specialValue
+          CollectedSpecials.push(CoinsName[i])
+        }
+      }
       CollectedCoins.push(CoinsName[i])
       requiresUpdate = true
       collectedAnyCoin = true
@@ -65,7 +82,8 @@ exports.run = ({ message, Send, i18n }) => {
   let collectedCoinsStr = ''
   for (let i = 0; i < CollectedCoins.length; i++) {
     const Coin = Coins[CollectedCoins[i]]
-    collectedCoinsStr += `${isNaN(Coin.emoji) ? Coin.emoji : `<:${message.guild.emojis.cache.get(Coin.emoji).name}:${message.guild.emojis.cache.get(Coin.emoji).id}>`}${Coin.code} +**${Coin.value}**\n`
+    const Gained = `${Coin.value}${CollectedSpecials.includes(CollectedCoins[i]) ? ` (${i18n.__('Daily_dailySpecial')}: +${Coin.specialBonus.specialValue})` : ''}`
+    collectedCoinsStr += `${isNaN(Coin.emoji) ? Coin.emoji : `<:${message.guild.emojis.cache.get(Coin.emoji).name}:${message.guild.emojis.cache.get(Coin.emoji).id}>`}${Coin.code} +**${Gained}**\n`
   }
 
   // This is cursed in every way. I'm not touching that, lol. ~ Zerinho6

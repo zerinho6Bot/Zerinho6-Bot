@@ -88,7 +88,7 @@
 	},
 	"sale": {
 		"options": {
-			"needArg": 5,
+			"needArg": 7,
 			"userNeed": "MANAGE_ROLES"
 		}
 	},

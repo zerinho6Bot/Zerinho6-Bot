@@ -82,7 +82,7 @@ exports.run = ({ message, Send, fastEmbed, ArgsManager, i18n }) => {
   }
 
   if (Item.value > UserWallet[ItemCoin].holds) {
-    Send('Buy_errorNotEnough', false, { coin: ItemCoin }, true)
+    Send('Buy_errorNotEnough', false, { coin: ItemCoin, missing: Item.value - UserWallet[ItemCoin].holds }, true)
     return
   }
 
@@ -104,9 +104,41 @@ exports.run = ({ message, Send, fastEmbed, ArgsManager, i18n }) => {
       }
     }
   }
-  CheckForInInvetory.push(ArgsManager.Argument[1])
+
+  if (ArgsManager.Argument[0].toLowerCase().includes(i18n.__('Buy_tagLiteral')) &&
+  Item.coinTrade !== '') {
+    if (!Profile.GuildCoin(Item.coinTrade.coin)) {
+      Item.coinTrade = ''
+      Send('Buy_guildHadInvalidCoin')
+      return
+    }
+
+    if (!UserWallet[Item.coinTrade.coin]) {
+      UserWallet[Item.coinTrade.coin] = Profile.DefaultCoinProperties
+    }
+    if (UserWallet[Item.coinTrade.coin].holds + Item.coinTrade.return < 0) {
+      Send('Buy_cantBuyTag')
+      return
+    }
+
+    UserWallet[Item.coinTrade.coin].holds += Item.coinTrade.return
+    Send('Buy_tradedTagForCoin', false, { coinTraded: Item.coinTrade.coin, gained: Item.coinTrade.return })
+  } else {
+    CheckForInInvetory.push(ArgsManager.Argument[1])
+    fastEmbed.setDescription(i18n.__('Buy_itemGiven', { itemType: CheckForStr, itemName: ArgsManager.Argument[1] }))
+    Send(fastEmbed, true)
+  }
+
   UserWallet[Item.coin].holds -= Item.value
   cacheUtils.write('guildProfile', Profile.guildConfig)
-  fastEmbed.setDescription(i18n.__('Buy_itemGiven', { itemType: CheckForStr, itemName: ArgsManager.Argument[1] }))
-  Send(fastEmbed, true)
+}
+
+exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
+  const Options = {
+    argumentsLength: 2,
+    argumentsNeeded: true,
+    argumentsFormat: [i18n.__('Buy_itemTypeExample'), i18n.__('Buy_itemNameExample')]
+  }
+
+  return helpEmbed(message, i18n, Options)
 }

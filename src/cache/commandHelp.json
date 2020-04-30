@@ -78,7 +78,7 @@
         "redir": "Iteminfo_description"
     },
     "guilddefault": {
-        "redir": "Guilddefault_description"
+        "redir": "Guilddefault_Realdescription"
     },
     "myprofile": {
         "redir": "Myprofile_description"

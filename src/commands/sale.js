@@ -25,10 +25,10 @@ exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
   const CoinName = ArgsManager.Argument[2]
   const ItemName = ArgsManager.Argument[1]
   const Value = ArgsManager.Argument[3]
-  const Description = ArgsManager.Argument.slice(4).join(' ')
   /*
-  const CoinTrade = ArgsManager.Argument[5]
-  const CoinReturn = ArgsManager.Argument[6]
+  const CoinTrade = ArgsManager.Argument[4]
+  const ReturnValue = ArgsManager.Argument[5]
+  const Description = ArgsManager.Argument.slice(6).join(' ')
   */
 
   if ((Object.keys(Roles).length + Object.keys(Tags).length) >= 100) {
@@ -85,6 +85,7 @@ exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
       return
     }
 
+    const Description = ArgsManager.Argument.slice(4).join(' ')
     if (Description.length > 1024) {
       Send('Sale_descriptionIsBig')
       return
@@ -106,7 +107,9 @@ exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
       return
     }
     const FixedTagName = ItemName.replace(/\s+/g, '')
-
+    const CoinTrade = ArgsManager.Argument[4]
+    const ReturnValue = ArgsManager.Argument[5]
+    const Description = ArgsManager.Argument.slice(6).join(' ')
     if (Description.length > 1024) {
       Send('Sale_descriptionIsBig')
       return
@@ -117,11 +120,34 @@ exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
       return
     }
 
+    if (CoinTrade !== '~') {
+      if (!Profile.GuildCoin(CoinTrade)) {
+        Send('Sale_coinToTradeDoesntExist')
+        return
+      }
+    }
+
+    if (ReturnValue !== '~') {
+      if (isNaN(ReturnValue) || ReturnValue < 0) {
+        Send('Sale_invalidReturnValue')
+        return
+      }
+    }
+
+    if ((CoinTrade === '~' || ReturnValue === '~') && CoinTrade !== ReturnValue) {
+      Send('Sale_coinReturnDontExistTogether')
+      return
+    }
+
     Tags[FixedTagName] = Profile.DefaultTagProperties
     const NewTag = Tags[FixedTagName]
     NewTag.coin = CoinName
     NewTag.value = parseInt(Value)
-    NewTag.description = Description;
+    NewTag.description = Description
+    NewTag.coinTrade = {
+      coin: CoinTrade === '~' ? '' : CoinTrade,
+      return: ReturnValue === '~' ? 0 : parseInt(ReturnValue)
+    };
     [Item.coin, Item.value, Item.name, Item.description] = [NewTag.coin, NewTag.value, FixedTagName, Description]
   }
 
