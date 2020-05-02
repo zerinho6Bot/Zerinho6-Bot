@@ -1,7 +1,6 @@
-const cacheUtils = require('../Utils/index.js').cacheUtils
-
 exports.condition = async ({ message, ArgsManager, Send, i18n, bot }) => {
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
@@ -85,7 +84,8 @@ exports.condition = async ({ message, ArgsManager, Send, i18n, bot }) => {
 }
 
 exports.run = async ({ message, ArgsManager, Send, bot }) => {
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass, write } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
   const CheckFor = ArgsManager.ID ? ArgsManager.ID[0]
     : message.mentions.users.size > 0 ? message.mentions.users.first().id
       : null
@@ -100,7 +100,7 @@ exports.run = async ({ message, ArgsManager, Send, bot }) => {
   const ParsedMoney = parseInt(ArgsManager.Argument[2])
   Profile.UserWallet(FromUser.id)[ArgsManager.Argument[1]].holds += ParsedMoney
   Profile.UserWallet(message.author.id)[ArgsManager.Argument[1]].holds -= ParsedMoney
-  cacheUtils.write('GuildProfile', Profile.guildConfig)
+  write('GuildProfile', Profile.guildConfig)
   Send('Give_sentMoney', false, { amount: ArgsManager.Argument[2], coin: ArgsManager.Argument[1], name: FromUser.username })
 }
 

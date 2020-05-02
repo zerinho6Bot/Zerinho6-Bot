@@ -1,6 +1,6 @@
 exports.condition = async ({ message, ArgsManager, Send, i18n }) => {
   const { Profiles } = require('../cache/index.js')
-  const { cacheUtils } = require('../Utils/index.js')
+  const { Profile: ProfileClass, write } = require('../Utils/cacheUtils/index.js')
   const Choices = [
     i18n.__('Myprofile_background'),
     i18n.__('Myprofile_description'),
@@ -15,7 +15,7 @@ exports.condition = async ({ message, ArgsManager, Send, i18n }) => {
     return false
   }
 
-  const Profile = new cacheUtils.Profile(message.guild)
+  const Profile = new ProfileClass(message.guild)
 
   if (!Profiles[message.author.id]) {
     Profiles[message.author.id] = Profile.DefaultProfileProperties
@@ -50,7 +50,7 @@ exports.condition = async ({ message, ArgsManager, Send, i18n }) => {
       break
   }
 
-  cacheUtils.write('Profiles', Profiles)
+  write('Profiles', Profiles)
   Send('Myprofile_updateDone')
 }
 

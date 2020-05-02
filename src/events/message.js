@@ -56,7 +56,7 @@ exports.run = async (bot, message) => {
     env: process.env,
     i18n: I18n,
     Send,
-    FastEmbed,
+    fastEmbed: FastEmbed,
     ArgsManager
   }
   const Command = getCommandRequirer(ArgsManager.CommandName[0].toLowerCase())

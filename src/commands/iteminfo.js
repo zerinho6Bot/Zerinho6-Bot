@@ -1,6 +1,6 @@
 exports.condition = ({ ArgsManager, message, Send, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const ProfileClass = require('../Utils/cacheUtils/index.js').Profile
+  const Profile = new ProfileClass(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
@@ -36,8 +36,8 @@ exports.condition = ({ ArgsManager, message, Send, i18n }) => {
 }
 
 exports.run = ({ ArgsManager, message, Send, fastEmbed, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const ProfileClass = require('../Utils/cacheUtils/index.js').Profile
+  const Profile = new ProfileClass(message.guild)
   const FixedItemName = ArgsManager.Argument[1].replace(/\s+/g, '')
   const SearchFor = ArgsManager.Argument[0].toLowerCase().includes(i18n.__('Buy_roleLiteral')) ? 'roles' : 'tags'
   const Item = Profile.FindGuildItem(SearchFor, FixedItemName)

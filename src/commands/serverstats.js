@@ -34,9 +34,9 @@ function MonthsToNumber (i18n, month) {
 }
 
 exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
-  const { cacheUtils } = require('../Utils/index.js')
+  const { ServerStats: ServerStatsClass, write } = require('../Utils/index.js')
   const { GuildStats, GuildWantingStats } = require('../cache/index.js')
-  const ServerStats = new cacheUtils.ServerStats(GuildStats, bot)
+  const ServerStats = new ServerStatsClass(GuildStats, bot)
 
   if (!ServerStats.guildWantsStats(message.guild.id)) {
     if (!message.channel.permissionsFor(message.author.id).has('MANAGE_GUILD')) {
@@ -59,7 +59,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
           GuildWantingStats.servers[Msg.guild.id] = {
             lastMonthUpdated: 13 // Little trick, if I put 0 and the month is January...
           }
-          await cacheUtils.write('GuildWantingStats', GuildWantingStats)
+          await write('GuildWantingStats', GuildWantingStats)
           Send('Serverstats_decidedYes_Part2')
           await ServerStats.updateServersStats()
 

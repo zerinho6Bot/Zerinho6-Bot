@@ -1,11 +1,9 @@
-const getMessage = require('../Utils/messageUtils/index.js').getMessage
-const Regex = /https:\/\/discordapp.com\/channels\/([0-9]{16,18})\/([0-9]{16,18})\/([0-9]{16,18})/
-const ChannelRegex = /<#([0-9]{16,18})>/
-const Discord = require('discord.js')
-
 exports.run = async ({ bot, message, ArgsManager, i18n, Send, fastEmbed }) => {
+  const Regex = /https:\/\/discordapp.com\/channels\/([0-9]{16,18})\/([0-9]{16,18})\/([0-9]{16,18})/
   const MatchedRegex = ArgsManager.Argument[0].match(Regex)
-
+  const getMessage = require('../Utils/messageUtils/index.js').getMessage
+  const ChannelRegex = /<#([0-9]{16,18})>/
+  const Discord = require('discord.js')
   if (MatchedRegex === null) {
     Send('Render_wrongFormat')
     return

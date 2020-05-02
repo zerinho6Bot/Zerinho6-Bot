@@ -1,9 +1,8 @@
-const { GuildLanguage } = require('../cache/index.js')
-const LanguageList = require('../Utils/languageUtils/index.js').acceptableLanguages
-const LanguageListLiteral = LanguageList.join(', ')
-
 exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
-  const cacheUtils = require('../Utils/index.js').cacheUtils
+  const { GuildLanguage } = require('../cache/index.js')
+  const LanguageList = require('../Utils/languageUtils/index.js').acceptableLanguages
+  const LanguageListLiteral = LanguageList.join(', ')
+  const Write = require('../Utils/cacheUtils/index.js').write
   if (!ArgsManager.Argument) {
     fastEmbed.addField(i18n.__('Setlanguage_languageList'), LanguageListLiteral)
     Send(fastEmbed, true)
@@ -33,7 +32,7 @@ exports.run = ({ message, ArgsManager, i18n, Send, fastEmbed }) => {
     GuildLanguage[Guild.id].language = ArgsManager.Argument[0]
   }
 
-  const Result = cacheUtils.write('GuildLanguage', GuildLanguage)
+  const Result = Write('GuildLanguage', GuildLanguage)
   if (Result) {
     Send('Setlanguage_languageDone')
   } else {

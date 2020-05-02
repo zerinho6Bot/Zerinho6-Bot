@@ -1,6 +1,6 @@
 exports.condition = ({ ArgsManager, message, Send, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const ProfileClass = require('../Utils/cacheUtils/index.js').Profile
+  const Profile = new ProfileClass(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
@@ -37,8 +37,8 @@ exports.condition = ({ ArgsManager, message, Send, i18n }) => {
 }
 
 exports.run = ({ message, ArgsManager, Send, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass, write } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
   const FullArgument = ArgsManager.Argument.slice(1).join(' ')
 
   if (ArgsManager.Argument[0].toLowerCase() === i18n.__('Guilddefault_background')) {
@@ -47,7 +47,7 @@ exports.run = ({ message, ArgsManager, Send, i18n }) => {
     Profile.GuildDefaults.description = FullArgument
   }
 
-  cacheUtils.write('GuildProfile', Profile.guildConfig)
+  write('GuildProfile', Profile.guildConfig)
   Send('Guilddefault_definedGuildDefault')
 }
 

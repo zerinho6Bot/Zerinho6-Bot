@@ -6,7 +6,7 @@ exports.run = ({ bot, ArgsManager, message, i18n, Send, fastEmbed }) => {
     fastEmbed.addField(i18n.__('Eval_code'), `\`\`\`JavaScript\n${FullArgument}\`\`\``)
     // eslint-disable-next-line no-eval
     fastEmbed.addField(i18n.__('Eval_result'), `\`\`\`JavaScript\n${eval(FullArgument)}\`\`\``)
-    Send(fastEmbed)
+    Send(fastEmbed, true)
   } catch (e) {
     Send(e.toString())
   }

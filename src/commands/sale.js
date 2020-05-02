@@ -3,8 +3,8 @@ exports.condition = ({ bot, ArgsManager, message, Send, i18n }) => {
     Send('Global_errorMissingPermission', false, { who: i18n.__('Global_I'), permission: 'MANAGE_ROLES' })
     return false
   }
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
@@ -15,8 +15,8 @@ exports.condition = ({ bot, ArgsManager, message, Send, i18n }) => {
 }
 
 exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass, write } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
   const SellStr = ArgsManager.Argument[0].toLowerCase() === i18n.__('Buy_roleLiteral') || ArgsManager.Argument[0].toLowerCase() === i18n.__('Buy_roleLiteralPlural') ? i18n.__('Buy_roleLiteral') : i18n.__('Buy_tagLiteral')
   const Roles = Profile.FindGuildSelling('roles')
   const Tags = Profile.FindGuildSelling('tags')
@@ -150,7 +150,7 @@ exports.run = ({ message, ArgsManager, Send, i18n, bot }) => {
     [Item.coin, Item.value, Item.name, Item.description] = [NewTag.coin, NewTag.value, FixedTagName, Description]
   }
 
-  cacheUtils.write('GuildProfile', Profile.guildConfig)
+  write('GuildProfile', Profile.guildConfig)
   Send('Sale_nowSelling', false, { itemType: SellStr, name: Item.name, value: Item.value, coin: Item.coin })
 }
 
