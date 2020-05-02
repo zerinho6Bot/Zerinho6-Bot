@@ -8,7 +8,7 @@
  * @param {String} messageId - The message from the channel ID.
  * @returns {Promise<Object>} - The found message.
  */
-module.exports.getMessage = async (bot, guildId, channelId, messageId) => {
+exports.getMessage = async (bot, guildId, channelId, messageId) => {
   const Guild = bot.guilds.cache.get(guildId)
 
   if (Guild === undefined) {

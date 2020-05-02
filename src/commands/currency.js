@@ -72,8 +72,8 @@ exports.run = ({ message, ArgsManager, Send, i18n }) => {
 
 exports.create = ({ message, ArgsManager, Send, Profile, i18n }) => {
   // ze.currency create kekCoin 200 KEK :kekwhatthefuck:
-  const { write } = require('../Utils/cacheUtils/index.js').write
-  const { profileOperationAllLanguages } = require('../Utils/languageUtils/index.js').profileOperationAllLanguages
+  const { write } = require('../Utils/cacheUtils/index.js')
+  const { profileOperationAllLanguages } = require('../Utils/languageUtils/index.js')
   if (Object.keys(Profile.GuildCoins).length >= Profile.maxGuildCoins) {
     Send('Currency_errorMaxGuildCoins', false, { amount: Profile.maxGuildCoins })
     return

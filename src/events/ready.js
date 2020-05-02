@@ -1,4 +1,4 @@
-exports.run = (bot) => {
+exports.run = async (bot) => {
   const { wowSuchGraphics } = require('../Utils/bootUtils/index.js')
   const { ServerStats } = require('../Utils/cacheUtils/index.js')
   const { GuildStats, GuildProfile } = require('../cache/index.js')
@@ -30,4 +30,16 @@ exports.run = (bot) => {
       delete GuildProfile[GuildsHoldingProfiles[i]]
     }
   }, 86400000)// 24h
+
+  if (process.env.API_CALL_BOOT !== 'false') {
+    try {
+      const { ChartsManager } = require('../Utils/chartsUtils/index.js')
+      const ChartsApi = new ChartsManager()
+      Log.info('Started charts api, updating charts')
+      await ChartsApi.updateCharts()
+      Log.info('Charts updated!')
+    } catch (e) {
+      Log.warn(`Google API error: ${e}`)
+    }
+  }
 }

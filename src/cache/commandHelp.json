@@ -97,5 +97,35 @@
     },
     "currency": {
         "redir": "Currency_description"
+    },
+    "allcharts": {
+        "redir": "Allcharts_description"
+    },
+    "author": {
+        "redir": "Author_description"
+    },
+    "chart": {
+        "redir": "Chart_description"
+    },
+    "fullcrashlog": {
+        "redir": "Fullcrashlog_description"
+    },
+    "crashlog": {
+        "redir": "Crashlog_description"
+    },
+    "id": {
+        "redir": "Id_description"
+    },
+    "pack": {
+        "redir": "Pack_description"
+    },
+    "random": {
+        "redir": "Random_description"
+    },
+    "updatecharts": {
+        "redir": "Updatecharts_description"
+    },
+    "version": {
+        "redir": "Version_description"
     }
 }
