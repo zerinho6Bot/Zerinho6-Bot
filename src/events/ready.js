@@ -1,11 +1,11 @@
 exports.run = (bot) => {
-  const { cacheUtils, bootUtils } = require('../Utils/index.js')
-  const { GuildStats } = require('../cache/index.js')
-  const { GuildProfile } = require('../cache/index.js')
-  const ServerStats = new cacheUtils.ServerStats(GuildStats, bot)
+  const { wowSuchGraphics } = require('../Utils/bootUtils/index.js')
+  const { ServerStats } = require('../Utils/cacheUtils/index.js')
+  const { GuildStats, GuildProfile } = require('../cache/index.js')
+  const Serverstats = new ServerStats(GuildStats, bot)
 
-  bootUtils.wowSuchGraphics(bot)
-  ServerStats.updateServersStats(true)
+  wowSuchGraphics(bot)
+  Serverstats.updateServersStats(true)
   if (process.env.SET_ACTIVITY !== 'false') {
     const Activity = `My prefix is "${process.env.PREFIX}"`
     bot.user.setActivity(Activity).then(() => {
@@ -13,7 +13,7 @@ exports.run = (bot) => {
     })
   }
   setTimeout(() => {
-    ServerStats.updateServersStats(true)
+    Serverstats.updateServersStats(true)
     const GuildsHoldingProfiles = Object.keys(GuildProfile)
 
     if (GuildsHoldingProfiles.length === 0) {

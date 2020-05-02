@@ -1,4 +1,4 @@
-const { CommandAvailables } = require('../../cache')
+const { CommandAvailables } = require('../../cache/index.js')
 /**
  * Returns a list of commands that the user can use.
  * @function

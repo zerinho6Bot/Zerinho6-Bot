@@ -23,7 +23,7 @@
  */
 exports.pageMessage = async (message, filter, contents, emotes, { time, codeblock, language }) => {
   time = time || 60000
-  const Collector = message.createReactionCollector(filter, { time: time })
+  const Collector = message.createReactionCollector(filter, { time })
   let page = 0
   await message.react(emotes.left.id)
   await message.react(emotes.right.id)

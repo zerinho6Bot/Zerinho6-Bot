@@ -1,6 +1,6 @@
 exports.condition = ({ message, Send }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const ProfileClass = require('../Utils/cacheUtils/index.js').Profile
+  const Profile = new ProfileClass(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
@@ -11,8 +11,9 @@ exports.condition = ({ message, Send }) => {
 }
 
 exports.run = ({ message, Send, i18n }) => {
-  const { cacheUtils, dateUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { dateUtils } = require('../Utils/index.js')
+  const { Profile: ProfileClass, write } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
   const Coins = Profile.GuildCoins
   const CoinsName = Object.keys(Coins)
   const CollectedCoins = []
@@ -76,7 +77,7 @@ exports.run = ({ message, Send, i18n }) => {
 
   if (requiresUpdate) {
     Log.info('Updating guildProfile, daily reported.')
-    cacheUtils.write('GuildProfile', Profile.guildConfig)
+    write('GuildProfile', Profile.guildConfig)
   }
 
   let collectedCoinsStr = ''

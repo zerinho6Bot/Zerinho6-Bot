@@ -1,6 +1,6 @@
 exports.condition = ({ message, ArgsManager, Send, fastEmbed, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const ProfileClass = require('../Utils/cacheUtils/index.js').Profile
+  const Profile = new ProfileClass(message.guild)
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
     return false
@@ -54,8 +54,8 @@ exports.condition = ({ message, ArgsManager, Send, fastEmbed, i18n }) => {
 }
 
 exports.run = ({ message, ArgsManager, Send, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const ProfileClass = require('../Utils/cacheUtils/index.js').Profile
+  const Profile = new ProfileClass(message.guild)
   const Choices = [i18n.__('Currency_Create'), i18n.__('Currency_Edit'), i18n.__('Currency_Delete')]
   switch (ArgsManager.Argument[0].toLowerCase()) {
     case Choices[0]:
@@ -72,14 +72,15 @@ exports.run = ({ message, ArgsManager, Send, i18n }) => {
 
 exports.create = ({ message, ArgsManager, Send, Profile, i18n }) => {
   // ze.currency create kekCoin 200 KEK :kekwhatthefuck:
-  const { cacheUtils, languageUtils } = require('../Utils/index.js')
+  const { write } = require('../Utils/cacheUtils/index.js').write
+  const { profileOperationAllLanguages } = require('../Utils/languageUtils/index.js').profileOperationAllLanguages
   if (Object.keys(Profile.GuildCoins).length >= Profile.maxGuildCoins) {
     Send('Currency_errorMaxGuildCoins', false, { amount: Profile.maxGuildCoins })
     return
   }
 
   const CoinName = ArgsManager.Argument[1]
-  const AllOperations = languageUtils.profileOperationAllLanguages()
+  const AllOperations = profileOperationAllLanguages()
   if (CoinName.length > Profile.lengthLimit || CoinName.length <= 0 || AllOperations.includes(CoinName.toLowerCase())) {
     Send('Currency_errorInvalidCoinName', false, { argument: i18n.__('Help_SecondArgument') })
     return
@@ -140,12 +141,12 @@ exports.create = ({ message, ArgsManager, Send, Profile, i18n }) => {
       requiredDaily: parseInt(ArgsManager.Argument[7])
     }
   }
-  cacheUtils.write('GuildProfile', Profile.guildConfig)
+  write('GuildProfile', Profile.guildConfig)
   Send('Currency_coinCreated', false, { name: CoinName, code: CodeName, emoji: Emoji, value: Value })
 }
 
 exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
+  const { write } = require('../Utils/cacheUtils/index.js').write
   // ze.currency edit kekMoney [code, emoji, value, ondaily, special, bonus, dailyrequired] newValue
   if (Object.keys(Profile.GuildCoins).length <= 0) {
     Send('Currency_errorNoGuildCoin')
@@ -244,13 +245,13 @@ exports.edit = ({ message, ArgsManager, Send, Profile, i18n }) => {
       break
   }
 
-  cacheUtils.write('GuildProfile', Profile.guildConfig)
+  write('GuildProfile', Profile.guildConfig)
   Send('Currency_editedCoin', false, { coin: CoinName, property: Property, newProperty: newValue })
 }
 
 exports.delete = ({ Send, ArgsManager, Profile, i18n }) => {
   // ze.currency delete kekMoney
-  const { cacheUtils } = require('../Utils/index.js')
+  const { write } = require('../Utils/cacheUtils/index.js').write
   if (Object.keys(Profile.GuildCoins).length <= 0) {
     Send('Currency_errorNoGuildCoin')
     return
@@ -280,7 +281,7 @@ exports.delete = ({ Send, ArgsManager, Profile, i18n }) => {
       }
     }
   }
-  cacheUtils.write('GuildProfile', Profile.guildConfig)
+  write('GuildProfile', Profile.guildConfig)
   Send('Currency_deleteCoin', false, { coin: CoinName })
 }
 

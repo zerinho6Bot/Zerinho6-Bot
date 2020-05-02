@@ -1,6 +1,6 @@
 exports.condition = ({ message, Send, ArgsManager, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
   const ValidTypes = [
     i18n.__('Buy_roleLiteral'),
     i18n.__('Buy_tagLiteral')
@@ -36,14 +36,14 @@ exports.condition = ({ message, Send, ArgsManager, i18n }) => {
 }
 
 exports.run = ({ ArgsManager, message, Send, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass, write } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
   const ToDeleteStr = ArgsManager.Argument[0].toLowerCase() === i18n.__('Buy_roleLiteral') ? i18n.__('Buy_roleLiteral') : i18n.__('Buy_tagLiteral')
   const Roles = Profile.FindGuildSelling('roles')
   const Tags = Profile.FindGuildSelling('tags')
   const ToDelete = ToDeleteStr === i18n.__('Buy_roleLiteral') ? Roles : Tags
   delete ToDelete[ArgsManager.Argument[1]]
-  cacheUtils.write('GuildProfile', Profile.guildConfig)
+  write('GuildProfile', Profile.guildConfig)
   Send('Unsell_deleted', false, { itemType: ToDeleteStr, itemName: ArgsManager.Argument[1] })
 }
 

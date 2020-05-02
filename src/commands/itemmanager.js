@@ -1,6 +1,6 @@
 exports.condition = ({ ArgsManager, message, Send, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
     return false
@@ -93,8 +93,8 @@ exports.condition = ({ ArgsManager, message, Send, i18n }) => {
 }
 
 exports.run = ({ ArgsManager, message, Send, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass, write } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
   const MentionedUser = message.mentions.users.first()
   const MentionedUserInventory = Profile.UserInventory(MentionedUser.id)
   const MentionedUserRoles = MentionedUserInventory.roles
@@ -110,7 +110,7 @@ exports.run = ({ ArgsManager, message, Send, i18n }) => {
     SearchIn.push(ItemName)
   }
 
-  cacheUtils.write('GuildProfile', Profile.guildConfig)
+  write('GuildProfile', Profile.guildConfig)
   Send(`${Operation === i18n.__('Itemmanager_remove') ? i18n.__('Itemmanager_removed') : i18n.__('Itemmanager_added')} ${ItemName} ${SearchForStr} ${i18n.__('Itemmanager_from')} ${MentionedUser.username}`, true)
 }
 

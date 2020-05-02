@@ -5,10 +5,10 @@
  */
 exports.profileOperationAllLanguages = () => {
   const Operations = []
-  const LanguageUtils = require('./index.js')
-  const LanguagesLength = LanguageUtils.acceptableLanguages.length
+  const { init, acceptableLanguages } = require('./index.js')
+  const LanguagesLength = acceptableLanguages.length
   for (let i = 0; i < LanguagesLength; i++) {
-    const I18n = LanguageUtils.init(LanguageUtils.acceptableLanguages[i])
+    const I18n = init(acceptableLanguages[i])
     Operations.push([I18n.__('Currency_Create'), I18n.__('Currency_Edit'), I18n.__('Currency_Delete')])
   }
 

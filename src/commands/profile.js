@@ -1,7 +1,7 @@
 exports.condition = ({ message, ArgsManager, i18n, Send }) => {
   const { Profiles } = require('../cache/index.js')
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass, write } = require('../Utils/cacheUtils/index.js')
+  const Profile = new ProfileClass(message.guild)
 
   if (Profile.ProfileDisabledForGuild()) {
     if (!message.guild.member(message.author.id).hasPermission('MANAGE_GUILD')) {
@@ -13,7 +13,7 @@ exports.condition = ({ message, ArgsManager, i18n, Send }) => {
     if (!Profile.GuildData) {
       Profile.guildConfig[message.guild.id] = Profile.DefaultGuildProperties
     }
-    cacheUtils.write('GuildProfile', Profile.guildConfig)
+    write('GuildProfile', Profile.guildConfig)
     return false
   }
 
@@ -24,7 +24,7 @@ exports.condition = ({ message, ArgsManager, i18n, Send }) => {
     }
 
     delete Profile.guildConfig[message.guild.id]
-    cacheUtils.write('GuildProfile', Profile.guildConfig)
+    write('GuildProfile', Profile.guildConfig)
     return false
   }
 
@@ -38,7 +38,7 @@ exports.condition = ({ message, ArgsManager, i18n, Send }) => {
       return false
     }
     Profiles[CheckFor] = Profile.DefaultProfileProperties
-    cacheUtils.write('Profiles', Profiles)
+    write('Profiles', Profiles)
   }
 
   return true
@@ -46,8 +46,8 @@ exports.condition = ({ message, ArgsManager, i18n, Send }) => {
 
 exports.run = async ({ message, ArgsManager, fastEmbed, Send, i18n, bot }) => {
   const { Profiles } = require('../cache/index.js')
-  const { cacheUtils } = require('../Utils/index.js')
-  const GuildProfile = new cacheUtils.Profile(message.guild)
+  const { Profile: ProfileClass, write } = require('../Utils/cacheUtils/index.js')
+  const GuildProfile = new ProfileClass(message.guild)
   const Guild = GuildProfile.GuildData
   const CheckFor = ArgsManager.ID ? ArgsManager.ID[0]
     : message.mentions.users.size > 0 ? message.mentions.users.first().id
@@ -109,7 +109,7 @@ exports.run = async ({ message, ArgsManager, fastEmbed, Send, i18n, bot }) => {
     const FileToUpdate = updateGuild ? 'GuildProfile' : 'Profiles'
     const ContentToGive = updateGuild ? GuildProfile.guildConfig : Profiles
 
-    cacheUtils.write(FileToUpdate, ContentToGive)
+    write(FileToUpdate, ContentToGive)
   }
 }
 

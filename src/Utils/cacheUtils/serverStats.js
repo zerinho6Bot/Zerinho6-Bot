@@ -239,8 +239,8 @@ exports.ServerStats = class {
     GuildWantingStats.setupConfigs.lastDayChecked = this.currentDay
 
     // If there's another way to acess the write function, please tell me.
-    const cacheUtils = require('./index.js')
-    cacheUtils.write('GuildStats', GuildStats)
-    cacheUtils.write('GuildWantingStats', GuildWantingStats)
+    const { write } = require('./index.js')
+    write('GuildStats', GuildStats)
+    write('GuildWantingStats', GuildWantingStats)
   }
 }

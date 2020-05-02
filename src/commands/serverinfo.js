@@ -1,6 +1,5 @@
-const Moment = require('moment')
-
 exports.run = ({ message, i18n, Send, fastEmbed }) => {
+  const Moment = require('moment')
   const VerificationMessages = {
     NONE: i18n.__('Serverinfo_unrestricted'),
     LOW: i18n.__('Serverinfo_needEmail'),

@@ -3,16 +3,17 @@ exports.condition = (bot, message) => {
     return false
   }
   const guildLanguage = require('../cache/index.js').GuildLanguage
-  const { messageUtils, languageUtils } = require('../Utils/index.js')
+  const { init, fallbackLanguage } = require('../Utils/languageUtils/index.js')
+  const { configSend, argsManager, applyCooldown } = require('../Utils/messageUtils/index.js')
   const GuildDefinedLanguage = guildLanguage[message.guild.id] && guildLanguage[message.guild.id].language ? guildLanguage[message.guild.id].language : ''
-  const Send = messageUtils.configSend(message.channel, languageUtils.init(GuildDefinedLanguage === '' ? languageUtils.fallbackLanguage : GuildDefinedLanguage))
+  const Send = configSend(message.channel, init(GuildDefinedLanguage === '' ? fallbackLanguage : GuildDefinedLanguage))
 
   if (!message.channel.permissionsFor(bot.user.id).has('EMBED_LINKS')) {
     Send('Message_errorMissingEmbedLinks')
     return false
   }
 
-  const ArgsManager = messageUtils.argsManager(message, process.env.PREFIX)
+  const ArgsManager = argsManager(message, process.env.PREFIX)
 
   if (!ArgsManager.CommandName) {
     Send('Message_errorMissingCommandName')
@@ -25,7 +26,7 @@ exports.condition = (bot, message) => {
     Send('Message_errorCommandDoesntExist')
     return
   }
-  const UserCooldown = messageUtils.applyCooldown(message.author.id)
+  const UserCooldown = applyCooldown(message.author.id)
 
   if (UserCooldown > 0) {
     if (UserCooldown === 4) {
@@ -39,13 +40,15 @@ exports.condition = (bot, message) => {
 
 exports.run = async (bot, message) => {
   const guildLanguage = require('../cache/index.js').GuildLanguage
-  const { messageUtils, languageUtils, commandUtils } = require('../Utils/index.js')
-  const ArgsManager = messageUtils.argsManager(message, process.env.PREFIX)
+  const { argsManager, configSend, fastEmbed } = require('../Utils/messageUtils/index.js')
+  const { init, fallbackLanguage } = require('../Utils/languageUtils/index.js')
+  const { checkCommandPermissions, getCommandRequirer } = require('../Utils/commandUtils/index.js')
+  const ArgsManager = argsManager(message, process.env.PREFIX)
   const GuildDefinedLanguage = guildLanguage[message.guild.id] && guildLanguage[message.guild.id].language ? guildLanguage[message.guild.id].language : ''
-  const I18n = await languageUtils.init(GuildDefinedLanguage === '' ? languageUtils.fallbackLanguage : GuildDefinedLanguage)
-  const checkMissingPermission = commandUtils.checkCommandPermissions(message, ArgsManager.CommandName[0], I18n)
-  const Send = messageUtils.configSend(message.channel, I18n)
-  const fastEmbed = messageUtils.fastEmbed(message.member)
+  const I18n = await init(GuildDefinedLanguage === '' ? fallbackLanguage : GuildDefinedLanguage)
+  const checkMissingPermission = checkCommandPermissions(message, ArgsManager.CommandName[0], I18n)
+  const Send = configSend(message.channel, I18n)
+  const FastEmbed = fastEmbed(message.member)
   const Arguments = {
     message,
     bot,
@@ -53,10 +56,10 @@ exports.run = async (bot, message) => {
     env: process.env,
     i18n: I18n,
     Send,
-    fastEmbed,
+    fastEmbed: FastEmbed,
     ArgsManager
   }
-  const Command = commandUtils.getCommandRequirer(ArgsManager.CommandName[0].toLowerCase())
+  const Command = getCommandRequirer(ArgsManager.CommandName[0].toLowerCase())
   try {
     if (checkMissingPermission !== '') {
       Log.info(`Missing permission for command ${ArgsManager.CommandName[0]}`)

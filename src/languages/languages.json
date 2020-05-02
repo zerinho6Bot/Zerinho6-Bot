@@ -115,6 +115,10 @@
         "en": "Bot Category",
         "pt-br": "Categoria Bot"
     },
+    "Help_Profile": {
+        "en": "Profile Category",
+        "pt-br": "Categoria Profile"
+    },
     "Help_Games": {
         "en": "Games Category",
         "pt-br": "Categoria Jogos"

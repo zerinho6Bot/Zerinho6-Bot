@@ -1,6 +1,5 @@
-const Moment = require('moment')
-
 exports.run = async ({ bot, ArgsManager, message, i18n, Send, fastEmbed }) => {
+  const Moment = require('moment')
   let user = message.author
 
   if (ArgsManager.ID) {

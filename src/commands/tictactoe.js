@@ -4,7 +4,8 @@ const PlayersPlaying = new Set()
 
 exports.run = async function ({ message, i18n, Send, fastEmbed }) {
   const { TictactoeMatchs, TictactoeProfiles } = require('../cache')
-  const { messageUtils, cacheUtils } = require('../Utils')
+  const FastEmbed = require('../Utils/messageUtils/index.js').fastEmbed
+  const Write = require('../Utils/cacheUtils/index.js').write
   class TicTacToe {
     constructor (p1, p2) {
       this.player1 = {
@@ -145,7 +146,7 @@ exports.run = async function ({ message, i18n, Send, fastEmbed }) {
         ActualPlayer.wins = this.winner === i + 1 ? ActualPlayer.wins + 1 : ActualPlayer.wins
         ActualPlayer.loses = this.winner !== i + 1 ? ActualPlayer.loses + 1 : ActualPlayer.loses
         ActualPlayer.draws = this.winner === 3 ? ActualPlayer.draws + 1 : ActualPlayer.draws
-        cacheUtils.write('TictactoeProfiles', TictactoeProfiles)
+        Write('TictactoeProfiles', TictactoeProfiles)
       }
     }
 
@@ -177,7 +178,7 @@ exports.run = async function ({ message, i18n, Send, fastEmbed }) {
       Match.p1.tag = this.player1.tag
       Match.p2.tag = this.player2.tag
       Match.winner = this.winner
-      cacheUtils.write('TictactoeMatchs', TictactoeMatchs)
+      Write('TictactoeMatchs', TictactoeMatchs)
     }
 
     /**
@@ -271,7 +272,7 @@ exports.run = async function ({ message, i18n, Send, fastEmbed }) {
       return
     }
 
-    const ResultEmbed = messageUtils.fastEmbed(message.member)
+    const ResultEmbed = FastEmbed(message.member)
     const Time = Math.floor((new Date() - Game.time) / 1000)
     const Players = Game.players
 
