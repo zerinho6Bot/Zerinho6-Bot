@@ -1,7 +1,7 @@
 exports.run = async ({ ArgsManager, Send, fastEmbed, i18n, message }) => {
   ArgsManager.Argument = []
   ArgsManager.Argument[0] = ''
-  require('./index.js').chartdealer.run({ message, ArgsManager, fastEmbed, Send, i18n })
+  require('./index.js').requirer.chartdealer.run({ message, ArgsManager, fastEmbed, Send, i18n })
 }
 
 exports.helpEmbed = ({ message, helpEmbed, i18n }) => {

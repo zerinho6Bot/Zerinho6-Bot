@@ -1,4 +1,3 @@
-const { getMessage } = require('../utils/messageUtils/index')
 const AllowedPeople = [
   '244894816939278336', // MrThatKid4
   '90545517263593472', // ArcticFqx
@@ -17,6 +16,7 @@ const AllowedGuilds = [
   '255464757610414080' // Stepmania Online
 ]
 exports.condition = async ({ env, message, Send, ArgsManager, bot }) => {
+  const { getMessage } = require('../Utils/messageUtils/index')
   if (!AllowedGuilds.includes(message.guild.id) && message.author.id !== env.OWNER && !AllowedPeople.includes(message.author.id)) {
     Send('Updatecharts_errorOnlyAllowed')
     return false
@@ -24,11 +24,11 @@ exports.condition = async ({ env, message, Send, ArgsManager, bot }) => {
 
   let messageWithAttachment = {}
 
-  if (!ArgsManager.Id) {
+  if (!ArgsManager.ID) {
     messageWithAttachment = message
   } else {
     try {
-      const RecievedMessage = ArgsManager.Id.length >= 2 ? await getMessage(bot, message.guild.id, ArgsManager.Id[1], ArgsManager.Id[0]) : await getMessage(bot, message.guild.id, message.channel.id, ArgsManager.Id[0])
+      const RecievedMessage = ArgsManager.ID.length >= 2 ? await getMessage(bot, message.guild.id, ArgsManager.ID[1], ArgsManager.ID[0]) : await getMessage(bot, message.guild.id, message.channel.id, ArgsManager.ID[0])
 
       if (!RecievedMessage) {
         Send('Crashlog_errorCouldntFindMessage')
@@ -63,19 +63,20 @@ function includesFromArray (strCheck, strArr) {
   return false
 }
 
-const Download = require('download')
-const { pageMessage } = require('../utils/messageUtils/index.js')
 exports.run = async ({ message, Send, ArgsManager, bot }) => {
+  const Download = require('download')
+  const { pageMessage } = require('../Utils/messageUtils/index.js')
+  const { getMessage } = require('../Utils/messageUtils/index')
   let recievedMessage = null
-  if (ArgsManager.Id) {
-    recievedMessage = await getMessage(bot, message.guild.id, !ArgsManager.Id[1] ? message.guild.id : ArgsManager.Id[1], ArgsManager.Id[0])
+  if (ArgsManager.ID) {
+    recievedMessage = await getMessage(bot, message.guild.id, !ArgsManager.ID[1] ? message.guild.id : ArgsManager.ID[1], ArgsManager.ID[0])
 
     if (!recievedMessage) {
       Send('Crashlog_errorCouldntFindMessage')
       return false
     }
   }
-  const Attachment = recievedMessage.attachments.first() || message.attachments.first()
+  const Attachment = recievedMessage ? recievedMessage.attachments.first() : message.attachments.first()
   try {
     const FileStream = await Download(Attachment.url)
     const Content = FileStream.toString('utf8')
@@ -102,7 +103,7 @@ exports.run = async ({ message, Send, ArgsManager, bot }) => {
       }
     }
 
-    const { pagination } = require('../utils/messageUtils/index.js')
+    const { pagination } = require('../Utils/messageUtils/index.js')
     const Pages = pagination(ReplyArr, true, 1994)
     if (ReplyArr.length <= 1) {
       Send('Crashlog_errorNoContent')

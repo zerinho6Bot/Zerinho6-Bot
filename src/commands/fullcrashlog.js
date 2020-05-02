@@ -1,4 +1,4 @@
-const { getMessage } = require('../utils/messageUtils/index')
+const { getMessage } = require('../Utils/messageUtils/index')
 const AllowedPeople = [
   '244894816939278336', // MrThatKid4
   '90545517263593472', // ArcticFqx
@@ -23,11 +23,11 @@ exports.condition = async ({ ArgsManager, bot, message, Send, env }) => {
   }
   let messageWithAttachment = {}
 
-  if (!ArgsManager.Id) {
+  if (!ArgsManager.ID) {
     messageWithAttachment = message
   } else {
     try {
-      const RecievedMessage = ArgsManager.Id.length >= 2 ? await getMessage(bot, message.guild.id, ArgsManager.Id[1], ArgsManager.Id[0]) : await getMessage(bot, message.guild.id, message.channel.id, ArgsManager.Id[0])
+      const RecievedMessage = ArgsManager.ID.length >= 2 ? await getMessage(bot, message.guild.id, ArgsManager.ID[1], ArgsManager.ID[0]) : await getMessage(bot, message.guild.id, message.channel.id, ArgsManager.ID[0])
 
       if (!RecievedMessage) {
         Send('Crashlog_errorCouldntFindMessage')
@@ -53,24 +53,24 @@ exports.condition = async ({ ArgsManager, bot, message, Send, env }) => {
 }
 
 const Download = require('download')
-const { pageMessage } = require('../utils/messageUtils/index.js')
+const { pageMessage } = require('../Utils/messageUtils/index.js')
 exports.run = async ({ message, ArgsManager, bot, Send }) => {
   let recievedMessage = null
-  if (ArgsManager.Id) {
-    recievedMessage = await getMessage(bot, message.guild.id, !ArgsManager.Id[1] ? message.guild.id : ArgsManager.Id[1], ArgsManager.Id[0])
+  if (ArgsManager.ID) {
+    recievedMessage = await getMessage(bot, message.guild.id, !ArgsManager.ID[1] ? message.guild.id : ArgsManager.ID[1], ArgsManager.ID[0])
 
     if (!recievedMessage) {
       Send('Crashlog_errorCouldntFindMessage')
       return false
     }
   }
-  const Attachment = recievedMessage.attachments.first() || message.attachments.first()
+  const Attachment = recievedMessage ? recievedMessage.attachments.first() : message.attachments.first()
   try {
     const FileStream = await Download(Attachment.url)
     const Content = FileStream.toString('utf8')
     const Arr = Content.split('\n')
 
-    const { pagination } = require('../utils/messageUtils/index.js')
+    const { pagination } = require('../Utils/messageUtils/index.js')
     const Pages = pagination(Arr, true, 1994)
     if (Arr.length <= 1) {
       Send('Crashlog_errorNoContent')

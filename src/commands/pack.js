@@ -1,4 +1,4 @@
-const { ChartsManager } = require('../utils/chartsUtils/index.js')
+const { ChartsManager } = require('../Utils/chartsUtils/index.js')
 const ChartsApi = new ChartsManager()
 
 exports.condition = ({ ArgsManager, Send, i18n }) => {
@@ -16,7 +16,7 @@ exports.condition = ({ ArgsManager, Send, i18n }) => {
 }
 
 exports.run = async ({ ArgsManager, Send, fastEmbed, i18n, message }) => {
-  require('./index.js').chartdealer.run({ message, ArgsManager, fastEmbed, Send, i18n }, 'pack')
+  require('./index.js').requirer.chartdealer.run({ message, ArgsManager, fastEmbed, Send, i18n }, 'pack')
 }
 
 exports.helpEmbed = ({ message, helpEmbed, i18n }) => {

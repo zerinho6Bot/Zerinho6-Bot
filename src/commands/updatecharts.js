@@ -1,4 +1,4 @@
-const { ChartsManager } = require('../utils/chartsUtils/index.js')
+const { ChartsManager } = require('../Utils/chartsUtils/index.js')
 const ChartsApi = new ChartsManager()
 const AllowedPeople = [
   '244894816939278336' // MrThatKid4

@@ -1,4 +1,4 @@
-const { ChartsManager } = require('../utils/chartsUtils/index.js')
+const { ChartsManager } = require('../Utils/chartsUtils/index.js')
 const ChartsApi = new ChartsManager()
 
 exports.run = async ({ ArgsManager, Send, fastEmbed, i18n, message }) => {
