@@ -1,8 +1,8 @@
-exports.condition = ({ bot, message, Send, ArgsManager, i18n }) => {
-  const cacheUtils = require('../Utils/index').cacheUtils
-  const Profile = new cacheUtils.Profile(message.guild)
+exports.condition = ({ bot, message, Send, i18n }) => {
+  const { Profile } = require('../Utils/cacheUtils/index.js')
+  const ProfileClass = new Profile(message.guild)
 
-  if (Profile.ProfileDisabledForGuild()) {
+  if (ProfileClass.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
     return false
   }
@@ -12,17 +12,17 @@ exports.condition = ({ bot, message, Send, ArgsManager, i18n }) => {
     return false
   }
 
-  if (!Profile.GuildData) {
+  if (!ProfileClass.GuildData) {
     Send('Buy_errorGuildHasNoData')
     return false
   }
 
-  if (!Object.keys(Profile.GuildBank).length < 0) {
+  if (!Object.keys(ProfileClass.GuildBank).length < 0) {
     Send('Buy_errorNoOneHasData')
     return false
   }
 
-  if (Object.keys(Profile.FindGuildSelling('roles')).length < 0 && Object.keys(Profile.FindGuildSelling('tags')).length < 0) {
+  if (Object.keys(ProfileClass.FindGuildSelling('roles')).length < 0 && Object.keys(ProfileClass.FindGuildSelling('tags')).length < 0) {
     Send('Buy_errorNoItensInSale')
     return false
   }
@@ -31,10 +31,11 @@ exports.condition = ({ bot, message, Send, ArgsManager, i18n }) => {
 }
 
 exports.run = ({ message, Send, fastEmbed, ArgsManager, i18n }) => {
-  const cacheUtils = require('../Utils/index').cacheUtils
+  const ProfileClass = require('../Utils/cacheUtils/index.js').Profile
+  const Write = require('../Utils/cacheUtils/index.js').write
   // ze.buy 2    3        4    5
   // ze.buy role MoruClan info
-  const Profile = new cacheUtils.Profile(message.guild)
+  const Profile = new ProfileClass(message.guild)
   const Roles = Profile.FindGuildSelling('roles')
   const Tags = Profile.FindGuildSelling('tags')
 
@@ -130,7 +131,7 @@ exports.run = ({ message, Send, fastEmbed, ArgsManager, i18n }) => {
   }
 
   UserWallet[Item.coin].holds -= Item.value
-  cacheUtils.write('GuildProfile', Profile.guildConfig)
+  Write('GuildProfile', Profile.guildConfig)
 }
 
 exports.helpEmbed = ({ message, helpEmbed, i18n }) => {

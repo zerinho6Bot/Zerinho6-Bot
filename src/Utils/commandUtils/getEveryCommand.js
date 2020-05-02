@@ -1,4 +1,4 @@
-const { CommandAvailables } = require('../../cache')
+const { CommandAvailables } = require('../../cache/index.js')
 /**
   * Returns the list of all commands listed on the every key on local_storage/command_availables.json
   * @function

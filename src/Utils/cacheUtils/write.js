@@ -5,8 +5,8 @@
  * @returns {Boolean} - If the action had success.
  */
 exports.write = (file, content) => {
-  const CacheUtils = require('./index.js')
-  const Files = CacheUtils.getFiles()
+  const { getFiles } = require('./index.js')
+  const Files = getFiles()
   const Path = require('path')
 
   if (!Files.includes(file)) {

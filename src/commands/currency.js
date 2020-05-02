@@ -1,6 +1,6 @@
 exports.condition = ({ message, ArgsManager, Send, fastEmbed, i18n }) => {
-  const { cacheUtils } = require('../Utils/index.js')
-  const Profile = new cacheUtils.Profile(message.guild)
+  const ProfileClass = require('../Utils/cacheUtils/index.js').Profile
+  const Profile = new ProfileClass(message.guild)
   if (Profile.ProfileDisabledForGuild()) {
     Send('Profile_profileNotEnabledForThisGuild')
     return false
