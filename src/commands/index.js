@@ -31,7 +31,18 @@ exports.requirer = {
   itemmanager: require('./itemmanager.js'),
   sale: require('./sale.js'),
   unsell: require('./unsell.js'),
-  currency: require('./currency.js')
+  currency: require('./currency.js'),
+  allcharts: require('./allcharts.js'),
+  author: require('./author.js'),
+  chart: require('./chart.js'),
+  fullcrashlog: require('./fullcrashlog.js'),
+  crashlog: require('./crashlog.js'),
+  id: require('./id.js'),
+  pack: require('./pack.js'),
+  random: require('./random.js'),
+  updatecharts: require('./updatecharts.js'),
+  version: require('./version.js'),
+  chartdealer: require('./chartdealer.js')
 }
 
 exports.commandNames = [
@@ -43,14 +54,17 @@ exports.commandNames = [
   'serverstats', 'ping', 'credits', 'bhaskara',
   'buy', 'give', 'daily', 'iteminfo', 'myprofile',
   'guilddefault', 'moneymanager', 'itemmanager',
-  'currency', 'unsell'
+  'currency', 'unsell', 'allcharts', 'author',
+  'chart', 'fullcrashlog', 'crashlog', 'id',
+  'pack', 'random', 'updatecharts', 'version'
 ]
 
 exports.advanced = {
+  Profile: ['profile', 'give', 'buy', 'daily', 'iteminfo', 'guilddefault', 'myprofile', 'moneymanager', 'itemmanager', 'sale', 'unsell', 'currency'],
+  Chart: ['allcharts', 'author', 'chart', 'fullcrashlog', 'crashlog', 'id', 'pack', 'random', 'updatecharts', 'version'],
   Bot: ['ram', 'help', 'bot-invite', 'info', 'ping', 'credits', 'stoptyping'],
   Games: ['rpg', 'tictactoe', 'tictactoe-profile', 'tictactoe-match'],
-  Staff: ['move', 'set-language'],
   Utility: ['move', 'avatar', 'embed', 'userinfo', 'serverinfo'],
-  Etc: ['bhaskara'],
-  Profile: ['profile', 'give', 'buy', 'daily', 'iteminfo', 'guilddefault', 'myprofile', 'moneymanager', 'itemmanager', 'sale', 'unsell', 'currency']
+  Staff: ['move', 'set-language'],
+  Etc: ['bhaskara']
 }

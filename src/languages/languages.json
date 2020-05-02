@@ -27,9 +27,17 @@
         "pt-br": "{{who}} não tem a permissão {{permission}}.",
         "en": "{{who}} don't have {{permission}} permission."
     },
+    "Global_errorMissingArgument": {
+        "en": "Missing argument.",
+        "pt-br": "Você não deu nenhum argumento."
+    },
     "Message_errorMissingCommandName": {
         "en": "You forgot the command name.",
         "pt-br": "Você esqueceu o nome do comando."
+    },
+    "Global_Pages": {
+        "en": "Pages",
+        "pt-br": "Páginas"
     },
     "Message_errorCommandDoesntExist": {
         "en": "That command doesn't exist.",
@@ -134,6 +142,10 @@
     "Help_Etc": {
         "en": "Etc Category",
         "pt-br": "Categoria Aleatória"
+    },
+    "Help_Chart": {
+        "en": "Chart Category",
+        "pt-br": "Categoria Chart"
     },
     "Help_typeWithCommandName": {
         "en": "**Type \"{{prefix}}help commandName\" to see a manual about that command.\nExample: {{prefix}}help avatar**",
@@ -1660,5 +1672,149 @@
     "Unsell_description": {
         "pt-br": "Tire um item da venda, sem remover dos usuários que tem ele.",
         "en": "Remove a item from selling, without removing from the users that have it."
+    },
+    "Allcharts_description": {
+        "en": "Look though all charts ported to SM5.",
+        "pt-br": "Veja todos os charts convertidos para SM5."
+    },
+    "Author_authorName": {
+        "en": "TaroNuke",
+        "pt-br": "WinDEU"
+    },
+    "Author_description": {
+        "en": "Search for charts that includes the given author name.\nTo find charts that includes **only the given author name** add a flag with --l, example: ``sh!author authorName --l``",
+        "pt-br": "Procure por charts que contenha o nome do criador.\nPara achar charts que contenha **apenas o nome do criador** adicione uma opção adicional --l, exemplo: ``sh!author criador --l``"
+    },
+    "Chartdealer_errorNoFoundWithThatName": {
+        "en": "No {{searchType}} found with that name.",
+        "pt-br": "{{searchType}} não encontrado com esse nome."
+    },
+    "Chart_chartName": {
+        "en": "FTW",
+        "pt-br": "Styx And Stones"
+    },
+    "Chart_description": {
+        "en": "Search for charts with the given name.\nTo find charts that includes **only the given chart name** add a flag with --l, example: ``sh!author chartName --l``",
+        "pt-br": "Procure por charts pelo nome.\nPara achar charts que contenha **apenas o nome do chart** adicione uma opção adicional --l, exemplo: ``sh!author chart --l``"
+    },
+    "Chartdealer_UnknownAuthor": {
+        "en": "Unknown author",
+        "pt-br": "Autor desconhedido"
+    },
+    "Chartdealer_typeTheChartNumber": {
+        "en": "Type the number of the chart you want. (You have {{time}} {{minuteWord}})",
+        "pt-br": "Digite o número do chart que você quer. (Você tem {{time}} {{minuteWord}})"
+    },
+    "Chartdealer_typeCancel": {
+        "en": "You can type {{cancel}} to cancel the search.",
+        "pt-br": "Digite {{cancel}} para cancelar a pesquisa."
+    },
+    "Chartdealer_cancel": {
+        "en": "cancel",
+        "pt-br": "cancelar"
+    },
+    "Chartdealer_errorNotValidNumber": {
+        "en": "Not a valid number or missed to cancel. (You'll need to execute the command again if you missed)",
+        "pt-br": "Número inválido ou você errou para cancelar. (Você vai ter que executar o comando novamente se errou)"
+    },
+    "Chartdealer_errorWaitResponse": {
+        "en": "An error happened while waiting your response or you did not reply.",
+        "pt-br": "Ocorreu um erro enquanto esperava sua resposta ou você não respondeu."
+    },
+    "Chartdealer_clickTitleToDownload": {
+        "en": "Click on the title to download.",
+        "pt-br": "Clique no título para baixar."
+    },
+    "Chartdealer_id": {
+        "en": "ID",
+        "pt-br": "ID"
+    },
+    "Chartdealer_version": {
+        "en": "Version",
+        "pt-br": "Versão"
+    },
+    "Chartdealer_pack": {
+        "en": "Pack",
+        "pt-br": "Pack"
+    },
+    "Chartdealer_author": {
+        "en": "Author",
+        "pt-br": "Criador"
+    },
+    "Chartdealer_chart": {
+        "en": "chart",
+        "pt-br": "chart"
+    },
+    "Updatecharts_errorOnlyAllowed": {
+        "en": "Only allowed people or servers.",
+        "pt-br": "Apenas pessoas ou servidores autorizados"
+    },
+    "Crashlog_errorCouldntFindMessage": {
+        "en": "Could find that message in this channel.",
+        "pt-br": "Não foi possivel achar essa mensagem nesse servidor."
+    },
+    "Crashslog_errorWhileGettingMessage": {
+        "en": "An error happened while trying to get the message.",
+        "pt-br": "Um erro ocorreu enquanto tentava pegar a mensagem."
+    },
+    "Crashlog_errorNoAttachment": {
+        "en": "You need to send one attachment with the command.",
+        "pt-br": "Você precisa enviar um arquivo com o comando."
+    },
+    "Crashlog_errorAttachmentNotDetected": {
+        "en": "Attachment not detected.",
+        "pt-br": "Arquivo não detectado."
+    },
+    "Crashlog_errorNoContent": {
+        "en": "No relevant content found.",
+        "pt-br": "Nenhum conteudo relevante encontrado."
+    },
+    "Crashlog_errorCouldntDownload": {
+        "en": "Couldn't download file, error: {{error}}",
+        "pt-br": "Não foi possivel baixar o arquivo, erro: {{error}}"
+    },
+    "Crashlog_description": {
+        "en": "Shows important lines of the sent crashlog (You can send the crashlog with the command)",
+        "pt-br": "Mostra linhas importantes do arquivo de crash(Você pode enviar o arquivo junto com o comando)"
+    },
+    "Fullcrashlog_description": {
+        "en": "Search though a full crash log.(You can send an attachment with the command)",
+        "pt-br": "Veja todas as informações de um craslog.(Você pode enviar o arquivo com o comando)"
+    },
+    "Updatecharts_errorOnlyAllowedPeople": {
+        "en": "Only allowed people or servers.",
+        "pt-br": "Apenas pessoas ou servidores autorizados"
+    },
+    "Updatecharts_chartsUpdated": {
+        "en": "Charts updated!",
+        "pt-br": "Charts atualizados!"
+    },
+    "Updatecharts_errorGoogleApi": {
+        "en": "Google API error: {{error}}",
+        "pt-br": "Erro no Google API: {{error}}"
+    },
+    "Version_versionNumber": {
+        "en": "Version Number (5, 5.0, 50, 5.0+, 5.1, 51, 5.1+ or 5.3)",
+        "pt-br": "Número da versão (5, 5.0, 50, 5.0+, 5.1, 51, 5.1+ ou 5.3)"
+    },
+    "Id_description": {
+        "en": "Search a chart by it's ID.",
+        "pt-br": "Procure um chart pelo ID dele."
+    },
+    "Pack_description": {
+        "en": "Search for charts with the pack name.\nTo find charts that includes **only the given pack name** add a flag with --l, example: ``sh!author packName --l``",
+        "pt-br": "Procure por charts pelo nome do pack.\nPara achar charts que contenha **apenas o nome do pack** adicione uma opção adicional --l, exemplo: ``sh!author pack --l``"
+    },
+    "Random_description": {
+        "en": "Get a random chart to download.",
+        "pt-br": "Ache um chart aleatório para baixar."
+    },
+    "Updatecharts_description": {
+        "en": "Updates the charts with the newest content from the spreadsheet, only the bot owner and allowed people can use this command.",
+        "pt-br": "Atualiza os charts com o conteudo mais novo do documento de charts, apenas o dono do bot ou pessoas podem usar esse comando."
+    },
+    "Version_description": {
+        "en": "Search for charts by the version that it supports.",
+        "pt-br": "Procura por charts pela versão que o chart suporta."
     }
 }
