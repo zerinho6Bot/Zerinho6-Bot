@@ -60,6 +60,13 @@ exports.run = async (bot, message) => {
     ArgsManager
   }
   const Command = getCommandRequirer(ArgsManager.CommandName[0].toLowerCase())
+  if (ArgsManager.Flag && ArgsManager.Flag.includes('--d')) {
+    try {
+      Send(JSON.stringify(ArgsManager, null, 2), true)
+    } catch (e) {
+      Log.warn(`Couldn't send ArgsManager, error: ${e}`)
+    }
+  }
   try {
     if (checkMissingPermission !== '') {
       Log.info(`Missing permission for command ${ArgsManager.CommandName[0]}`)
