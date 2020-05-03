@@ -4,3 +4,4 @@ exports.write = require('./write.js').write
 exports.defaultGuildProperties = require('./defaultGuildProperties').defaultGuildProperties
 exports.ServerStats = require('./serverStats.js').ServerStats
 exports.Profile = require('./profile.js').Profile
+exports.getFileContent = require('./getFileContent.js').getFileContent

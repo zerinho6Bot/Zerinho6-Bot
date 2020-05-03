@@ -34,14 +34,18 @@ exports.pageMessage = async (message, filter, contents, emotes, { time, codebloc
       case emotes.left.name:
         if (page !== 0) {
           page--
-          needsUpdate = true
+        } else {
+          page = contents.length - 1
         }
+        needsUpdate = true
         break
       case emotes.right.name:
         if (page !== contents.length - 1) {
           page++
-          needsUpdate = true
+        } else {
+          page = 0
         }
+        needsUpdate = true
         break
       default:
         break

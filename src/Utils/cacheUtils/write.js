@@ -13,7 +13,7 @@ exports.write = (file, content) => {
   String.prototype.replaceAt = function (index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length)
   }
-  const realFile = file.replaceAt(0, file[0])
+  const realFile = file.replaceAt(0, file[0].toLowerCase())
   if (!Files.includes(file)) {
     Log.info(`${realFile} does not exist on cache directory, files that exist: ${Files.join(', ')}`)
     return false
