@@ -1,5 +1,5 @@
 exports.run = ({ message, Send }) => {
-  Send('stoptyping:CANYOUSTOPTYPINGHOLYSHIT')
+  Send('Stoptyping_CANYOUSTOPTYPINGHOLYSHIT')
   message.channel.stopTyping(true)
 }
 

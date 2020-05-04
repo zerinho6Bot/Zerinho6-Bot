@@ -1816,5 +1816,17 @@
     "Version_description": {
         "en": "Search for charts by the version that it supports.",
         "pt-br": "Procura por charts pela versão que o chart suporta."
+    },
+    "Stoptyping_CANYOUSTOPTYPINGHOLYSHIT": {
+        "en": "Trying to stop typing..",
+        "pt-br": "Tentando parar de digitar.."
+    },
+    "Serverstats_yearMembersResume": {
+        "en": "Resume of Members in this Year",
+        "pt-br": "Resumo de Membros nesse Ano"
+    },
+    "Serverstats_theWholeYear": {
+        "en": "You have data from this whole year.",
+        "pt-br": "Você tem data deste ano inteiro."
     }
 }

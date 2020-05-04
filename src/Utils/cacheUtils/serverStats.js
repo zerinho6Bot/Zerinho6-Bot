@@ -34,7 +34,7 @@ exports.ServerStats = class {
    * @returns {Object}
    */
   getDataFromYear (id, year) {
-    return this.data[id][year]
+    return this.data[id] ? this.data[id][year] : null
   }
 
   getDataFromServer (id) {
