@@ -415,6 +415,10 @@
         "en": "ms",
         "pt-br": "ms"
     },
+    "Ping_averageMs": {
+        "en": "Average MS",
+        "pt-br": "Média de Ping"
+    },
     "Ping_description": {
         "en": "See bot's ping.",
         "pt-br": "Veja o ping do bot."

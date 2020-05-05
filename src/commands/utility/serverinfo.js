@@ -26,7 +26,6 @@ exports.run = ({ message, i18n, Send, fastEmbed, bot }) => {
   fastEmbed.addField(i18n.__('Serverinfo_verificationLevel'), VerificationMessages[Guild.verificationLevel], true)
   const ServerStats = new ServerStatsClass(GuildStats, bot)
   const DataFromYear = ServerStats.getDataFromYear(message.guild.id, ServerStats.currentYear)
-  console.log(DataFromYear)
   if (DataFromYear &&
     Object.keys(DataFromYear).length >= 2) {
     const Asciichart = require('asciichart')
