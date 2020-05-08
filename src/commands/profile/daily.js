@@ -121,9 +121,9 @@ exports.run = ({ message, Send, i18n }) => {
         const Hour = SplitTime[0]
         const Minute = SplitTime[2]
         const Second = SplitTime[4]
-        const HourStr = Hour === 1 ? i18n.__('Daily_hour') : i18n.__('Daily_hours')
-        const MinuteStr = Minute === 1 ? i18n.__('Daily_minute') : i18n.__('Daily_minutes')
-        const SecondStr = Second === 1 ? i18n.__('Daily_second') : i18n.__('Daily_seconds')
+        const HourStr = Hour <= 1 ? i18n.__('Daily_hour') : i18n.__('Daily_hours')
+        const MinuteStr = Minute <= 1 ? i18n.__('Daily_minute') : i18n.__('Daily_minutes')
+        const SecondStr = Second <= 1 ? i18n.__('Daily_second') : i18n.__('Daily_seconds')
 
         return i18n.__('Daily_errorNoCoinToCollectSameDay', { time: `${Hour} ${HourStr} ${Minute} ${MinuteStr} ${Second} ${SecondStr}` })
       }
