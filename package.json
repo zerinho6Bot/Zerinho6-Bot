@@ -23,16 +23,17 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^12.1.1",
+    "asciichart": "^1.5.17",
+    "caller-id": "^0.1.0",
+    "discord.js": "^12.2.0",
     "dotenv": "^8.0.0",
-    "moment": "^2.24.0",
-    "standard": "^14.3.3",
-    "terminal-kit": "^1.28.0",
     "download": "^8.0.0",
     "google-spreadsheet": "^3.0.10",
     "i18n-nodejs": "^3.0.0",
+    "moment": "^2.24.0",
     "simple-node-logger": "^18.12.24",
-    "caller-id": "^0.1.0"
+    "standard": "^14.3.3",
+    "terminal-kit": "^1.28.0"
   },
   "standard": {
     "globals": [

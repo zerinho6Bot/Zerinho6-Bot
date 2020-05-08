@@ -1,9 +1,17 @@
-exports.run = ({ i18n, Send }) => {
+exports.run = async ({ i18n, Send, fastEmbed }) => {
+  const Asciichart = require('asciichart')
+  // Asciichart.plot(MembersArray(), { height: 9 })
   const DateBeforeSend = new Date()
 
-  Send('Ping_ping').then((message) => {
-    message.edit(`${i18n.__('Ping_pong')} \`${new Date() - DateBeforeSend}\`${i18n.__('Ping_ms')}`)
-  })
+  const FirstMessage = await Send('Ping_ping')
+  const SecondDate = new Date()
+  const SecondPing = SecondDate - DateBeforeSend
+  const SecondMessage = await FirstMessage.edit(`${i18n.__('Ping_pong')} \`${SecondPing}\`${i18n.__('Ping_ms')}`)
+  const ThirdPing = new Date() - SecondDate
+  fastEmbed.setTitle(i18n.__('Ping_averageMs'))
+  const Data = [0, SecondPing, ThirdPing]
+  fastEmbed.setDescription(`\`\`\`JavaScript\n${Asciichart.plot(Data, { height: 4 })}\`\`\``)
+  SecondMessage.edit(fastEmbed)
 }
 
 exports.helpEmbed = ({ message, helpEmbed, i18n }) => {

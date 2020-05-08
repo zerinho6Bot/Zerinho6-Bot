@@ -40,13 +40,13 @@ You still need to change the values..
 
 ° **LANGUAGE** (string of a supported language) being the bot default language for commands.(Be sure that the language exist on the locales folder or it'll crash)
 
-° **FAST_LOAD** (true to enable) being if you want to load the bot without those detailed things on the console.
+° **FAST_LOAD** (false to disable) being if you want to load the bot without those detailed things on the console.
 
 ° **TERMINAL_RELOAD_INTERVAL** (number in ms) Being how fast the terminal will update if FAST_LOAD is active.
 
-° **SET_ACTIVITY** (true to enable) If you want the bot to define it's status.
+° **SET_ACTIVITY** (false to disable) If you want the bot to define it's status.
 
-° **API_CALL_BOOT** (true to enable) If the bot should call the googlesheets api to update charts.json on boot.
+° **API_CALL_BOOT** (false to disable) If the bot should call the googlesheets api to update charts.json on boot.
 
 ° **GOOGLE_SERVICE_ACCOUNT_EMAIL** (string: e-mail) The google service account e-mail to access googlesheets api
 
@@ -54,9 +54,17 @@ You still need to change the values..
 
 ° **SHEET_ID** (string) The sheet id of where the bot should get chart information from.
 
+° **LOG_ERROR** (false to disable) If the bot should log errors on the given bot_guild/channel_log discord.
+
+° **BOT_GUILD** (number: ID) The bot guild.
+
+° **CHANNEL_LOG** (number: ID) The channel to log errors.
+
 string = you can type normally (without spaces or quotes)
 number = numbers, like 102391203923
-true to enable = if you put exactly true, it'll enable the system, anything else won't.
+
+false to disale = if you put exactly false, it'll disable the system, anything else will.
+
 FORCED string = "You must put quote or it won't work"
 
 Open the console window on the app folder and type ``npm i``, after that you can do ``npm start``. There'll be a message saying when the bot's ready or a lot of things if FAST_LOAD is enabled.
@@ -87,4 +95,5 @@ Open the console window on the app folder and type ``npm i``, after that you can
 
 ## "Hey, I want to contact you"
 
+Official Server: https://discord.gg/VKSevNk
 M-me? Seriusly? You can find my e-mail on my github profile and if you want to talk on Discord, here's my Discord tag: ``Moru Zerinho6#9939`` or my ID: ``134292889177030657``

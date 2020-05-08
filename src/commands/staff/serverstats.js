@@ -34,7 +34,7 @@ function MonthsToNumber (i18n, month) {
 }
 
 exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
-  const { ServerStats: ServerStatsClass, write } = require('../../Utils/index.js')
+  const { ServerStats: ServerStatsClass, write } = require('../../Utils/cacheUtils/index.js')
   const { GuildStats, GuildWantingStats } = require('../../cache/index.js')
   const ServerStats = new ServerStatsClass(GuildStats, bot)
 
@@ -86,8 +86,12 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
       mainString += `● ${Keys[i]}\n`
 
       const values = Object.keys(data[Object.keys(data)[i]])
-      for (let v = 0; v < values.length; v++) {
-        mainString += `---${Months(i18n, values[v])}\n`
+      if (values.length >= 12) {
+        mainString += `${i18n.__('Serverstats_theWholeYear')}\n`
+      } else {
+        for (let v = 0; v < values.length; v++) {
+          mainString += `---${Months(i18n, values[v])}\n`
+        }
       }
     }
 
@@ -184,6 +188,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
      * @param {(String|Number)} secondYear
      * @param {Number} secondMonth
      * @param {Object} secondData
+     * @returns {Object}
      */
   function returnSpecifiedComparedData (comparationEmbed, ServerStats, firstYear, firstMonth, firstData, secondYear, secondMonth, secondData) {
     comparationEmbed.setTitle(`${i18n.__('Serverstats_comparing')} ${firstYear}(${Months(i18n, firstMonth)}) ${i18n.__('Serverstats_with')} ${secondYear}(${Months(i18n, secondMonth)})`)
@@ -211,6 +216,22 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
   if (!ArgsManager.Argument || ArgsManager.Argument.length !== 3) {
     fastEmbed.setTitle(i18n.__('Serverstats_yourOptions'))
     fastEmbed.setDescription(castadeVisualizer(FullDataFromServer))
+    const DataFromYear = ServerStats.getDataFromYear(message.guild.id, ServerStats.currentYear)
+    if (DataFromYear &&
+      Object.keys(DataFromYear).length >= 2) {
+      const Asciichart = require('asciichart')
+      const MembersArray = () => {
+        const DataYear = Object.keys(DataFromYear)
+        const ReturnArr = []
+
+        for (let i = 0; i < DataYear.length; i++) {
+          ReturnArr.push(DataFromYear[DataYear[i]].membersCount)
+        }
+
+        return ReturnArr
+      }
+      fastEmbed.addField(i18n.__('Serverstats_yearMembersResume'), `\`\`\`JavaScript\n${Asciichart.plot(MembersArray(), { height: 9 })}\`\`\``)
+    }
     Send(fastEmbed, true)
     return
   }
@@ -276,7 +297,7 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
           return
         }
         // Time to do cursed things.
-        // If the year isn'i18n.__ the same, find the oldest, else the difference is on the month.(Thanks god I don'i18n.__ store days)
+        // If the year isn't the same, find the oldest, else the difference is on the month.(Thanks god I don't store days)
         const DataToCompare = firstYear !== secondYear ? [firstYear, secondYear] : [firstMonth, secondMonth]
         const WhatWeAreComparing = DataToCompare[0].toString().length === 4 ? secondYear : secondMonth
         // We want the oldest data to be the firstYear, that's why we are comparing to the secondYear
@@ -289,8 +310,24 @@ exports.run = async ({ bot, message, ArgsManager, i18n, fastEmbed, Send }) => {
 
         const FirstDataFromMonth = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, firstYear), firstMonth)
         const SecondDataFromMonth = ServerStats.getDataFromMonth(ServerStats.getDataFromYear(message.guild.id, secondYear), secondMonth)
+        const DataEmbed = returnSpecifiedComparedData(fastEmbed, ServerStats, firstYear, firstMonth, FirstDataFromMonth, secondYear, secondMonth, SecondDataFromMonth)
+        const DataFromYear = ServerStats.getDataFromYear(message.guild.id, ServerStats.currentYear)
+        if (DataFromYear &&
+          Object.keys(DataFromYear).length >= 2) {
+          const Asciichart = require('asciichart')
+          const MembersArray = () => {
+            const DataYear = Object.keys(DataFromYear)
+            const ReturnArr = []
 
-        Send(returnSpecifiedComparedData(fastEmbed, ServerStats, firstYear, firstMonth, FirstDataFromMonth, secondYear, secondMonth, SecondDataFromMonth), true)
+            for (let i = 0; i < DataYear.length; i++) {
+              ReturnArr.push(DataFromYear[DataYear[i]].membersCount)
+            }
+
+            return ReturnArr
+          }
+          DataEmbed.addField(i18n.__('Serverstats_yearMembersResume'), `\`\`\`JavaScript\n${Asciichart.plot(MembersArray(), { height: 9 })}\`\`\``)
+        }
+        Send(DataEmbed, true)
       })
   } else {
     Send('Serverstats_anIdiotsGuide')

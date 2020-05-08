@@ -42,4 +42,44 @@ exports.run = async (bot) => {
       Log.warn(`Google API error: ${e}`)
     }
   }
+
+  if (process.env.LOG_ERROR !== 'false') {
+    const Guild = bot.guilds.cache.get(process.env.BOT_GUILD)
+    const Channel = Guild.channels.cache.get(process.env.CHANNEL_LOG)
+    const Discord = require('discord.js')
+    const Embed = new Discord.MessageEmbed()
+    Embed.setAuthor('Error Handler', 'https://cdn1.iconfinder.com/data/icons/color-bold-style/21/08-512.png')
+    Embed.setTimestamp()
+    Embed.setColor('#8B0000')
+
+    process.on('uncaughtException', (err, origin) => {
+      Embed.setTitle('UncaughtException')
+      Embed.setDescription(`Caught exception: ${err}\nException origin: ${origin}`)
+      try {
+        Channel.send(Embed)
+      } catch (e) {
+        Log.warn(`Could send error to guild channel: ${e}`)
+      }
+    })
+
+    process.on('unhandledRejection', async (reason, promise) => {
+      Embed.setTitle('unhandledRejection')
+      Embed.setDescription(`Unhandled Rejection at: ${promise}\nreason: ${reason}`)
+      try {
+        Channel.send(Embed)
+      } catch (e) {
+        Log.warn(`Could send error to guild channel: ${e}`)
+      }
+    })
+
+    process.on('warning', (warning) => {
+      Embed.setTitle(warning.name)
+      Embed.setDescription(`Warning message: ${warning.message}\nWarning Stack ${warning.stack}`)
+      try {
+        Channel.send(Embed)
+      } catch (e) {
+        Log.warn(`Could send error to guild channel: ${e}`)
+      }
+    })
+  }
 }
