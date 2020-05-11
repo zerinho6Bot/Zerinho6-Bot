@@ -1,7 +1,5 @@
 exports.GuildLanguage = require('./guildLanguage.json')
 exports.CommandNeeds = require('./commandNeeds.json')
-exports.TictactoeMatchs = require('./tictactoeMatchs.json')
-exports.TictactoeProfiles = require('./tictactoeProfiles.json')
 exports.CommandAvailables = require('./commandAvailables.json')
 exports.GuildStats = require('./guildStats.json')
 exports.GuildWantingStats = require('./guildWantingStats.json')
