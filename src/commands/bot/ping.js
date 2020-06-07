@@ -1,6 +1,5 @@
 exports.run = async ({ i18n, Send, fastEmbed }) => {
   const Asciichart = require('asciichart')
-  // Asciichart.plot(MembersArray(), { height: 9 })
   const DateBeforeSend = new Date()
 
   const FirstMessage = await Send('Ping_ping')

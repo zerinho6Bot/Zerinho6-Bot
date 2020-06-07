@@ -17,7 +17,13 @@ exports.configSend = (channel, translate) => {
    */
   const Send = async (content, noTranslation, parameters) => {
     if (!noTranslation) {
-      Log.info(`Getting translation for ${content} with the parameters ${JSON.stringify(parameters)}`)
+      const Parameters = JSON.stringify(parameters)
+
+      if (!Parameters) {
+        Log.info(`Getting translation for ${content}`)
+      } else {
+        Log.info(`Getting translation for ${content} with the parameters ${JSON.stringify(parameters)}`)
+      }
     }
     content = noTranslation ? content : translate.__(content, parameters)
 
