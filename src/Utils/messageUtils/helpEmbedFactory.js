@@ -14,8 +14,12 @@ exports.helpEmbedFactory = (message, i18n, { argumentsLength, argumentsNeeded, a
   const Embed = require('./index').fastEmbed(message.member)
   const CommandHelp = require('../../cache/index.js').CommandHelp
   const CallerId = require('caller-id')
-  const PathSplit = CallerId.getData().filePath.split('\\')
-  const FileName = PathSplit[PathSplit.length - 1].replace(/.js/gi, '')
+  const Path = CallerId.getData().filePath
+  let pathSplit = Path.split('\\')
+  if (pathSplit[0] === Path) {
+    pathSplit = Path.split('/')
+  }
+  const FileName = pathSplit[pathSplit.length - 1].replace(/.js/gi, '')
   // The last index will always be the file name that's calling.
 
   const ArgumentsRequired = ['Help_NoArgument', 'Help_OneArgument', 'Help_TwoArguments', 'Help_ThreeArguments', 'Help_FourArguments', 'Help_FiveArguments', 'Help_SixArguments']
