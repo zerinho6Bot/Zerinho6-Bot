@@ -1,3 +1,5 @@
+const Dym = require('didyoumean')
+
 exports.ChartsManager = class {
   constructor () {
     this.chartsFile = () => {
@@ -105,7 +107,19 @@ exports.ChartsManager = class {
     if (literal) {
       return this.charts.filter(chart => chart[property].toLowerCase() === name)
     }
-    return this.charts.filter(chart => chart[property].toLowerCase().includes(name))
+
+    const Result = this.charts.filter(chart => chart[property].toLowerCase().includes(name))
+    if (property === 'name' && !Result) {
+      const List = this.propertyFromChartArray(this.chart, 'name')
+      let possibleMatch = Dym(name, List)
+      // Convert to string if array.
+      possibleMatch = Array.isArray(possibleMatch) ? possibleMatch[0] : possibleMatch
+      if (possibleMatch) {
+        return this.charts.find(chart => chart.name === possibleMatch)
+      }
+      // Dym
+    }
+    return Result
   }
 
   /**

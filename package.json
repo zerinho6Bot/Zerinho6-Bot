@@ -25,6 +25,7 @@
   "dependencies": {
     "asciichart": "^1.5.17",
     "caller-id": "^0.1.0",
+    "didyoumean": "^1.2.1",
     "discord.js": "^12.2.0",
     "dotenv": "^8.0.0",
     "download": "^8.0.0",
