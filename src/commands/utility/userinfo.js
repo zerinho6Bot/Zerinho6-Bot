@@ -5,13 +5,18 @@ exports.run = async ({ bot, ArgsManager, message, i18n, Send, fastEmbed }) => {
   if (ArgsManager.ID) {
     if (!isNaN(ArgsManager.ID[0]) && ArgsManager.ID[0].length >= 16 && ArgsManager.ID[0].length <= 18) {
       if (ArgsManager.ID[0] !== message.author.id) {
-        const SearchedUser = await bot.users.fetch(ArgsManager.ID[0])
+        try {
+          const SearchedUser = await bot.users.fetch(ArgsManager.ID[0])
 
-        if (SearchedUser === null) {
+          if (SearchedUser === null) {
+            Send('Userinfo_couldNotFindUser')
+            return
+          }
+          user = SearchedUser
+        } catch (e) {
           Send('Userinfo_couldNotFindUser')
           return
         }
-        user = SearchedUser
       }
     }
   }
