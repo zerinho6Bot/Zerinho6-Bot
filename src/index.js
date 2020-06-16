@@ -2,9 +2,9 @@
 require('dotenv').config()
 const Discord = require('discord.js')
 const { Message, Ready } = require('./events/index.js')
+const { LogHandler } = require('./Utils/bootUtils/index.js')
 const Bot = new Discord.Client({ messageSweepInterval: 60, messageCacheLifetime: 60, messageCacheMaxSize: 100 })
-const Path = require('path')
-global.Log = require('simple-node-logger').createSimpleLogger({ logFilePath: Path.join(__dirname, './cache/log.txt') })
+global.Log = LogHandler
 
 Bot.on('message', (message) => {
   if (!Message.condition(Bot, message)) {

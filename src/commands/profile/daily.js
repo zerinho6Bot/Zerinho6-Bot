@@ -121,11 +121,11 @@ exports.run = ({ message, Send, i18n }) => {
         const Hour = SplitTime[0]
         const Minute = SplitTime[2]
         const Second = SplitTime[4]
-        const HourStr = Hour <= 1 ? i18n.__('Daily_hour') : i18n.__('Daily_hours')
-        const MinuteStr = Minute <= 1 ? i18n.__('Daily_minute') : i18n.__('Daily_minutes')
-        const SecondStr = Second <= 1 ? i18n.__('Daily_second') : i18n.__('Daily_seconds')
+        const FullHour = Hour === 0 ? '' : Hour === 1 ? `${Hour} ${i18n.__('Daily_hour')} ` : `${Hour} ${i18n.__('Daily_hours')} `
+        const FullMinute = Minute === 0 ? '' : Minute === 1 ? `${Minute} ${i18n.__('Daily_minute')} ` : `${Minute} ${i18n.__('Daily_minutes')} `
+        const FullSecond = Second === 0 ? '' : Second === 1 ? `${Second} ${i18n.__('Daily_second')} ` : `${Second} ${i18n.__('Daily_seconds')} `
 
-        return i18n.__('Daily_errorNoCoinToCollectSameDay', { time: `${Hour} ${HourStr} ${Minute} ${MinuteStr} ${Second} ${SecondStr}` })
+        return i18n.__('Daily_errorNoCoinToCollectSameDay', { time: `${FullHour}${FullMinute}${FullSecond}` })
       }
     }
     Log.info(`User ${message.author.id} has no coin to collect, timestamp is ${new Date().getTime().toString()} his last daily was ${TimeSinceLastDaily}`)

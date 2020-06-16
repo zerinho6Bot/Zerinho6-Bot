@@ -134,20 +134,9 @@ exports.run = async ({ message, Send, ArgsManager, bot }) => {
 
 exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
   const Options = {
-    argumentsLength: 0,
-    argumentsNeeded: false,
-    argumentsFormat: [],
-    imageExample: 'https://cdn.discordapp.com/attachments/696881817453592577/699813817038929961/unknown.png'
-  }
-
-  return helpEmbed(message, i18n, Options)
-}
-
-exports.helpEmbed = ({ message, helpEmbed, i18n }) => {
-  const Options = {
     argumentsLength: 2,
     argumentsNeeded: true,
-    argumentsFormat: ['706204053331509269', '586285188158586881'],
+    argumentsFormat: [i18n.__('Crashlog_channelExample'), i18n.__('Crashlog_messageExample')],
     imageExample: 'https://cdn.discordapp.com/attachments/688182781263609868/700041697349861386/unknown.png'
   }
 

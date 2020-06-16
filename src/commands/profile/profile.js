@@ -70,7 +70,9 @@ exports.run = async ({ message, ArgsManager, fastEmbed, Send, i18n, bot }) => {
   fastEmbed.setThumbnail(FromUser.displayAvatarURL({ dynamic: true }))
   fastEmbed.setAuthor(`${FromUser.tag}${Profile.clan.length > 0 ? ` [${Profile.clan}]` : ''}`, FromUser.displayAvatarURL({ dynamic: true }))
 
-  if (GuildProfile.UserBank(FromUser.id) && Object.keys(GuildProfile.UserWallet(FromUser.id)).length > 0) {
+  const HasBank = !!GuildProfile.UserBank(FromUser.id)
+  const HasWallet = Object.keys(GuildProfile.UserWallet(FromUser.id)).length > 0
+  if (HasBank && HasWallet) {
     const MoneyString = () => {
       const Coins = Object.keys(GuildProfile.UserWallet(FromUser.id))
       let str = ''
@@ -85,7 +87,7 @@ exports.run = async ({ message, ArgsManager, fastEmbed, Send, i18n, bot }) => {
     fastEmbed.addField(i18n.__('Profile_serverEconomy'), MoneyString())
   }
 
-  const UserTags = GuildProfile.UserBank(FromUser.id) ? GuildProfile.UserInventory(FromUser.id).tags : null
+  const UserTags = HasBank ? GuildProfile.UserInventory(FromUser.id).tags : null
 
   if (UserTags && UserTags.length > 0) {
     fastEmbed.addField(i18n.__('Profile_tags'), '``' + UserTags.join('``, ``') + '``')
