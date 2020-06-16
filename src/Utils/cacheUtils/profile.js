@@ -121,7 +121,7 @@ module.exports.Profile = class {
   /**
    * Gets a object of itens on the itemType
    * @function
-   * @param {String} itemType - roles or tags.
+   * @param {('roles'|'tags')} itemType - roles or tags.
    * @returns {Object}
    */
   FindGuildSelling (itemType) {
@@ -191,7 +191,7 @@ module.exports.Profile = class {
   /**
    * Gets a array of itens of the given itemType from user inventory.
    * @param {String} userId - The user Id
-   * @param {String} itemType - The item type
+   * @param {('roles'|'tags')} itemType - roles or tags.
    * @returns {Array<String>}
    */
   FromUserInventory (userId, itemType) {
@@ -204,7 +204,7 @@ module.exports.Profile = class {
 
   /**
    * Gets a item from the guild sellings.
-   * @param {String} itemType - The item type
+   * @param {('roles'|'tags')} itemType - roles or tags.
    * @param {String} itemName - The item name
    * @returns {Object}
    */
