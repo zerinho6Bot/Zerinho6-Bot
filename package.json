@@ -34,7 +34,7 @@
     "moment": "^2.24.0",
     "simple-node-logger": "^18.12.24",
     "standard": "^14.3.3",
-    "terminal-kit": "^1.28.0"
+    "terminal-kit": "^1.49.4"
   },
   "standard": {
     "globals": [
